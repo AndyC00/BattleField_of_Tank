@@ -1,0 +1,12 @@
+﻿  game.cpp
+  logmanager.cpp
+  Main.cpp
+  matrix4.cpp
+  renderer.cpp
+  shader.cpp
+  sprite.cpp
+  texture.cpp
+  texturemanager.cpp
+  vertexarray.cpp
+  Generating Code...
+  GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe
