@@ -50,15 +50,22 @@ private:
 public:
 
 protected:
-	Texture* m_pTexture; int m_x;
+	Texture* m_pTexture; 
+	int m_x;
 	int m_y;
-	float m_angle; int m_centerX; int m_centerY;
+	float m_angle; 
+	int m_centerX; 
+	int m_centerY;
 
-	int m_width; int m_height;
+	int m_width; 
+	int m_height;
 
-	float m_scale; float m_alpha;
+	float m_scale; 
+	float m_alpha;
 
-	float m_tintRed; float m_tintGreen; float m_tintBlue;
+	float m_tintRed; 
+	float m_tintGreen; 
+	float m_tintBlue;
 
 private:
 
