@@ -11,7 +11,8 @@ class Shader
 public:
 	Shader();
 	~Shader();
-	bool Load(const char* vertexFile, const char* pixelFile); void Unload();
+	bool Load(const char* vertexFile, const char* pixelFile); 
+	void Unload();
 
 	void SetActive();
 

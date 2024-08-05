@@ -50,7 +50,8 @@ protected:
 	bool m_bLooping;
 
 private:
-	
+	Sprite* m_pCheckerboard;
+
 };
 
 #endif //   GAME_H 

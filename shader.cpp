@@ -26,7 +26,9 @@ Shader::~Shader()
 bool
 Shader::Load(const char* vertexFile, const char* pixelFile)
 {
-	bool vertexCompiled = CompileShader(vertexFile, GL_VERTEX_SHADER, m_vertexShader); bool pixelCompiled = CompileShader(pixelFile, GL_FRAGMENT_SHADER, m_pixelShader);
+	bool vertexCompiled = CompileShader(vertexFile, GL_VERTEX_SHADER, m_vertexShader); 
+	bool pixelCompiled = CompileShader(pixelFile, GL_FRAGMENT_SHADER, m_pixelShader);
+
 	if (vertexCompiled == false || pixelCompiled == false)
 	{
 		LogManager::GetInstance().Log("Shaders failed to compile!"); 
@@ -35,23 +37,30 @@ Shader::Load(const char* vertexFile, const char* pixelFile)
 	}
 	m_shaderProgram = glCreateProgram();
 
-	glAttachShader(m_shaderProgram, m_vertexShader); glAttachShader(m_shaderProgram, m_pixelShader); glLinkProgram(m_shaderProgram);
+	glAttachShader(m_shaderProgram, m_vertexShader);
+	glAttachShader(m_shaderProgram, m_pixelShader);
+	glLinkProgram(m_shaderProgram);
 	return IsValidProgram();
 }
 void Shader::Unload()
 {
-	glDeleteProgram(m_shaderProgram); glDeleteShader(m_vertexShader); glDeleteShader(m_pixelShader);
+	glDeleteProgram(m_shaderProgram);
+	glDeleteShader(m_vertexShader);
+	glDeleteShader(m_pixelShader);
 }
 void Shader::SetActive()
 {
-	assert(m_shaderProgram); glUseProgram(m_shaderProgram);
+	assert(m_shaderProgram);
+	glUseProgram(m_shaderProgram);
 }
+
 void
 Shader::SetMatrixUniform(const char* name, const Matrix4& matrix)
 {
 	GLuint location = glGetUniformLocation(m_shaderProgram, name);
 	glUniformMatrix4fv(location, 1, GL_TRUE, (float*)&matrix);
 }
+
 void
 Shader::SetVector4Uniform(const char* name, float x, float y, float z, float w)
 {
@@ -63,6 +72,7 @@ Shader::SetVector4Uniform(const char* name, float x, float y, float z, float w)
 
 	glUniform4fv(location, 1, vec4);
 }
+
 	bool
 		Shader::CompileShader(const char* filename, GLenum shaderType, GLuint& outShader)
 	{
@@ -72,15 +82,20 @@ Shader::SetVector4Uniform(const char* name, float x, float y, float z, float w)
 			std::stringstream sstream; sstream << shaderFile.rdbuf();
 			std::string shaderCode = sstream.str();
 			const char* pShaderCode = shaderCode.c_str();
-			outShader = glCreateShader(shaderType); glShaderSource(outShader, 1, &(pShaderCode), 0); glCompileShader(outShader);
+			outShader = glCreateShader(shaderType);
+			glShaderSource(outShader, 1, &(pShaderCode), 0);
+			glCompileShader(outShader);
+
 			if (!IsCompiled(outShader))
 			{
-				LogManager::GetInstance().Log("Shader failed to compile!"); return false;
+				LogManager::GetInstance().Log("Shader failed to compile!");
+				return false;
 			}
 		}
 		else
 		{
-			LogManager::GetInstance().Log("Shader file not found!"); return false;
+			LogManager::GetInstance().Log("Shader file not found!");
+			return false;
 		}
 
 		return true;
@@ -105,12 +120,15 @@ Shader::SetVector4Uniform(const char* name, float x, float y, float z, float w)
 	bool Shader::IsValidProgram()
 	{
 		GLint linkedStatus;
-		glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &linkedStatus); if (linkedStatus != GL_TRUE)
+		glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &linkedStatus);
+		if (linkedStatus != GL_TRUE)
 		{
-			char error[1024]; error[0] = 0;
+			char error[1024];
+			error[0] = 0;
 			glGetShaderInfoLog(m_shaderProgram, 1023, 0, error);
 
-			LogManager::GetInstance().Log("Shader failed to link!"); assert(0);
+			LogManager::GetInstance().Log("Shader failed to link!");
+			assert(0);
 
 			return false;
 		}

@@ -1,4 +1,4 @@
-// This include: 
+﻿// This include: 
 #include "game.h"
 #include "sprite.h"
 
@@ -26,13 +26,17 @@ void Game::DestroyInstance()
 Game::Game()
 	: m_pRenderer(0)
 	, m_bLooping(true)
+	, m_pCheckerboard(0)
 {
 
 }
 
 Game::~Game()
 {
-	delete m_pRenderer; m_pRenderer = 0;
+	delete m_pRenderer;
+	m_pRenderer = 0;
+	delete m_pCheckerboard;
+	m_pCheckerboard = 0;
 }
 
 void Game::Quit()
@@ -52,11 +56,18 @@ bool Game::Initialise()
 		return false;
 	}
 
+	//load sprite and draw
+	m_pCheckerboard = m_pRenderer->CreateSprite("board8x8.png");
+
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();
 
 	m_iLastTime = SDL_GetPerformanceCounter();
 	m_pRenderer->SetClearColour(0, 255, 255); 
+
+	//set X and Y
+	m_pCheckerboard->SetX(100);
+	m_pCheckerboard->SetY(100);
 
 	return true;
 }
@@ -64,6 +75,7 @@ bool Game::DoGameLoop()
 {
 	const float stepSize = 1.0f / 60.0f;
 	// TODO: Process input here! 
+
 	SDL_Event event;
 	while (SDL_PollEvent(&event) != 0)
 	{
@@ -101,6 +113,8 @@ Game::Process(float deltaTime)
 {
 	ProcessFrameCounting(deltaTime);
 	// TODO: Add game objects to process here!
+	m_pCheckerboard->Process(deltaTime);
+
 }
 
 void
@@ -110,6 +124,7 @@ Game::Draw(Renderer& renderer)
 	renderer.Clear();
 
 	// TODO: Add game objects to draw here!
+	m_pCheckerboard->Draw(renderer);
 
 	renderer.Present();
 }
@@ -121,6 +136,8 @@ Game::ProcessFrameCounting(float deltaTime)
 	// Frame Counter:
 	if (m_fElapsedSeconds > 1.0f)
 	{
-		m_fElapsedSeconds -= 1.0f; m_iFPS = m_iFrameCount; m_iFrameCount = 0;
+		m_fElapsedSeconds -= 1.0f;
+		m_iFPS = m_iFrameCount;
+		m_iFrameCount = 0;
 	}
 }
