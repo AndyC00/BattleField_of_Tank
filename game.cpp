@@ -20,13 +20,13 @@ Game& Game::GetInstance()
 
 void Game::DestroyInstance()
 {
-	delete sm_pInstance; sm_pInstance = 0;
+	delete sm_pInstance;
+	sm_pInstance = 0;
 }
 
 Game::Game()
 	: m_pRenderer(0)
 	, m_bLooping(true)
-	, m_pCheckerboard(0)
 {
 
 }

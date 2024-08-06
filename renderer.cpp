@@ -31,13 +31,17 @@ Renderer::Renderer()
 
 Renderer::~Renderer()
 {
-	delete m_pSpriteShader; m_pSpriteShader = 0;
+	delete m_pSpriteShader; 
+	m_pSpriteShader = 0;
 
-	delete m_pSpriteVertexData; m_pSpriteVertexData = 0;
+	delete m_pSpriteVertexData; 
+	m_pSpriteVertexData = 0;
 
-	delete m_pTextureManager; m_pTextureManager = 0;
+	delete m_pTextureManager; 
+	m_pTextureManager = 0;
 
-	SDL_DestroyWindow(m_pWindow); IMG_Quit();
+	SDL_DestroyWindow(m_pWindow); 
+	IMG_Quit();
 	SDL_Quit();
 }
 
@@ -46,7 +50,8 @@ Renderer::Initialise(bool windowed, int width, int height)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		LogSdlError(); return false;
+		LogSdlError(); 
+		return false;
 	}
 
 	if (!windowed)
@@ -73,7 +78,8 @@ Renderer::Initialise(bool windowed, int width, int height)
 			}
 		}
 
-		delete[] currentDisplayMode; currentDisplayMode = 0;
+		delete[] currentDisplayMode;
+		currentDisplayMode = 0;
 
 		width = widest;
 		height = andItsHeight;
@@ -94,10 +100,11 @@ Renderer::Initialise(bool windowed, int width, int height)
 bool
 Renderer::InitialiseOpenGL(int screenWidth, int screenHeight)
 {
-	m_iWidth = screenWidth; m_iHeight = screenHeight;
+	m_iWidth = screenWidth;
+	m_iHeight = screenHeight;
 
 	m_pWindow = SDL_CreateWindow("COMP710 GP Framework 2022", SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
+								SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -110,8 +117,11 @@ Renderer::InitialiseOpenGL(int screenWidth, int screenHeight)
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	
 	m_glContext = SDL_GL_CreateContext(m_pWindow); 
+	
 	GLenum glewResult = glewInit();
+	
 	if (glewResult != GLEW_OK)
 	{
 		return false;
@@ -124,7 +134,8 @@ Renderer::InitialiseOpenGL(int screenWidth, int screenHeight)
 }
 void Renderer::Clear()
 {
-	glClearColor(m_fClearRed, m_fClearGreen, m_fClearBlue, 1.0f); glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(m_fClearRed, m_fClearGreen, m_fClearBlue, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 void Renderer::Present()
 {
@@ -174,7 +185,11 @@ Sprite*
 Renderer::CreateSprite(const char* pcFilename)
 {
 	assert(m_pTextureManager);
-	Texture* pTexture = m_pTextureManager->GetTexture(pcFilename); Sprite* pSprite = new Sprite();
+
+	Texture* pTexture = m_pTextureManager->GetTexture(pcFilename); 
+
+	Sprite* pSprite = new Sprite();
+	
 	if (!pSprite->Initialise(*pTexture))
 	{
 		LogManager::GetInstance().Log("Sprite Failed to Create!");
@@ -219,7 +234,8 @@ Renderer::DrawSprite(Sprite& sprite)
 	const float PI = 3.14159f;
 	float angleInRadians = (angleInDegrees * PI) / 180.0f;
 
-	Matrix4 world; SetIdentity(world);
+	Matrix4 world; 
+	SetIdentity(world);
 	world.m[0][0] = cosf(angleInRadians) * (sizeX); 
 	world.m[0][1] = -sinf(angleInRadians) * (sizeX); 
 	world.m[1][0] = sinf(angleInRadians) * (sizeY); 
@@ -233,7 +249,9 @@ Renderer::DrawSprite(Sprite& sprite)
 	CreateOrthoProjection(orthoViewProj, static_cast<float>(m_iWidth), static_cast<float>(m_iHeight));
 
 	m_pSpriteShader->SetVector4Uniform("colour", sprite.GetRedTint(),
-		sprite.GetGreenTint(), sprite.GetBlueTint(), sprite.GetAlpha());
+		sprite.GetGreenTint(), 
+		sprite.GetBlueTint(), 
+		sprite.GetAlpha());
 
 	m_pSpriteShader->SetMatrixUniform("uViewProj", orthoViewProj);
 

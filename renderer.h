@@ -48,9 +48,12 @@ private:
 public:
 
 protected:
-	TextureManager* m_pTextureManager; SDL_Window* m_pWindow; SDL_GLContext m_glContext;
+	TextureManager* m_pTextureManager; 
+	SDL_Window* m_pWindow; 
+	SDL_GLContext m_glContext;
 
-	Shader* m_pSpriteShader; VertexArray* m_pSpriteVertexData;
+	Shader* m_pSpriteShader; 
+	VertexArray* m_pSpriteVertexData;
 
 	int m_iWidth; 
 	int m_iHeight;
@@ -63,4 +66,4 @@ private:
 
 };
 
-#endif //   RENDERER_H 
+#endif //   __RENDERER_H 

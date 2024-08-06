@@ -1,6 +1,4 @@
-#define SDL_MAIN_HANDLED
-
-#include <iostream>
+// Library includes:
 #include <SDL.h>
 
 // Local includes: 

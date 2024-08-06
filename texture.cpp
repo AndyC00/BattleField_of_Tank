@@ -26,13 +26,16 @@ bool
 Texture::Initialise(const char* pcFilename)
 {
 	SDL_Surface* pSurface = IMG_Load(pcFilename);
+
 	if (pSurface)
 	{
 		m_iWidth = pSurface->w; 
 		m_iHeight = pSurface->h;
+
 		int bytesPerPixel = pSurface->format->BytesPerPixel;
 
 		unsigned int format = 0;
+
 		if (bytesPerPixel == 3)
 		{
 			format = GL_RGB;
@@ -41,9 +44,12 @@ Texture::Initialise(const char* pcFilename)
 		{
 			format = GL_RGBA;
 		}
+
 		glGenTextures(1, &m_uiTextureId); 
 		glBindTexture(GL_TEXTURE_2D, m_uiTextureId);
-		glTexImage2D(GL_TEXTURE_2D, 0, format, m_iWidth, m_iHeight, 0, format, GL_UNSIGNED_BYTE, pSurface->pixels);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, format, m_iWidth, m_iHeight, 0, 
+						format, GL_UNSIGNED_BYTE, pSurface->pixels);
 
 		SDL_FreeSurface(pSurface); 
 		pSurface = 0;
@@ -68,11 +74,13 @@ void Texture::SetActive()
 int
 Texture::GetWidth() const
 {
-	assert(m_iWidth); return (m_iWidth);
+	assert(m_iWidth); 
+	return (m_iWidth);
 }
 
 int
 Texture::GetHeight() const
 {
-	assert(m_iHeight); return (m_iHeight);
+	assert(m_iHeight); 
+	return (m_iHeight);
 }

@@ -14,11 +14,16 @@ class TextureManager
 public:
 	TextureManager();
 	~TextureManager();
+
 	bool Initialise();
-Texture* GetTexture(const char* pcFilename); protected:
+
+Texture* GetTexture(const char* pcFilename); 
+
+protected:
 
 private:
-	TextureManager(const TextureManager& textureManager); TextureManager& operator=(const TextureManager& textureManager);
+	TextureManager(const TextureManager& textureManager); 
+	TextureManager& operator=(const TextureManager& textureManager);
 
 	// Member data: 
 public:

@@ -10,6 +10,7 @@ public:
 	~Texture();
 
 	bool Initialise(const char* pcFilename);
+
 	void SetActive();
 
 	int GetWidth() const; 
@@ -26,7 +27,8 @@ public:
 
 
 protected:
-	unsigned int m_uiTextureId; int m_iWidth;
+	unsigned int m_uiTextureId; 
+	int m_iWidth;
 	int m_iHeight;
 
 private:
