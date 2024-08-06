@@ -57,17 +57,17 @@ bool Game::Initialise()
 	}
 
 	//load sprite and draw
-	m_pCheckerboard = m_pRenderer->CreateSprite("board8x8.png");
+	m_pCheckerboard = m_pRenderer->CreateSprite("Sprites\\board8x8.png");
+
+	//set X and Y
+	m_pCheckerboard->SetX(100);
+	m_pCheckerboard->SetY(100);
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();
 
 	m_iLastTime = SDL_GetPerformanceCounter();
 	m_pRenderer->SetClearColour(0, 255, 255); 
-
-	//set X and Y
-	m_pCheckerboard->SetX(100);
-	m_pCheckerboard->SetY(100);
 
 	return true;
 }

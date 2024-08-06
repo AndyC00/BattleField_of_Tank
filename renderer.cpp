@@ -190,7 +190,7 @@ void Renderer::LogSdlError()
 bool Renderer::SetupSpriteShader()
 {
 	m_pSpriteShader = new Shader();
-	bool loaded = m_pSpriteShader->Load("shaders\\sprite.vert", "shaders\\sprite.frag");
+	bool loaded = m_pSpriteShader->Load("shader\\sprite.vert", "shader\\sprite.frag");
 
 	m_pSpriteShader->SetActive();
 
