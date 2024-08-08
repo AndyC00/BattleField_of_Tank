@@ -50,7 +50,11 @@ protected:
 	bool m_bLooping;
 
 private:
-	Sprite* m_pCheckerboard;
+	Sprite* m_pCheckerboard1;
+	Sprite* m_pCheckerboard2;
+	Sprite* m_pCheckerboard3;
+	Sprite* m_pCheckerboard4;
+	Sprite* m_pCheckerboard5;
 
 };
 
