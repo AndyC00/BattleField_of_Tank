@@ -84,7 +84,7 @@ bool Game::Initialise()
 
 	//loading more sprites:
 	m_pCheckerboard2 = m_pRenderer->CreateSprite("Sprites\\board8x8.png");
-	m_pCheckerboard2->SetX(290);
+	m_pCheckerboard2->SetX(290); 
 	m_pCheckerboard2->SetY(221);
 	m_pCheckerboard2->SetRedTint(0);
 	m_pCheckerboard2->SetGreenTint(0);
