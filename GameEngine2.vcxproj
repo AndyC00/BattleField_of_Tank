@@ -144,6 +144,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="matrix4.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="scene.cpp" />
+    <ClCompile Include="scenecheckerboards.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -155,6 +157,9 @@
     <ClInclude Include="logmanager.h" />
     <ClInclude Include="matrix4.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="scene.h" />
+    <ClInclude Include="scenebouncingballs.h" />
+    <ClInclude Include="scenecheckerboards.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="texture.h" />

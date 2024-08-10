@@ -1,10 +1,15 @@
 #ifndef   GAME_H 
 #define   GAME_H 
 
+//Library includes:
+#include <vector>
+
 // Forward declarations: 
 class Renderer;
 
 class Sprite;
+
+class Scene;
 
 class Game
 {
@@ -36,6 +41,10 @@ protected:
 	static Game* sm_pInstance; 
 	Renderer* m_pRenderer;
 
+	std::vector<Scene*> m_scenes;
+	int m_iCurrentScene;
+
+
 	__int64 m_iLastTime; 
 	float m_fExecutionTime; 
 	float m_fElapsedSeconds; 
@@ -50,11 +59,7 @@ protected:
 	bool m_bLooping;
 
 private:
-	Sprite* m_pCheckerboard1;
-	Sprite* m_pCheckerboard2;
-	Sprite* m_pCheckerboard3;
-	Sprite* m_pCheckerboard4;
-	Sprite* m_pCheckerboard5;
+
 
 };
 

@@ -1,2 +1,17 @@
 ﻿  game.cpp
-  GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe
+  logmanager.cpp
+  Main.cpp
+  matrix4.cpp
+  renderer.cpp
+  scene.cpp
+  scenecheckerboards.cpp
+D:\Developing_Projects\GameEngine2\scenecheckerboards.cpp(61,27): error C2601: 'SceneCheckerboards::Process': local function definitions are illegal
+D:\Developing_Projects\GameEngine2\scenecheckerboards.cpp(68,31): error C2065: 'deltaTime': undeclared identifier
+D:\Developing_Projects\GameEngine2\scenecheckerboards.cpp(71,21): error C2065: 'deltaTime': undeclared identifier
+D:\Developing_Projects\GameEngine2\scenecheckerboards.cpp(73,27): error C2601: 'SceneCheckerboards::Draw': local function definitions are illegal
+  shader.cpp
+  sprite.cpp
+  texture.cpp
+  texturemanager.cpp
+  vertexarray.cpp
+  Generating Code...

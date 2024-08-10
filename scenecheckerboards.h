@@ -23,7 +23,7 @@ public:
 protected:
 
 private:
-	SceneCheckerboards(const SceneCheckerboards& sceneCheckerbaords);
+	SceneCheckerboards(const SceneCheckerboards& sceneCheckerboards);
 	SceneCheckerboards& operator = (const SceneCheckerboards& sceneCheckerboards);
 
 //member data:

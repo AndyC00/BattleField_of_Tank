@@ -1,10 +1,14 @@
 ﻿// This include: 
 #include "game.h"
 #include "sprite.h"
+#include "scenecheckerboards.h"
 
 // Library includes: 
 #include "renderer.h" 
 #include "logmanager.h"
+
+#include <vector>
+
 
 // Static Members:
 Game* Game::sm_pInstance = 0;
@@ -35,16 +39,6 @@ Game::~Game()
 {
 	delete m_pRenderer;
 	m_pRenderer = 0;
-	delete m_pCheckerboard1;
-	m_pCheckerboard1 = 0;
-	delete m_pCheckerboard2;
-	m_pCheckerboard2 = 0;
-	delete m_pCheckerboard3;
-	m_pCheckerboard3 = 0;
-	delete m_pCheckerboard4;
-	m_pCheckerboard4 = 0;
-	delete m_pCheckerboard5;
-	m_pCheckerboard5 = 0;
 }
 
 void Game::Quit()
@@ -64,52 +58,11 @@ bool Game::Initialise()
 		return false;
 	}
 
-	//load sprite and draw
-	m_pCheckerboard1 = m_pRenderer->CreateSprite("Sprites\\board8x8.png");
-
-	//set X and Y
-	m_pCheckerboard1->SetX(930);
-	m_pCheckerboard1->SetY(525);
-
-	//setting the color for the sprite
-	m_pCheckerboard1->SetRedTint(255);
-	m_pCheckerboard1->SetGreenTint(255);
-	m_pCheckerboard1->SetBlueTint(255);
-
-	//set angles for the sprite:
-	m_pCheckerboard1->SetAngle(45);
-
-	//change scale for the sprite:
-	m_pCheckerboard1->SetScale(1.5);
-
-	//loading more sprites:
-	m_pCheckerboard2 = m_pRenderer->CreateSprite("Sprites\\board8x8.png");
-	m_pCheckerboard2->SetX(290); 
-	m_pCheckerboard2->SetY(221);
-	m_pCheckerboard2->SetRedTint(0);
-	m_pCheckerboard2->SetGreenTint(0);
-	m_pCheckerboard2->SetBlueTint(255);
-
-	m_pCheckerboard3 = m_pRenderer->CreateSprite("Sprites\\board8x8.png");
-	m_pCheckerboard3->SetX(1570);
-	m_pCheckerboard3->SetY(829);
-	m_pCheckerboard3->SetRedTint(255);
-	m_pCheckerboard3->SetGreenTint(0);
-	m_pCheckerboard3->SetBlueTint(0);
-
-	m_pCheckerboard4 = m_pRenderer->CreateSprite("Sprites\\board8x8.png");
-	m_pCheckerboard4->SetX(290);
-	m_pCheckerboard4->SetY(829);
-	m_pCheckerboard4->SetRedTint(0);
-	m_pCheckerboard4->SetGreenTint(255);
-	m_pCheckerboard4->SetBlueTint(0);
-
-	m_pCheckerboard5 = m_pRenderer->CreateSprite("Sprites\\board8x8.png");
-	m_pCheckerboard5->SetX(1570);
-	m_pCheckerboard5->SetY(221);
-	m_pCheckerboard5->SetRedTint(122);
-	m_pCheckerboard5->SetGreenTint(122);
-	m_pCheckerboard5->SetBlueTint(122);
+	Scene* pScene = 0;
+	pScene = new SceneCheckerboards();
+	pScene->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene);
+	m_iCurrentScene = 0;
 
 
 	bbWidth = m_pRenderer->GetWidth();
@@ -162,11 +115,8 @@ Game::Process(float deltaTime)
 {
 	ProcessFrameCounting(deltaTime);
 	// TODO: Add game objects to process here!
-	m_pCheckerboard1->Process(deltaTime);
-	m_pCheckerboard2->Process(deltaTime);
-	m_pCheckerboard3->Process(deltaTime);
-	m_pCheckerboard4->Process(deltaTime);
-	m_pCheckerboard5->Process(deltaTime);
+	m_scenes[m_iCurrentScene]->Process(deltaTime);
+
 }
 
 void
@@ -176,11 +126,8 @@ Game::Draw(Renderer& renderer)
 	renderer.Clear();
 
 	// TODO: Add game objects to draw here!
-	m_pCheckerboard1->Draw(renderer);
-	m_pCheckerboard2->Draw(renderer);
-	m_pCheckerboard3->Draw(renderer);
-	m_pCheckerboard4->Draw(renderer);
-	m_pCheckerboard5->Draw(renderer);
+	m_scenes[m_iCurrentScene]->Draw(renderer);
+
 
 	renderer.Present();
 }
