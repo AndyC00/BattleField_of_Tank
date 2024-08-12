@@ -41,9 +41,9 @@ protected:
 	static Game* sm_pInstance; 
 	Renderer* m_pRenderer;
 
+	//Scene:
 	std::vector<Scene*> m_scenes;
 	int m_iCurrentScene;
-
 
 	__int64 m_iLastTime; 
 	float m_fExecutionTime; 

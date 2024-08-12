@@ -40,6 +40,4 @@ private:
 
 };
 
-
-
 #endif // _SCENECHECKERBOARDS_H_
