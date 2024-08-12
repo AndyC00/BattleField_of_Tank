@@ -28,7 +28,7 @@ private:
 
 //member data:
 public:
-
+	virtual void DebugDraw();
 protected:
 	Sprite* m_pCorners[4];
 	Sprite* m_pCentre;

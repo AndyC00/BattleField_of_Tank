@@ -4,6 +4,7 @@
 // Local includes:
 #include "renderer.h" 
 #include "ball.h"
+#include "imgui/imgui.h"
 
 // Library includes:
 #include <cassert> 
@@ -60,4 +61,14 @@ SceneBouncingBalls::Draw(Renderer& renderer)
 	{
 		m_pBalls[k]->Draw(renderer);
 	}
+}
+
+void SceneBouncingBalls::DebugDraw()
+{
+	ImGui::Text("Scene: Bouncing Balls");
+	ImGui::SliderInt("Show Count", &m_iShowCount, 1, 100);
+	static int editBallNumber = 0;
+	ImGui::SliderInt("Edit ball", &editBallNumber, 0, 99);
+
+	m_pBalls[editBallNumber]->DebugDraw();
 }

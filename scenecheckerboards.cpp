@@ -5,6 +5,8 @@
 #include "renderer.h"
 #include "sprite.h"
 
+#include "imgui/imgui.h"
+
 //library includes:
 #include <cassert>
 
@@ -85,4 +87,27 @@ bool SceneCheckerboards::Initialise(Renderer& renderer)
 			m_pCorners[k]->Draw(renderer);
 		}
 		m_pCentre->Draw(renderer);
+	}
+
+	void SceneCheckerboards::DebugDraw()
+	{
+		ImGui::Text("Scene: Checkerboards");
+		ImGui::InputFloat("Rotation speed", &m_rotationSpeed); float scale = m_pCentre->GetScale();
+		ImGui::SliderFloat("Demo scale", &scale, 0.0f, 2.0f, "%.3f"); m_pCentre->SetScale(scale);
+
+		int position[2];
+		position[0] = m_pCentre->GetX(); position[1] = m_pCentre->GetY();
+		ImGui::InputInt2("Demo position", position); m_pCentre->SetX(position[0]);
+		m_pCentre->SetY(position[1]);
+
+		float tint[4];
+		tint[0] = m_pCentre->GetRedTint();
+		tint[1] = m_pCentre->GetGreenTint();
+		tint[2] = m_pCentre->GetBlueTint();
+		tint[3] = m_pCentre->GetAlpha();
+		ImGui::ColorEdit4("Demo tint", tint);
+		m_pCentre->SetRedTint(tint[0]);
+		m_pCentre->SetGreenTint(tint[1]);
+		m_pCentre->SetBlueTint(tint[2]);
+		m_pCentre->SetAlpha(tint[3]);
 	}

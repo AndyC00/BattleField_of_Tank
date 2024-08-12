@@ -1,2 +1,5 @@
-﻿  ball.cpp
+﻿  renderer.cpp
+  scene.cpp
+  scenecheckerboards.cpp
+  Generating Code...
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe

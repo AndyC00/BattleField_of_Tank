@@ -24,6 +24,7 @@ private:
 
 	//member data:
 public:
+	virtual void DebugDraw() = 0;
 
 protected:
 

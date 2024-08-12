@@ -8,6 +8,7 @@
 // Library includes: 
 #include "renderer.h" 
 #include "logmanager.h"
+#include "imgui/imgui_impl_sdl2.h"
 
 #include <vector>
 
@@ -93,8 +94,10 @@ bool Game::DoGameLoop()
 	SDL_Event event;
 	while (SDL_PollEvent(&event) != 0)
 	{
-		continue;
+		ImGuiIO& io = ImGui::GetIO(); 
+		ImGui_ImplSDL2_ProcessEvent(&event);
 	}
+
 	if (m_bLooping)
 	{
 		Uint64 current = SDL_GetPerformanceCounter();
@@ -122,8 +125,7 @@ bool Game::DoGameLoop()
 	return m_bLooping;
 }
 
-void
-Game::Process(float deltaTime)
+void Game::Process(float deltaTime)
 {
 	ProcessFrameCounting(deltaTime);
 	// TODO: Add game objects to process here!
@@ -131,8 +133,23 @@ Game::Process(float deltaTime)
 
 }
 
-void
-Game::Draw(Renderer& renderer)
+void Game::DebugDraw()
+{
+	bool open = true;
+	ImGui::Begin("Debug Window", &open, ImGuiWindowFlags_MenuBar);
+	ImGui::Text("COMP710 GP Framework (%s)", "2022, S2");
+
+	if (ImGui::Button("Quit"))
+	{
+		Quit();
+	}
+	ImGui::SliderInt("Active scene", &m_iCurrentScene, 0, m_scenes.size() - 1, "%d");
+	m_scenes[m_iCurrentScene]->DebugDraw();
+
+	ImGui::End();
+}
+
+void Game::Draw(Renderer& renderer)
 {
 	++m_iFrameCount;
 	renderer.Clear();
@@ -140,10 +157,12 @@ Game::Draw(Renderer& renderer)
 	// TODO: Add game objects to draw here!
 	m_scenes[m_iCurrentScene]->Draw(renderer);
 
+	DebugDraw();
+
 	renderer.Present();
 }
-void
-Game::ProcessFrameCounting(float deltaTime)
+
+void Game::ProcessFrameCounting(float deltaTime)
 {
 	// Count total simulation time elapsed:
 	m_fElapsedSeconds += deltaTime;

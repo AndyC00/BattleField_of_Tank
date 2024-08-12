@@ -38,6 +38,8 @@ private:
 public:
 
 protected:
+	void DebugDraw();
+
 	static Game* sm_pInstance; 
 	Renderer* m_pRenderer;
 

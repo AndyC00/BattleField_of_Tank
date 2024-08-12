@@ -28,7 +28,7 @@ private:
 
 	// Member data:
 public:
-
+	virtual void DebugDraw();
 protected:
 	Ball* m_pBalls[100];
 	int m_iShowCount;
