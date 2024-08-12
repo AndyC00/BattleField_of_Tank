@@ -51,6 +51,7 @@ typedef enum
      */
     /* @{ */
 
+
     SDL_SCANCODE_A = 4,
     SDL_SCANCODE_B = 5,
     SDL_SCANCODE_C = 6,

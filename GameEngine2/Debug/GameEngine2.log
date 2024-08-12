@@ -1,5 +1,28 @@
-﻿  renderer.cpp
+﻿  ball.cpp
+  game.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_impl_sdl2.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  inputsystem.cpp
+D:\Developing_Projects\GameEngine2\inputsystem.cpp(28,2): warning C4150: deletion of pointer to incomplete type 'XboxController'; no destructor called
+  logmanager.cpp
+  Main.cpp
+  matrix4.cpp
+  renderer.cpp
   scene.cpp
+  scenebouncingballs.cpp
   scenecheckerboards.cpp
+  shader.cpp
+  sprite.cpp
+  texture.cpp
+  Generating Code...
+  Compiling...
+  texturemanager.cpp
+  vector2.cpp
+  vertexarray.cpp
   Generating Code...
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe

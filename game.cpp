@@ -4,6 +4,7 @@
 #include "scenecheckerboards.h"
 #include "scenebouncingballs.h"
 #include "ball.h"
+#include "inputsystem.h"
 
 // Library includes: 
 #include "renderer.h" 
@@ -31,9 +32,10 @@ void Game::DestroyInstance()
 	sm_pInstance = 0;
 }
 
-Game::Game()
-	: m_pRenderer(0)
-	, m_bLooping(true)
+Game::Game():
+	m_pRenderer(0),
+	m_bLooping(true),
+	m_pInputSystem(0)
 {
 
 }
@@ -42,6 +44,9 @@ Game::~Game()
 {
 	delete m_pRenderer;
 	m_pRenderer = 0;
+
+	delete m_pInputSystem;
+    m_pInputSystem = 0;
 	//deleting created sprites:
 
 }
@@ -55,6 +60,10 @@ bool Game::Initialise()
 {
 	int bbWidth = 1860;
 	int bbHeight = 1050;
+
+	//Instantiate a inputsystem pointer with new
+	m_pInputSystem = new InputSystem();
+	m_pInputSystem->Initialise();
 
 	m_pRenderer = new Renderer();
 	if (!m_pRenderer->Initialise(true, bbWidth, bbHeight))
@@ -91,12 +100,14 @@ bool Game::DoGameLoop()
 	const float stepSize = 1.0f / 60.0f;
 	// TODO: Process input here! 
 
-	SDL_Event event;
+	m_pInputSystem->ProcessInput();
+
+	/*SDL_Event event;
 	while (SDL_PollEvent(&event) != 0)
 	{
 		ImGuiIO& io = ImGui::GetIO(); 
 		ImGui_ImplSDL2_ProcessEvent(&event);
-	}
+	}*/
 
 	if (m_bLooping)
 	{
@@ -131,22 +142,49 @@ void Game::Process(float deltaTime)
 	// TODO: Add game objects to process here!
 	m_scenes[m_iCurrentScene]->Process(deltaTime);
 
+	ButtonState leftArrowState = (m_pInputSystem->GetKeyState(SDL_SCANCODE_LEFT));
+
+	if (leftArrowState == BS_PRESSED)
+	{
+		LogManager::GetInstance().Log("Left arrow key pressed.");
+	}
+	else if (leftArrowState == BS_RELEASED)
+	{
+		LogManager::GetInstance().Log("Left arrow key released.");
+	}
+
+	int result = m_pInputSystem->GetMouseButtonState(SDL_BUTTON_LEFT);
+
+	if (result == BS_PRESSED)
+	{
+		LogManager::GetInstance().Log("Left mouse button pressed.");
+	}
+	else if (result == BS_RELEASED)
+	{
+		LogManager::GetInstance().Log("Left mouse button released.");
+	}
+
+
 }
 
 void Game::DebugDraw()
 {
-	bool open = true;
-	ImGui::Begin("Debug Window", &open, ImGuiWindowFlags_MenuBar);
-	ImGui::Text("COMP710 GP Framework (%s)", "2022, S2");
-
-	if (ImGui::Button("Quit"))
+	if (m_bShowDebugWindow)
 	{
-		Quit();
-	}
-	ImGui::SliderInt("Active scene", &m_iCurrentScene, 0, m_scenes.size() - 1, "%d");
-	m_scenes[m_iCurrentScene]->DebugDraw();
+		bool open = true;
+		ImGui::Begin("Debug Window", &open, ImGuiWindowFlags_MenuBar);
+		ImGui::Text("COMP710 GP Framework (%s)", "2022, S2");
 
-	ImGui::End();
+		if (ImGui::Button("Quit"))
+		{
+			Quit();
+		}
+
+		ImGui::SliderInt("Active scene", &m_iCurrentScene, 0, m_scenes.size() - 1, "%d");
+		m_scenes[m_iCurrentScene]->DebugDraw();
+
+		ImGui::End();
+	}
 }
 
 void Game::Draw(Renderer& renderer)
@@ -173,4 +211,11 @@ void Game::ProcessFrameCounting(float deltaTime)
 		m_iFPS = m_iFrameCount;
 		m_iFrameCount = 0;
 	}
+}
+
+void Game::ToggleDebugWindow()
+{
+	m_bShowDebugWindow = !m_bShowDebugWindow;
+
+	m_pInputSystem->ShowMouseCursor(m_bShowDebugWindow);
 }

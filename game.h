@@ -4,6 +4,8 @@
 //Library includes:
 #include <vector>
 
+#include "inputsystem.h"
+
 // Forward declarations: 
 class Renderer;
 
@@ -36,8 +38,11 @@ private:
 
 	// Member data: 
 public:
+	void ToggleDebugWindow();
 
 protected:
+	bool m_bShowDebugWindow;
+
 	void DebugDraw();
 
 	static Game* sm_pInstance; 
@@ -61,7 +66,7 @@ protected:
 	bool m_bLooping;
 
 private:
-
+	InputSystem* m_pInputSystem;
 
 };
 
