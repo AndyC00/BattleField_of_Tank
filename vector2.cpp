@@ -20,33 +20,35 @@ Vector2::~Vector2()
 
 }
 
-Vector2::Vector2(float inx, float iny)
-	: x(inx)
-	, y(iny)
+Vector2::Vector2(float inx, float iny): 
+	x(inx),
+	y(iny)
 {
 
 }
 void Vector2::Set(float inx, float iny)
-	{
-		x = inx; y = iny;
-	}
+{
+	x = inx; 
+	y = iny;
+}
 
 float Vector2::LengthSquared() const
-	{
-		return ((x * x) + (y * y));
-	}
+{
+	return ((x * x) + (y * y));
+}
 
 float Vector2::Length() const
-	{
-		return (sqrtf(LengthSquared()));
-	}
+{
+	return (sqrtf(LengthSquared()));
+}
 
 void Vector2::Normalise()
-	{
-		float length = Length();
+{
+	float length = Length();
 
-		x = x / length; y = y / length;
-	}
+	x = x / length; 
+	y = y / length;
+}
 
 float
 Vector2::DotProduct(const Vector2& veca, const Vector2& vecb)

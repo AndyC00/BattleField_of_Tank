@@ -2,6 +2,8 @@
 #include "game.h"
 #include "sprite.h"
 #include "scenecheckerboards.h"
+#include "scenebouncingballs.h"
+#include "ball.h"
 
 // Library includes: 
 #include "renderer.h" 
@@ -39,6 +41,8 @@ Game::~Game()
 {
 	delete m_pRenderer;
 	m_pRenderer = 0;
+	//deleting created sprites:
+
 }
 
 void Game::Quit()
@@ -58,12 +62,19 @@ bool Game::Initialise()
 		return false;
 	}
 
-	Scene* pScene = 0;
+	//creating the scene:
+	/*Scene* pScene = 0;
 	pScene = new SceneCheckerboards();
 	pScene->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene);
-	m_iCurrentScene = 0;
+	m_iCurrentScene = 0;*/
 
+	//creating another scene for bouncing balls:
+	Scene* pScene2 = 0;
+	pScene2 = new SceneBouncingBalls();
+	pScene2->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene2);
+	m_iCurrentScene = 0;
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();
@@ -73,6 +84,7 @@ bool Game::Initialise()
 
 	return true;
 }
+
 bool Game::DoGameLoop()
 {
 	const float stepSize = 1.0f / 60.0f;
@@ -127,7 +139,6 @@ Game::Draw(Renderer& renderer)
 
 	// TODO: Add game objects to draw here!
 	m_scenes[m_iCurrentScene]->Draw(renderer);
-
 
 	renderer.Present();
 }

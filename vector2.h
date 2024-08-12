@@ -4,7 +4,8 @@
 // Class declaration:
 class Vector2
 {
-	// Member methods: public:
+	// Member methods:
+public:
 	Vector2();
 	Vector2(float inx, float iny);
 	~Vector2();
