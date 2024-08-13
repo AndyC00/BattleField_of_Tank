@@ -25,8 +25,7 @@ InputSystem::InputSystem()
 }
 InputSystem::~InputSystem()
 {
-	delete[] m_pXboxController;
-	m_pXboxController = 0;
+
 }
 
 bool InputSystem::Initialise()

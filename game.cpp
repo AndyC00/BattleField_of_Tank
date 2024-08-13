@@ -102,13 +102,6 @@ bool Game::DoGameLoop()
 
 	m_pInputSystem->ProcessInput();
 
-	/*SDL_Event event;
-	while (SDL_PollEvent(&event) != 0)
-	{
-		ImGuiIO& io = ImGui::GetIO(); 
-		ImGui_ImplSDL2_ProcessEvent(&event);
-	}*/
-
 	if (m_bLooping)
 	{
 		Uint64 current = SDL_GetPerformanceCounter();

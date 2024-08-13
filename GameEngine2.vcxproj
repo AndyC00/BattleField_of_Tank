@@ -154,6 +154,7 @@
     <ClCompile Include="matrix4.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="sceneballgame.cpp" />
     <ClCompile Include="scenebouncingballs.cpp" />
     <ClCompile Include="scenecheckerboards.cpp" />
     <ClCompile Include="shader.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="matrix4.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="sceneballgame.h" />
     <ClInclude Include="scenebouncingballs.h" />
     <ClInclude Include="scenecheckerboards.h" />
     <ClInclude Include="shader.h" />

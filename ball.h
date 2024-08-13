@@ -25,6 +25,16 @@ public:
 
 	Vector2& Position();
 
+	//additional methods for ball game:
+	void SetAsPlayer();
+	void SetGood();
+	void SetBad();
+	void Shrink();
+	void Enlarge();
+	float GetRadius();
+	void Kill();
+	bool IsAlive() const;
+
 protected:
 	void ComputeBounds(int width, int height);
 

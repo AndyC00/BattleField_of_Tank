@@ -27,8 +27,7 @@ Ball::~Ball()
 	m_pSprite = 0;
 }
 
-bool
-Ball::Initialise(Renderer& renderer)
+bool Ball::Initialise(Renderer& renderer)
 {
 	m_pSprite = renderer.CreateSprite("Sprites\\ball.png");
 
@@ -86,8 +85,7 @@ Ball::Process(float deltaTime)
 
 void Ball::Draw(Renderer & renderer)
 {
-	//I assigned it to true to avoid printing error
-	if (m_bAlive = true)
+	if (m_bAlive)
 	{
 		m_pSprite->Draw(renderer);
 	}
@@ -145,4 +143,61 @@ void Ball::DebugDraw()
 	m_pSprite->SetGreenTint(colour[1]);
 	m_pSprite->SetBlueTint(colour[2]);
 	m_pSprite->SetAlpha(colour[3]);
+}
+
+//the below methods are additional methods to achieve the ball game:
+void Ball::SetAsPlayer()
+{
+	m_pSprite->SetRedTint(1.0f);
+	m_pSprite->SetGreenTint(1.0f);
+	m_pSprite->SetBlueTint(1.0f);
+	m_pSprite->SetAlpha(1.0f);
+	m_pSprite->SetScale(1.0f);  // adjust the size
+}
+
+void Ball::SetGood()
+{
+	m_pSprite->SetRedTint(0.0f);
+	m_pSprite->SetGreenTint(1.0f);
+	m_pSprite->SetBlueTint(0.0f);
+	m_pSprite->SetAlpha(1.0f);
+}
+
+void Ball::SetBad()
+{
+	m_pSprite->SetRedTint(1.0f);
+	m_pSprite->SetGreenTint(0.0f);
+	m_pSprite->SetBlueTint(0.0f);
+	m_pSprite->SetAlpha(1.0f);
+}
+
+void Ball::Shrink()
+{
+	float scale = m_pSprite->GetScale();
+	scale *= 0.9f;  //10% smaller when touch
+	m_pSprite->SetScale(scale);
+	ComputeBounds(static_cast<int>(sm_fBoundaryWidth), static_cast<int>(sm_fBoundaryHeight));
+}
+
+void Ball::Enlarge()
+{
+	float scale = m_pSprite->GetScale();
+	scale *= 1.1f;  //10% bigger when touch
+	m_pSprite->SetScale(scale);
+	ComputeBounds(static_cast<int>(sm_fBoundaryWidth), static_cast<int>(sm_fBoundaryHeight));
+}
+
+float Ball::GetRadius()
+{
+	return (m_pSprite->GetWidth() / 2.0f) * m_pSprite->GetScale();
+}
+
+void Ball::Kill()
+{
+	m_bAlive = false;
+}
+
+bool Ball::IsAlive() const
+{
+	return m_bAlive;
 }

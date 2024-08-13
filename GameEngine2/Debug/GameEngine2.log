@@ -8,21 +8,30 @@
   imgui_tables.cpp
   imgui_widgets.cpp
   inputsystem.cpp
-D:\Developing_Projects\GameEngine2\inputsystem.cpp(28,2): warning C4150: deletion of pointer to incomplete type 'XboxController'; no destructor called
   logmanager.cpp
+D:\Developing_Projects\GameEngine2\inputsystem.cpp(28,2): warning C4150: deletion of pointer to incomplete type 'XboxController'; no destructor called
   Main.cpp
   matrix4.cpp
   renderer.cpp
   scene.cpp
+  sceneballgame.cpp
+D:\Developing_Projects\GameEngine2\sceneballgame.h(23,40): error C2061: syntax error: identifier 'InputSystem'
+D:\Developing_Projects\GameEngine2\sceneballgame.cpp(89,21): error C2511: 'void SceneBallGame::Process(float,InputSystem &)': overloaded member function not found in 'SceneBallGame'
+D:\Developing_Projects\GameEngine2\sceneballgame.cpp(99,9): error C2597: illegal reference to non-static member 'SceneBallGame::m_pGoodBalls'
+D:\Developing_Projects\GameEngine2\sceneballgame.cpp(99,9): error C3867: 'SceneBallGame::m_pGoodBalls': non-standard syntax; use '&' to create a pointer to member
+D:\Developing_Projects\GameEngine2\sceneballgame.cpp(99,9): error C2568: '[': unable to resolve function overload
+D:\Developing_Projects\GameEngine2\sceneballgame.cpp(105,9): error C2597: illegal reference to non-static member 'SceneBallGame::m_pBadBalls'
+D:\Developing_Projects\GameEngine2\sceneballgame.cpp(105,9): error C3867: 'SceneBallGame::m_pBadBalls': non-standard syntax; use '&' to create a pointer to member
+D:\Developing_Projects\GameEngine2\sceneballgame.cpp(105,9): error C2568: '[': unable to resolve function overload
+D:\Developing_Projects\GameEngine2\sceneballgame.cpp(109,5): error C2352: 'SceneBallGame::CheckCollisions': a call of a non-static member function requires an object
   scenebouncingballs.cpp
   scenecheckerboards.cpp
   shader.cpp
   sprite.cpp
-  texture.cpp
   Generating Code...
   Compiling...
+  texture.cpp
   texturemanager.cpp
   vector2.cpp
   vertexarray.cpp
   Generating Code...
-  GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe
