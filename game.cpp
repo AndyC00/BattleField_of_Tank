@@ -3,6 +3,7 @@
 #include "sprite.h"
 #include "scenecheckerboards.h"
 #include "scenebouncingballs.h"
+#include "sceneballgame.h"
 #include "ball.h"
 #include "inputsystem.h"
 
@@ -85,6 +86,9 @@ bool Game::Initialise()
 	pScene2->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene2);
 	m_iCurrentScene = 0;
+
+	//creating the scene3 for the ball game:
+
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();

@@ -4,6 +4,7 @@
 #include "renderer.h"
 #include "ball.h"
 #include "logmanager.h"
+#include "imgui/imgui.h"
 
 // Library includes:
 #include <vector>
@@ -82,55 +83,121 @@ void SceneBallGame::SpawnBadBalls(int number)
 
 void SceneBallGame::Process(float deltaTime, InputSystem& inputSystem)
 {
-	// ?????????????
-	Vector2 mousePos = inputSystem.GetMousePosition();
-	m_pPlayerBall->Position() = mousePos;
+	// ??????????????
+	Vector2 mousePosition = inputSystem.GetMousePosition();
+	m_pPlayerBall->Position() = mousePosition;
 
 	// ??????????
-	for (auto& ball : m_pGoodBalls)
+	for (auto& goodBall : m_pGoodBalls)
 	{
-		ball->Process(deltaTime);
+		goodBall->Process(deltaTime);
 	}
-	for (auto& ball : m_pBadBalls)
+
+	// ??????????
+	for (auto& badBall : m_pBadBalls)
 	{
-		ball->Process(deltaTime);
+		badBall->Process(deltaTime);
 	}
 
 	// ????
 	CheckCollisions();
-
-	// ??????
-	m_pGoodBalls.erase(std::remove_if(m_pGoodBalls.begin(), m_pGoodBalls.end(),
-		[](Ball* ball) { return !ball->IsAlive(); }), m_pGoodBalls.end());
-	m_pBadBalls.erase(std::remove_if(m_pBadBalls.begin(), m_pBadBalls.end(),
-		[](Ball* ball) { return !ball->IsAlive(); }), m_pBadBalls.end());
 }
 
 void SceneBallGame::CheckCollisions()
 {
-	// ??????
-	for (auto& ball : m_pGoodBalls)
+	// ???????
+	for (auto it = m_pGoodBalls.begin(); it != m_pGoodBalls.end();)
 	{
-		if (BallVsBall(m_pPlayerBall, ball))
+		Ball* goodBall = *it;
+		if (BallVsBall(m_pPlayerBall, goodBall))
 		{
-			m_pPlayerBall->Enlarge();  // ?????
-			ball->Kill();              // ????
+			m_pPlayerBall->Enlarge();  // ?????????????
+			goodBall->Kill();  // ???????
+			it = m_pGoodBalls.erase(it);  // ????????
+		}
+		else
+		{
+			++it;
 		}
 	}
 
-	// ??????
-	for (auto& ball : m_pBadBalls)
+	// ???????
+	for (auto it = m_pBadBalls.begin(); it != m_pBadBalls.end();)
 	{
-		if (BallVsBall(m_pPlayerBall, ball))
+		Ball* badBall = *it;
+		if (BallVsBall(m_pPlayerBall, badBall))
 		{
-			m_pPlayerBall->Shrink();   // ?????
-			ball->Kill();              // ????
+			m_pPlayerBall->Shrink();  // ?????????????
+			badBall->Kill();  // ???????
+			it = m_pBadBalls.erase(it);  // ????????
+		}
+		else
+		{
+			++it;
 		}
 	}
 }
 
 bool SceneBallGame::BallVsBall(Ball* p1, Ball* p2)
 {
-	float dist = Vector2::Distance(p1->Position(), p2->Position());
-	return dist < (p1->GetRadius() + p2->GetRadius());
+	float distanceSquared = (p1->Position() - p2->Position()).LengthSquared();
+	float combinedRadius = p1->GetRadius() + p2->GetRadius();
+	return distanceSquared <= (combinedRadius * combinedRadius);
+}
+
+void SceneBallGame::Draw(Renderer& renderer)
+{
+	// ?????
+	if (m_pPlayerBall && m_pPlayerBall->IsAlive())
+	{
+		m_pPlayerBall->Draw(renderer);
+	}
+
+	// ???????
+	for (auto& goodBall : m_pGoodBalls)
+	{
+		if (goodBall->IsAlive())
+		{
+			goodBall->Draw(renderer);
+		}
+	}
+
+	// ???????
+	for (auto& badBall : m_pBadBalls)
+	{
+		if (badBall->IsAlive())
+		{
+			badBall->Draw(renderer);
+		}
+	}
+}
+
+void SceneBallGame::DebugDraw()
+{
+	// ????????????
+	if (m_pPlayerBall && m_pPlayerBall->IsAlive())
+	{
+		ImGui::Text("Player Ball:");
+		m_pPlayerBall->DebugDraw();
+	}
+
+	// ?????????
+	ImGui::Text("Good Balls:");
+	for (auto& goodBall : m_pGoodBalls)
+	{
+		if (goodBall->IsAlive())
+		{
+			goodBall->DebugDraw();
+		}
+	}
+
+	// ?????????
+	ImGui::Text("Bad Balls:");
+	for (auto& badBall : m_pBadBalls)
+	{
+		if (badBall->IsAlive())
+		{
+			badBall->DebugDraw();
+		}
+	}
 }
