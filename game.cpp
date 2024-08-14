@@ -4,6 +4,7 @@
 #include "scenecheckerboards.h"
 #include "scenebouncingballs.h"
 #include "sceneballgame.h"
+#include "scene.h"
 #include "ball.h"
 #include "inputsystem.h"
 
@@ -62,7 +63,7 @@ bool Game::Initialise()
 	int bbWidth = 1860;
 	int bbHeight = 1050;
 
-	//Instantiate a inputsystem pointer with new
+	//Instantiate a input system pointer with new
 	m_pInputSystem = new InputSystem();
 	m_pInputSystem->Initialise();
 
@@ -81,14 +82,18 @@ bool Game::Initialise()
 	m_iCurrentScene = 0;*/
 
 	//creating another scene for bouncing balls:
-	Scene* pScene2 = 0;
+	/*Scene* pScene2 = 0;
 	pScene2 = new SceneBouncingBalls();
 	pScene2->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene2);
-	m_iCurrentScene = 0;
+	m_iCurrentScene = 0;*/
 
 	//creating the scene3 for the ball game:
-
+	Scene* pScene3 = 0;
+	pScene3 = new SceneBallGame();
+	pScene3->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene3);
+	m_iCurrentScene = 0;
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();

@@ -3,6 +3,7 @@
 #include "inputsystem.h"
 #include "renderer.h"
 #include "ball.h"
+#include "scene.h"
 #include "logmanager.h"
 #include "imgui/imgui.h"
 
@@ -83,37 +84,32 @@ void SceneBallGame::SpawnBadBalls(int number)
 
 void SceneBallGame::Process(float deltaTime, InputSystem& inputSystem)
 {
-	// ??????????????
 	Vector2 mousePosition = inputSystem.GetMousePosition();
 	m_pPlayerBall->Position() = mousePosition;
 
-	// ??????????
 	for (auto& goodBall : m_pGoodBalls)
 	{
 		goodBall->Process(deltaTime);
 	}
 
-	// ??????????
 	for (auto& badBall : m_pBadBalls)
 	{
 		badBall->Process(deltaTime);
 	}
 
-	// ????
 	CheckCollisions();
 }
 
 void SceneBallGame::CheckCollisions()
 {
-	// ???????
 	for (auto it = m_pGoodBalls.begin(); it != m_pGoodBalls.end();)
 	{
 		Ball* goodBall = *it;
 		if (BallVsBall(m_pPlayerBall, goodBall))
 		{
-			m_pPlayerBall->Enlarge();  // ?????????????
-			goodBall->Kill();  // ???????
-			it = m_pGoodBalls.erase(it);  // ????????
+			m_pPlayerBall->Enlarge();  
+			goodBall->Kill();  
+			it = m_pGoodBalls.erase(it);  
 		}
 		else
 		{
@@ -121,15 +117,14 @@ void SceneBallGame::CheckCollisions()
 		}
 	}
 
-	// ???????
 	for (auto it = m_pBadBalls.begin(); it != m_pBadBalls.end();)
 	{
 		Ball* badBall = *it;
 		if (BallVsBall(m_pPlayerBall, badBall))
 		{
-			m_pPlayerBall->Shrink();  // ?????????????
-			badBall->Kill();  // ???????
-			it = m_pBadBalls.erase(it);  // ????????
+			m_pPlayerBall->Shrink(); 
+			badBall->Kill(); 
+			it = m_pBadBalls.erase(it);
 		}
 		else
 		{
@@ -147,13 +142,11 @@ bool SceneBallGame::BallVsBall(Ball* p1, Ball* p2)
 
 void SceneBallGame::Draw(Renderer& renderer)
 {
-	// ?????
 	if (m_pPlayerBall && m_pPlayerBall->IsAlive())
 	{
 		m_pPlayerBall->Draw(renderer);
 	}
 
-	// ???????
 	for (auto& goodBall : m_pGoodBalls)
 	{
 		if (goodBall->IsAlive())
@@ -162,7 +155,6 @@ void SceneBallGame::Draw(Renderer& renderer)
 		}
 	}
 
-	// ???????
 	for (auto& badBall : m_pBadBalls)
 	{
 		if (badBall->IsAlive())
@@ -174,14 +166,12 @@ void SceneBallGame::Draw(Renderer& renderer)
 
 void SceneBallGame::DebugDraw()
 {
-	// ????????????
 	if (m_pPlayerBall && m_pPlayerBall->IsAlive())
 	{
 		ImGui::Text("Player Ball:");
 		m_pPlayerBall->DebugDraw();
 	}
 
-	// ?????????
 	ImGui::Text("Good Balls:");
 	for (auto& goodBall : m_pGoodBalls)
 	{
@@ -191,7 +181,6 @@ void SceneBallGame::DebugDraw()
 		}
 	}
 
-	// ?????????
 	ImGui::Text("Bad Balls:");
 	for (auto& badBall : m_pBadBalls)
 	{

@@ -3,6 +3,7 @@
 
 // Local includes:
 #include "scene.h"
+#include "inputsystem.h"
 
 // Library includes:
 #include <vector>

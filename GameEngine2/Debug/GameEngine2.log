@@ -1,6 +1,8 @@
 ﻿  ball.cpp
   game.cpp
   imgui.cpp
+D:\Developing_Projects\GameEngine2\game.cpp(93,16): error C2259: 'SceneBallGame': cannot instantiate abstract class
+D:\Developing_Projects\GameEngine2\game.cpp(93,29): error C2259: 'SceneBallGame': cannot instantiate abstract class
   imgui_demo.cpp
   imgui_draw.cpp
   imgui_impl_opengl3.cpp
@@ -14,25 +16,6 @@
   renderer.cpp
   scene.cpp
   sceneballgame.cpp
-D:\Developing_Projects\GameEngine2\sceneballgame.h(23,40): error C2061: syntax error: identifier 'InputSystem'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(84,21): error C2511: 'void SceneBallGame::Process(float,InputSystem &)': overloaded member function not found in 'SceneBallGame'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(91,24): error C2597: illegal reference to non-static member 'SceneBallGame::m_pGoodBalls'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(91,24): error C3535: cannot deduce type for 'auto &&' from 'unknown'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(91,24): error C2440: 'initializing': cannot convert from 'unknown' to 'int &&'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(91,24): error C2672: 'begin': no matching overloaded function found
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(91,24): error C2672: 'end': no matching overloaded function found
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(91,24): error C3536: '<begin>$L0': cannot be used before it is initialized
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(91,24): error C3536: '<end>$L0': cannot be used before it is initialized
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(91,36): error C2100: you cannot dereference an operand of type 'int'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(97,23): error C2597: illegal reference to non-static member 'SceneBallGame::m_pBadBalls'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(97,23): error C3535: cannot deduce type for 'auto &&' from 'unknown'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(97,23): error C2440: 'initializing': cannot convert from 'unknown' to 'int &&'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(97,23): error C2672: 'begin': no matching overloaded function found
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(97,23): error C2672: 'end': no matching overloaded function found
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(97,23): error C3536: '<begin>$L1': cannot be used before it is initialized
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(97,23): error C3536: '<end>$L1': cannot be used before it is initialized
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(97,34): error C2100: you cannot dereference an operand of type 'int'
-D:\Developing_Projects\GameEngine2\sceneballgame.cpp(103,2): error C2352: 'SceneBallGame::CheckCollisions': a call of a non-static member function requires an object
   scenebouncingballs.cpp
   scenecheckerboards.cpp
   shader.cpp
