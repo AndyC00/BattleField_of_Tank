@@ -8,15 +8,16 @@
 
 // Forward declarations: 
 class Renderer;
-
 class Sprite;
-
 class Scene;
 
 class Game
 {
 	// Member methods:
 public:
+	//declare the font:
+	Sprite* m_pZapPow[4];
+
 	static Game& GetInstance(); 
 	static void DestroyInstance();
 

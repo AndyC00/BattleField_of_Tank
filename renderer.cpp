@@ -333,9 +333,7 @@ void
 Renderer::CreateStaticText(const char* pText, int pointsize)
 {
 	Texture* pTexture = new Texture();
-	//
-	//TODO: changing to my own .ttf font
-	//
-	pTexture->LoadTextTexture(pText, "yourfontfile.ttf", pointsize);
+
+	pTexture->LoadTextTexture(pText, "font\\friendlyscribbles.ttf", pointsize);
 	m_pTextureManager->AddTexture(pText, pTexture);
 }

@@ -36,6 +36,8 @@ public:
 	AnimatedSprite* CreateAnimatedSprite(const char* pcFilename);
 	void DrawAnimatedSprite(AnimatedSprite& sprite, int frame);
 
+	void CreateStaticText(const char* pText, int pointsize);
+
 protected:
 	bool InitialiseOpenGL(int screenWidth, int screenHeight);
 	void SetFullscreen(bool fullscreen);
@@ -43,8 +45,6 @@ protected:
 	void LogSdlError();
 
 	bool SetupSpriteShader();
-
-	void CreateStaticText(const char* pText, int pointsize);
 
 private:
 	Renderer(const Renderer& renderer);

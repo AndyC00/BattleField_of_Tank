@@ -1,6 +1,8 @@
 #ifndef  TEXTURE_H  
 #define  TEXTURE_H 
 
+#include <SDL_ttf.h>
+
 class Texture
 {
 	// Member methods: 

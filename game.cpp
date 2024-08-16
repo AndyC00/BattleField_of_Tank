@@ -15,6 +15,7 @@
 #include "imgui/imgui_impl_sdl2.h"
 
 #include <vector>
+#include <SDL_ttf.h>
 
 
 // Static Members:
@@ -51,7 +52,11 @@ Game::~Game()
 	delete m_pInputSystem;
     m_pInputSystem = 0;
 	//deleting created sprites:
-
+	for (int i = 0; i < 4; ++i)
+	{
+		delete m_pZapPow[i];
+		m_pZapPow[i] = 0;
+	}
 }
 
 void Game::Quit()
@@ -81,6 +86,19 @@ bool Game::Initialise()
 	pScene->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene);
 	m_iCurrentScene = 0;
+
+	// Load static text textures into the Texture Manager... 
+	m_pRenderer->CreateStaticText("Zap!!", 60);
+	m_pRenderer->CreateStaticText("Boom!", 60);
+	m_pRenderer->CreateStaticText("Pow!!", 60);
+	m_pRenderer->CreateStaticText("Pop!!!", 60);
+
+	// Generate sprites that use the static text textures... 
+	m_pZapPow[0] = m_pRenderer->CreateSprite("Zap!!");
+	m_pZapPow[1] = m_pRenderer->CreateSprite("Boom!");
+	m_pZapPow[2] = m_pRenderer->CreateSprite("Pow!!");
+	m_pZapPow[3] = m_pRenderer->CreateSprite("Pop!!!");
+
 
 	//creating another scene for bouncing balls:
 	/*Scene* pScene2 = 0;
@@ -166,8 +184,6 @@ void Game::Process(float deltaTime)
 	{
 		LogManager::GetInstance().Log("Left mouse button released.");
 	}
-
-
 }
 
 void Game::DebugDraw()
@@ -197,6 +213,15 @@ void Game::Draw(Renderer& renderer)
 
 	// TODO: Add game objects to draw here!
 	m_scenes[m_iCurrentScene]->Draw(renderer);
+
+	//draw the fonts:
+	for (int i = 0; i < 4; ++i)
+	{
+		if (m_pZapPow[i])
+		{
+			m_pZapPow[i]->Draw(renderer);
+		}
+	}
 
 	DebugDraw();
 
