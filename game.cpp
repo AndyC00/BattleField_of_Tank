@@ -75,11 +75,11 @@ bool Game::Initialise()
 	}
 
 	//creating the scene:
-	/*Scene* pScene = 0;
+	Scene* pScene = 0;
 	pScene = new SceneCheckerboards();
 	pScene->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene);
-	m_iCurrentScene = 0;*/
+	m_iCurrentScene = 0;
 
 	//creating another scene for bouncing balls:
 	/*Scene* pScene2 = 0;
@@ -89,11 +89,11 @@ bool Game::Initialise()
 	m_iCurrentScene = 0;*/
 
 	//creating the scene3 for the ball game:
-	Scene* pScene3 = 0;
+	/*Scene* pScene3 = 0;
 	pScene3 = new SceneBallGame();
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
-	m_iCurrentScene = 0;
+	m_iCurrentScene = 0;*/
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();

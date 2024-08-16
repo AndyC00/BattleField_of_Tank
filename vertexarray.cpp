@@ -8,24 +8,27 @@
 #include <cassert>
 
 VertexArray::VertexArray(const float* pVertexData, unsigned int numVertices,
-	const unsigned int* pIndexData, unsigned int numIndicies)
-	: m_numVertices(numVertices)
-	, m_numIndices(numIndicies)
-	, m_glVertexBuffer(0)
-	, m_glIndexBuffer(0)
-	, m_glVertexArray(0)
+	const unsigned int* pIndexData, unsigned int numIndicies):
+	m_numVertices(numVertices),
+	m_numIndices(numIndicies),
+	m_glVertexBuffer(0),
+	m_glIndexBuffer(0),
+	m_glVertexArray(0)
 {
 	const int stride = 5 * sizeof(float); //XYZUV
 	assert(pVertexData);
 
-	glGenVertexArrays(1, &m_glVertexArray); glBindVertexArray(m_glVertexArray);
+	glGenVertexArrays(1, &m_glVertexArray);
+	glBindVertexArray(m_glVertexArray);
 
-	glGenBuffers(1, &m_glVertexBuffer); glBindBuffer(GL_ARRAY_BUFFER, m_glVertexBuffer);
+	glGenBuffers(1, &m_glVertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, m_glVertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, m_numVertices * stride, pVertexData, GL_STATIC_DRAW);
 
 	if (pIndexData)
 	{
-		glGenBuffers(1, &m_glIndexBuffer); glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_glIndexBuffer);
+		glGenBuffers(1, &m_glIndexBuffer);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_glIndexBuffer);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(unsigned int), pIndexData, GL_STATIC_DRAW);
 	}
 	// Layout: XYZ 
@@ -38,7 +41,9 @@ VertexArray::VertexArray(const float* pVertexData, unsigned int numVertices,
 }
 VertexArray::~VertexArray()
 {
-	glDeleteBuffers(1, &m_glVertexBuffer); glDeleteBuffers(1, &m_glIndexBuffer); glDeleteVertexArrays(1, &m_glVertexArray);
+	glDeleteBuffers(1, &m_glVertexBuffer);
+	glDeleteBuffers(1, &m_glIndexBuffer);
+	glDeleteVertexArrays(1, &m_glVertexArray);
 }
 void VertexArray::SetActive()
 {
