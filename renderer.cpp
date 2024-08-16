@@ -4,6 +4,7 @@
 
 // Local includes:
 #include "texturemanager.h" 
+#include "texture.h"
 #include "logmanager.h" 
 #include "shader.h" 
 #include "vertexarray.h" 
@@ -14,6 +15,7 @@
 // Library includes:
 #include <SDL.h> 
 #include <SDL_image.h> 
+#include <SDL_ttf.h>
 #include <glew.h> 
 #include <cassert> 
 #include <cmath>
@@ -325,4 +327,15 @@ Renderer::DrawAnimatedSprite(AnimatedSprite& sprite, int frame)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)((frame * 6) * sizeof(GLuint)));
+}
+
+void
+Renderer::CreateStaticText(const char* pText, int pointsize)
+{
+	Texture* pTexture = new Texture();
+	//
+	//TODO: changing to my own .ttf font
+	//
+	pTexture->LoadTextTexture(pText, "yourfontfile.ttf", pointsize);
+	m_pTextureManager->AddTexture(pText, pTexture);
 }

@@ -1,4 +1,3 @@
-d:\developing_projects\gameengine2\gameengine2\debug\ball.obj
 d:\developing_projects\gameengine2\gameengine2\debug\imgui.obj
 d:\developing_projects\gameengine2\gameengine2\debug\imgui_demo.obj
 d:\developing_projects\gameengine2\gameengine2\debug\imgui_draw.obj
@@ -6,20 +5,12 @@ d:\developing_projects\gameengine2\gameengine2\debug\imgui_impl_opengl3.obj
 d:\developing_projects\gameengine2\gameengine2\debug\imgui_impl_sdl2.obj
 d:\developing_projects\gameengine2\gameengine2\debug\imgui_tables.obj
 d:\developing_projects\gameengine2\gameengine2\debug\imgui_widgets.obj
-d:\developing_projects\gameengine2\gameengine2\debug\inputsystem.obj
 d:\developing_projects\gameengine2\gameengine2\debug\logmanager.obj
 d:\developing_projects\gameengine2\gameengine2\debug\main.obj
 d:\developing_projects\gameengine2\gameengine2\debug\matrix4.obj
-d:\developing_projects\gameengine2\gameengine2\debug\renderer.obj
-d:\developing_projects\gameengine2\gameengine2\debug\scene.obj
-d:\developing_projects\gameengine2\gameengine2\debug\sceneballgame.obj
-d:\developing_projects\gameengine2\gameengine2\debug\scenebouncingballs.obj
-d:\developing_projects\gameengine2\gameengine2\debug\scenecheckerboards.obj
 d:\developing_projects\gameengine2\gameengine2\debug\shader.obj
-d:\developing_projects\gameengine2\gameengine2\debug\sprite.obj
 d:\developing_projects\gameengine2\gameengine2\debug\texture.obj
 d:\developing_projects\gameengine2\gameengine2\debug\texturemanager.obj
-d:\developing_projects\gameengine2\gameengine2\debug\vector2.obj
 d:\developing_projects\gameengine2\gameengine2\debug\vertexarray.obj
 d:\developing_projects\gameengine2\gameengine2\debug\vc143.idb
 d:\developing_projects\gameengine2\gameengine2\debug\vc143.pdb

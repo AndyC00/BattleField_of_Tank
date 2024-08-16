@@ -38,6 +38,7 @@ private:
 
 	// Member data:
 public:
+
 protected:
 	VertexArray* m_pVertexData;
 	int m_iFrameWidth;
@@ -49,6 +50,7 @@ protected:
 	float totalTime;
 	bool m_bAnimating;
 	bool m_bLooping;
+
 private:
 
 };

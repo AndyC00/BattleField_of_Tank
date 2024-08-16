@@ -7,6 +7,7 @@
 #include "scene.h"
 #include "ball.h"
 #include "inputsystem.h"
+#include "animatedsprite.h"
 
 // Library includes: 
 #include "renderer.h" 

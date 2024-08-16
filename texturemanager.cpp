@@ -62,3 +62,9 @@ TextureManager::GetTexture(const char* pcFilename)
 
 	return pTexture;
 }
+
+void
+TextureManager::AddTexture(const char* key, Texture* pTexture)
+{
+	m_pLoadedTextures[key] = pTexture;
+}

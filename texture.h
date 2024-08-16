@@ -1,4 +1,3 @@
-
 #ifndef  TEXTURE_H  
 #define  TEXTURE_H 
 
@@ -15,6 +14,9 @@ public:
 
 	int GetWidth() const; 
 	int GetHeight() const;
+
+	void LoadTextTexture(const char* text, const char* fontname, int pointsize);
+	void LoadSurfaceIntoTexture(SDL_Surface* pSurface);
 
 protected:
 

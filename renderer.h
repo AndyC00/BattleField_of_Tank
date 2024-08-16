@@ -44,12 +44,17 @@ protected:
 
 	bool SetupSpriteShader();
 
+	void CreateStaticText(const char* pText, int pointsize);
+
 private:
 	Renderer(const Renderer& renderer);
 	Renderer& operator=(const Renderer& renderer);
 
 	// Member data:
 public:
+
+
+
 
 protected:
 	TextureManager* m_pTextureManager; 
