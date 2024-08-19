@@ -87,6 +87,8 @@ void SceneBallGame::Process(float deltaTime, InputSystem& inputSystem)
 	Vector2 mousePosition = inputSystem.GetMousePosition();
 	m_pPlayerBall->Position() = mousePosition;
 
+	m_pPlayerBall->Process(deltaTime);
+
 	for (auto& goodBall : m_pGoodBalls)
 	{
 		goodBall->Process(deltaTime);

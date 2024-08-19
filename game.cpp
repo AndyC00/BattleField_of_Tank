@@ -81,18 +81,17 @@ bool Game::Initialise()
 	}
 
 	//creating the scene:
-	//Scene* pScene = 0;
-	//pScene = new SceneCheckerboards();
-	//pScene->Initialise(*m_pRenderer);
-	//m_scenes.push_back(pScene);
-	//m_iCurrentScene = 0;
+	Scene* pScene = 0;
+	pScene = new SceneCheckerboards();
+	pScene->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene);
+	m_iCurrentScene = 0;
 
 	//creating another scene for bouncing balls:
 	Scene* pScene2 = 0;
 	pScene2 = new SceneBouncingBalls();
 	pScene2->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene2);
-	m_iCurrentScene = 0;
 
 	// text renderer at last:
 	// Load static text textures into the Texture Manager... 
@@ -102,20 +101,19 @@ bool Game::Initialise()
 	m_pRenderer->CreateStaticText("Pop!!!", 60);
 
 	// Generate sprites that use the static text textures... 
-	//m_pZapPow[0] = m_pRenderer->CreateSprite("Zap!!");
-	//m_pZapPow[0]->SetX(200);
-	//m_pZapPow[0]->SetY(200);
-	//m_pZapPow[0]->SetAngle(180);
-	//m_pZapPow[1] = m_pRenderer->CreateSprite("Boom!");
-	//m_pZapPow[2] = m_pRenderer->CreateSprite("Pow!!");
-	//m_pZapPow[3] = m_pRenderer->CreateSprite("Pop!!!");
+	m_pZapPow[0] = m_pRenderer->CreateSprite("Zap!!");
+	m_pZapPow[0]->SetX(200);
+	m_pZapPow[0]->SetY(200);
+	m_pZapPow[0]->SetAngle(180);
+	m_pZapPow[1] = m_pRenderer->CreateSprite("Boom!");
+	m_pZapPow[2] = m_pRenderer->CreateSprite("Pow!!");
+	m_pZapPow[3] = m_pRenderer->CreateSprite("Pop!!!");
 
 	//creating the scene3 for the ball game:
 	Scene* pScene3 = 0;
 	pScene3 = new SceneBallGame();
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
-	m_iCurrentScene = 0;
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();
@@ -164,7 +162,7 @@ void Game::Process(float deltaTime)
 {
 	ProcessFrameCounting(deltaTime);
 	// TODO: Add game objects to process here!
-	m_scenes[m_iCurrentScene]->Process(deltaTime);
+	m_scenes[m_iCurrentScene]->Process(deltaTime, *m_pInputSystem);
 
 	ButtonState leftArrowState = (m_pInputSystem->GetKeyState(SDL_SCANCODE_LEFT));
 

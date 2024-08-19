@@ -46,7 +46,7 @@ SceneBouncingBalls::Initialise(Renderer& renderer)
 }
 
 void
-SceneBouncingBalls::Process(float deltaTime)
+SceneBouncingBalls::Process(float deltaTime, InputSystem& inputSystem)
 {
 	for (int k = 0; k < m_iShowCount; ++k)
 	{
