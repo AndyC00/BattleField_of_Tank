@@ -45,6 +45,7 @@ private:
 	// Member data: 
 public:
 	void DebugDraw();
+
 protected:
 	Vector2 m_position; 
 	Vector2 m_velocity;

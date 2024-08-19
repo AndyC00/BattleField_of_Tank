@@ -42,10 +42,10 @@ bool SceneBallGame::Initialise(Renderer& renderer)
 	m_pPlayerBall->Position().y = renderer.GetHeight() / 2.0f;
 
 	// Spawn good balls
-	SpawnGoodBalls(10);  // You can specify the number of good balls you want to spawn
+	SpawnGoodBalls(10);  // specify the number of good balls to 10
 
 	// Spawn bad balls
-	SpawnBadBalls(10);  // You can specify the number of bad balls you want to spawn
+	SpawnBadBalls(10);  // specify the number of bad balls to 10
 
 	return true;
 }

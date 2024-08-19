@@ -15,8 +15,9 @@
 float Ball::sm_fBoundaryWidth = 0.0f; 
 float Ball::sm_fBoundaryHeight = 0.0f;
 
-Ball::Ball(): 
-	m_pSprite(0)
+Ball::Ball() :
+	m_pSprite(0),
+	m_bAlive(true)
 {
 
 }
@@ -85,10 +86,7 @@ Ball::Process(float deltaTime)
 
 void Ball::Draw(Renderer & renderer)
 {
-	if (m_bAlive)
-	{
-		m_pSprite->Draw(renderer);
-	}
+	m_pSprite->Draw(renderer);
 }
 
 Vector2& Ball::Position()

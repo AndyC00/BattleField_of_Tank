@@ -21,7 +21,7 @@ public:
 
 	void SetX(int x); 
 	int GetX() const; 
-	void SetY(int y); 
+	void SetY(int y);
 	int GetY() const;
 
 	void SetAngle(float angle); 

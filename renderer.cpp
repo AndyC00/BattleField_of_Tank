@@ -329,8 +329,7 @@ Renderer::DrawAnimatedSprite(AnimatedSprite& sprite, int frame)
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)((frame * 6) * sizeof(GLuint)));
 }
 
-void
-Renderer::CreateStaticText(const char* pText, int pointsize)
+void Renderer::CreateStaticText(const char* pText, int pointsize)
 {
 	Texture* pTexture = new Texture();
 

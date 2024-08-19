@@ -81,12 +81,20 @@ bool Game::Initialise()
 	}
 
 	//creating the scene:
-	Scene* pScene = 0;
-	pScene = new SceneCheckerboards();
-	pScene->Initialise(*m_pRenderer);
-	m_scenes.push_back(pScene);
+	//Scene* pScene = 0;
+	//pScene = new SceneCheckerboards();
+	//pScene->Initialise(*m_pRenderer);
+	//m_scenes.push_back(pScene);
+	//m_iCurrentScene = 0;
+
+	//creating another scene for bouncing balls:
+	Scene* pScene2 = 0;
+	pScene2 = new SceneBouncingBalls();
+	pScene2->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene2);
 	m_iCurrentScene = 0;
 
+	// text renderer at last:
 	// Load static text textures into the Texture Manager... 
 	m_pRenderer->CreateStaticText("Zap!!", 60);
 	m_pRenderer->CreateStaticText("Boom!", 60);
@@ -94,25 +102,20 @@ bool Game::Initialise()
 	m_pRenderer->CreateStaticText("Pop!!!", 60);
 
 	// Generate sprites that use the static text textures... 
-	m_pZapPow[0] = m_pRenderer->CreateSprite("Zap!!");
-	m_pZapPow[1] = m_pRenderer->CreateSprite("Boom!");
-	m_pZapPow[2] = m_pRenderer->CreateSprite("Pow!!");
-	m_pZapPow[3] = m_pRenderer->CreateSprite("Pop!!!");
-
-
-	//creating another scene for bouncing balls:
-	/*Scene* pScene2 = 0;
-	pScene2 = new SceneBouncingBalls();
-	pScene2->Initialise(*m_pRenderer);
-	m_scenes.push_back(pScene2);
-	m_iCurrentScene = 0;*/
+	//m_pZapPow[0] = m_pRenderer->CreateSprite("Zap!!");
+	//m_pZapPow[0]->SetX(200);
+	//m_pZapPow[0]->SetY(200);
+	//m_pZapPow[0]->SetAngle(180);
+	//m_pZapPow[1] = m_pRenderer->CreateSprite("Boom!");
+	//m_pZapPow[2] = m_pRenderer->CreateSprite("Pow!!");
+	//m_pZapPow[3] = m_pRenderer->CreateSprite("Pop!!!");
 
 	//creating the scene3 for the ball game:
-	/*Scene* pScene3 = 0;
+	Scene* pScene3 = 0;
 	pScene3 = new SceneBallGame();
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
-	m_iCurrentScene = 0;*/
+	m_iCurrentScene = 0;
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();
@@ -188,7 +191,8 @@ void Game::Process(float deltaTime)
 
 void Game::DebugDraw()
 {
-	if (m_bShowDebugWindow)
+	// assigned to be true by myself because it hasn't been return by functions
+	if (m_bShowDebugWindow = true)
 	{
 		bool open = true;
 		ImGui::Begin("Debug Window", &open, ImGuiWindowFlags_MenuBar);

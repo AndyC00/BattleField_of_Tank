@@ -129,6 +129,8 @@ Texture::LoadSurfaceIntoTexture(SDL_Surface* pSurface)
 			format = GL_RGBA;
 		}
 
+		glPixelStorei(GL_UNPACK_ROW_LENGTH, pSurface->pitch / bytesPerPixel);
+
 		glGenTextures(1, &m_uiTextureId);
 		glBindTexture(GL_TEXTURE_2D, m_uiTextureId);
 		glTexImage2D(GL_TEXTURE_2D, 0, format, m_iWidth, m_iHeight, 0, format, GL_UNSIGNED_BYTE, pSurface->pixels);
