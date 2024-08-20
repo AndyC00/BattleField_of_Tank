@@ -102,7 +102,7 @@ bool Game::Initialise()
 
 	// Generate sprites that use the static text textures... 
 	m_pZapPow[0] = m_pRenderer->CreateSprite("Zap!!");
-	m_pZapPow[0]->SetX(200);
+	m_pZapPow[0]->SetX(300);
 	m_pZapPow[0]->SetY(200);
 	m_pZapPow[0]->SetAngle(180);
 	m_pZapPow[1] = m_pRenderer->CreateSprite("Boom!");
