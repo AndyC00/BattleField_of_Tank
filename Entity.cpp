@@ -9,7 +9,6 @@
 // Library includes:
 #include <cassert>
 
-// Constructor
 Entity::Entity()
     : m_pSprite(nullptr)
     , m_position(0.0f, 0.0f)
@@ -18,7 +17,6 @@ Entity::Entity()
 {
 }
 
-// Destructor
 Entity::~Entity()
 {
     delete m_pSprite;
@@ -37,13 +35,10 @@ bool Entity::Initialise(Renderer& renderer)
     return true;
 }
 
-// Process the entity's logic
 void Entity::Process(float deltaTime)
 {
-    // Update position based on velocity
     m_position += m_velocity * deltaTime;
 
-    // Update sprite position
     m_pSprite->SetX(static_cast<int>(m_position.x));
     m_pSprite->SetY(static_cast<int>(m_position.y));
 
@@ -52,7 +47,6 @@ void Entity::Process(float deltaTime)
 
 }
 
-// Draw the entity
 void Entity::Draw(Renderer& renderer)
 {
     if (m_bAlive)
@@ -61,7 +55,6 @@ void Entity::Draw(Renderer& renderer)
     }
 }
 
-// Rotate the entity
 void Entity::Rotate(float direction)
 {
     if (m_pSprite)
@@ -70,13 +63,11 @@ void Entity::Rotate(float direction)
     }
 }
 
-// Check if the entity is alive
 bool Entity::IsAlive() const
 {
     return m_bAlive;
 }
 
-// Set the entity as dead
 void Entity::SetDead()
 {
     m_bAlive = false;
@@ -88,7 +79,6 @@ float Entity::GetRadius()
     return (m_pSprite->GetWidth() / 2.0f) * m_pSprite->GetScale();
 }
 
-// Get the direction the entity is facing
 Vector2 Entity::GetFacingDirection()
 {
     // Assuming the sprite's angle represents the facing direction
@@ -96,19 +86,16 @@ Vector2 Entity::GetFacingDirection()
     return Vector2(cos(angle), sin(angle));
 }
 
-// Get the position of the entity
 Vector2& Entity::GetPosition()
 {
     return m_position;
 }
 
-// Get the velocity of the entity
 Vector2& Entity::GetVelocity()
 {
     return m_velocity;
 }
 
-// Check if this entity is colliding with another entity
 bool Entity::IsCollidingWith(Entity& toCheck)
 {
     float distanceSquared = (m_position - toCheck.GetPosition()).LengthSquared();
