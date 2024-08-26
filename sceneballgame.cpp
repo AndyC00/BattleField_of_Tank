@@ -10,6 +10,11 @@
 // Library includes:
 #include <vector>
 #include <cmath>
+#include "fmod.hpp"
+
+using FMOD::System;
+using FMOD::Sound;
+using FMOD::Channel;
 
 SceneBallGame::SceneBallGame()
 	: m_pRenderer(nullptr),
@@ -46,6 +51,10 @@ bool SceneBallGame::Initialise(Renderer& renderer)
 
 	// Spawn bad balls
 	SpawnBadBalls(10);  // specify the number of bad balls to 10
+
+	//initialise the sound:
+
+
 
 	return true;
 }

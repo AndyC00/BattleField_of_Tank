@@ -13,10 +13,17 @@
 #include "renderer.h" 
 #include "logmanager.h"
 #include "imgui/imgui_impl_sdl2.h"
+#include "fmod.hpp"
+#include "fmod.h"
+#include "fmod_errors.h"
+
 
 #include <vector>
 #include <SDL_ttf.h>
 
+//Fmod:
+FMOD_RESULT result;
+FMOD::System* system = NULL;
 
 // Static Members:
 Game* Game::sm_pInstance = 0;
@@ -120,6 +127,20 @@ bool Game::Initialise()
 
 	m_iLastTime = SDL_GetPerformanceCounter();
 	m_pRenderer->SetClearColour(0, 255, 255); 
+
+	//initialise the sound middleware Fmod:
+	result = FMOD::System_Create(&system);      // Create the main system object.
+	if (result != FMOD_OK)
+	{
+		printf("FMOD error! (%d) %s\n", result, FMOD_ErrorString(result));
+		exit(-1);
+	}
+	result = system->init(512, FMOD_INIT_NORMAL, 0);    // Initialize FMOD.
+	if (result != FMOD_OK)
+	{
+		printf("FMOD error! (%d) %s\n", result, FMOD_ErrorString(result));
+		exit(-1);
+	}
 
 	return true;
 }

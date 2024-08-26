@@ -160,6 +160,7 @@
     <ClCompile Include="scenebouncingballs.cpp" />
     <ClCompile Include="scenecheckerboards.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="soundsystem.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="texturemanager.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="scenebouncingballs.h" />
     <ClInclude Include="scenecheckerboards.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="soundsystem.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="texturemanager.h" />
