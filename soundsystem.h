@@ -10,14 +10,15 @@ public:
 	SoundSystem();
 	~SoundSystem();
 
-	bool System_Create();
-	void init();
+	void System_Create(&system);
+	void init(int, FMOD_STUDIO_INITFLAGS, FMOD_INITFLAGS, void);
 	void createSound();
 	void playSound();
 	void update();
 	void release();
 
-
+private:
+	FMOD::System* soundsystem;
 
 };
 
