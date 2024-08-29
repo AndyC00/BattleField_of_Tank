@@ -11,54 +11,52 @@
 using FMOD::System;
 using FMOD::Sound;
 using FMOD::Channel;
+using FMOD::ChannelGroup;
 
 SoundSystem::SoundSystem()	
 {
-	soundsystem = new System();
+	FMOD::System_Create(&system);
 }
 
 SoundSystem::~SoundSystem()
 {
-	if (soundsystem)
+	if (system)
 	{
-		soundsystem->release();
-		soundsystem = nullptr;
+		system->release();
+		system = nullptr;
 	}
-}
-
-void SoundSystem::System_Create(&system)
-{
-	soundsystem->System_Create(&system);
 }
 
 void SoundSystem::init()
 {
-	soundsystem->init(512, FMOD_STUDIO_INIT_NORMAL, FMOD_INIT_NORMAL, nullptr);
+	system->init(512, FMOD_INIT_NORMAL, nullptr);
 }
 
-void SoundSystem::createSound(const char* addressname, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, Sound** sound)
+void SoundSystem::createSound(const char* addressname, FMOD_MODE mode, Sound** sound)
 {
-	soundsystem->createSound(addressname, mode, nullptr, sound);
+	system->createSound(addressname, mode, nullptr, sound);
 }
 
-void SoundSystem::playSound()
+void SoundSystem::playSound(Sound* sound, ChannelGroup* channelgroup, bool paused, Channel** channel)
 {
-	soundsystem->
+	system->playSound( sound, channelgroup, paused, channel);
 }
 
 void SoundSystem::update()
 {
-	soundsystem->
+	system->update();
 }
 
 void SoundSystem::release()
 {
-	soundsystem->release();
+	system->release();
 }
 
 /*
 	todo:
 	create system then initialise in game.cpp's initialise()
+	auto thing = new SoundSystem();
+
 	load sound in scene where it should be
 	clear the sound in gmae.cpp's destructor
 */

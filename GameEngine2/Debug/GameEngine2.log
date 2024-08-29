@@ -1,4 +1,7 @@
-﻿  Entity.cpp
-D:\Developing_Projects\GameEngine2\Entity.cpp(94,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Entity.cpp(94,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+﻿  animatedsprite.cpp
+  game.cpp
+  imgui.cpp
+  scenecheckerboards.cpp
+  vertexarray.cpp
+  Generating Code...
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe

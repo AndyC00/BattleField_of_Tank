@@ -4,23 +4,27 @@
 // Library Includes: 
 #include "fmod.hpp"
 
+using FMOD::System;
+using FMOD::Sound;
+using FMOD::Channel;
+using FMOD::ChannelGroup;
+
 class SoundSystem 
 {
 public:
 	SoundSystem();
 	~SoundSystem();
 
-	void System_Create(&system);
-	void init(int, FMOD_STUDIO_INITFLAGS, FMOD_INITFLAGS, void);
-	void createSound();
-	void playSound();
+	void init();
+	void createSound(const char* addressname, FMOD_MODE mode, Sound** sound);
+	void playSound(Sound* sound, ChannelGroup* channelgroup, bool paused, Channel** channel);
 	void update();
 	void release();
 
 private:
-	FMOD::System* soundsystem;
+	FMOD::System* system;
 
 };
 
 
-#endif //   SOUNDSYSTEM_H 
+#endif //   SOUNDSYSTEM_H

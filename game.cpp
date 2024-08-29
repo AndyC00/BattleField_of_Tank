@@ -21,9 +21,6 @@
 #include <vector>
 #include <SDL_ttf.h>
 
-//Fmod:
-FMOD_RESULT result;
-FMOD::System* system = NULL;
 
 // Static Members:
 Game* Game::sm_pInstance = 0;
