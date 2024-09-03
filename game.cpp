@@ -112,27 +112,27 @@ bool Game::Initialise()
 	pScene2->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene2);
 
-	// text renderer at last:
-	// Load static text textures into the Texture Manager... 
-	m_pRenderer->CreateStaticText("Zap!!", 60);
-	m_pRenderer->CreateStaticText("Boom!", 60);
-	m_pRenderer->CreateStaticText("Pow!!", 60);
-	m_pRenderer->CreateStaticText("Pop!!!", 60);
-
-	// Generate sprites that use the static text textures... 
-	m_pZapPow[0] = m_pRenderer->CreateSprite("Zap!!");
-	m_pZapPow[0]->SetX(300);
-	m_pZapPow[0]->SetY(200);
-	m_pZapPow[0]->SetAngle(180);
-	m_pZapPow[1] = m_pRenderer->CreateSprite("Boom!");
-	m_pZapPow[2] = m_pRenderer->CreateSprite("Pow!!");
-	m_pZapPow[3] = m_pRenderer->CreateSprite("Pop!!!");
-
 	//creating the scene3 for the ball game:
 	Scene* pScene3 = 0;
 	pScene3 = new SceneBallGame();
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
+
+	// text renderer at last:
+	// Load static text textures into the Texture Manager... 
+	m_pRenderer->CreateStaticText("Andy's Game", 60);
+	m_pRenderer->CreateStaticText("Boom!", 60);
+	m_pRenderer->CreateStaticText("Pow!!", 60);
+	m_pRenderer->CreateStaticText("Pop!!!", 60);
+
+	// Generate sprites that use the static text textures... 
+	m_pZapPow[0] = m_pRenderer->CreateSprite("Andy's Game");
+	m_pZapPow[0]->SetX(900);
+	m_pZapPow[0]->SetY(100);
+	m_pZapPow[0]->SetAngle(180);
+	m_pZapPow[1] = m_pRenderer->CreateSprite("Boom!");
+	m_pZapPow[2] = m_pRenderer->CreateSprite("Pow!!");
+	m_pZapPow[3] = m_pRenderer->CreateSprite("Pop!!!");
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();
@@ -215,7 +215,7 @@ void Game::DebugDraw()
 	{
 		bool open = true;
 		ImGui::Begin("Debug Window", &open, ImGuiWindowFlags_MenuBar);
-		ImGui::Text("COMP710 GP Framework (%s)", "2022, S2");
+		ImGui::Text("My Game Frame", "2024, S2");
 
 		if (ImGui::Button("Quit"))
 		{
