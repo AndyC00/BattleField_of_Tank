@@ -54,6 +54,7 @@ protected:
 private:
 	FMOD::Sound* hitsound1;
 	FMOD::Sound* hitsound2;
+	FMOD::Sound* opening;
 	FMOD::Channel* channel;
 };
 

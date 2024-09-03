@@ -13,7 +13,8 @@
 #include <vector>
 #include <cmath>
 #include "fmod.hpp"
-#include "soundsystem.h"
+#include "fmod_errors.h"
+
 
 using FMOD::System;
 using FMOD::Sound;
@@ -24,7 +25,8 @@ SceneBallGame::SceneBallGame()
 	m_pPlayerBall(nullptr),
 	hitsound1(nullptr),
 	hitsound2(nullptr),
-	channel(nullptr)
+	channel(nullptr),
+	opening(nullptr)
 {
 }
 
@@ -59,8 +61,23 @@ bool SceneBallGame::Initialise(Renderer& renderer)
 	SpawnBadBalls(25);  // specify the number of bad balls to 10
 
 	//initialise the sound:
-	Game::pSoundsystem->createSound("sounds\\hit.wav", FMOD_DEFAULT, &hitsound1);
-	Game::pSoundsystem->createSound("sounds\\hit2.wav", FMOD_DEFAULT, &hitsound2);
+	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
+	if (result != FMOD_OK || hitsound1 == nullptr) {
+		printf("Failed to load hit.wav: %s\n", FMOD_ErrorString(result));
+	}
+	else {
+		printf("Successfully loaded hit.wav\n");
+	}
+
+	result = Game::pSoundsystem->createSound("sounds\\hit2.mp3", FMOD_DEFAULT, &hitsound2);
+	if (result != FMOD_OK || hitsound2 == nullptr) {
+		printf("Failed to load hit2.mp3: %s\n", FMOD_ErrorString(result));
+	}
+	else {
+		printf("Successfully loaded hit2.mp3\n");
+	}
+	Game::pSoundsystem->createSound("sounds\\opening.wav", FMOD_LOOP_NORMAL, &opening);
+	Game::pSoundsystem->playSound(opening, nullptr, false, &channel);
 
 	return true;
 }

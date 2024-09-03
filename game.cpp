@@ -82,6 +82,9 @@ void Game::Quit()
 
 bool Game::Initialise()
 {
+	//load soundsystem:
+	pSoundsystem->init();
+
 	int bbWidth = 1860;
 	int bbHeight = 1050;
 
@@ -136,10 +139,6 @@ bool Game::Initialise()
 
 	m_iLastTime = SDL_GetPerformanceCounter();
 	m_pRenderer->SetClearColour(0, 255, 255); 
-
-	//load soundsystem:
-	pSoundsystem->init();
-
 
 	return true;
 }

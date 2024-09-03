@@ -32,9 +32,9 @@ void SoundSystem::init()
 	system->init(512, FMOD_INIT_NORMAL, nullptr);
 }
 
-void SoundSystem::createSound(const char* addressname, FMOD_MODE mode, Sound** sound)
+FMOD_RESULT SoundSystem::createSound(const char* addressname, FMOD_MODE mode, Sound** sound)
 {
-	system->createSound(addressname, mode, nullptr, sound);
+	return system->createSound(addressname, mode, nullptr, sound);
 }
 
 void SoundSystem::playSound(Sound* sound, ChannelGroup* channelgroup, bool paused, Channel** channel)

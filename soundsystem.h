@@ -16,7 +16,7 @@ public:
 	~SoundSystem();
 
 	void init();
-	void createSound(const char* addressname, FMOD_MODE mode, Sound** sound);
+	FMOD_RESULT createSound(const char* addressname, FMOD_MODE mode, Sound** sound);
 	void playSound(Sound* sound, ChannelGroup* channelgroup, bool paused, Channel** channel);
 	void update();
 	void release();
