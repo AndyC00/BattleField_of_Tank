@@ -51,12 +51,3 @@ void SoundSystem::release()
 {
 	system->release();
 }
-
-/*
-	todo:
-	create system then initialise in game.cpp's initialise()
-	auto thing = new SoundSystem();
-
-	load sound in scene where it should be
-	clear the sound in gmae.cpp's destructor
-*/

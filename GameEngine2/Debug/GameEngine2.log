@@ -1,7 +1,2 @@
-﻿  animatedsprite.cpp
-  game.cpp
-  imgui.cpp
-  scenecheckerboards.cpp
-  vertexarray.cpp
-  Generating Code...
+﻿  game.cpp
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe

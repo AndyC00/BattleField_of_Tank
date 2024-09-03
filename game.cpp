@@ -8,6 +8,7 @@
 #include "ball.h"
 #include "inputsystem.h"
 #include "animatedsprite.h"
+#include "soundsystem.h"
 
 // Library includes: 
 #include "renderer.h" 
@@ -21,9 +22,16 @@
 #include <vector>
 #include <SDL_ttf.h>
 
+//namespace using:
+using FMOD::System;
+using FMOD::Sound;
+using FMOD::Channel;
+using FMOD::ChannelGroup;
 
 // Static Members:
 Game* Game::sm_pInstance = 0;
+SoundSystem* Game::pSoundsystem = nullptr;
+
 Game& Game::GetInstance()
 {
 	if (sm_pInstance == 0)
@@ -45,7 +53,7 @@ Game::Game():
 	m_bLooping(true),
 	m_pInputSystem(0)
 {
-
+	pSoundsystem = new SoundSystem();
 }
 
 Game::~Game()
@@ -55,6 +63,10 @@ Game::~Game()
 
 	delete m_pInputSystem;
     m_pInputSystem = 0;
+
+	delete pSoundsystem;
+	pSoundsystem = 0;
+
 	//deleting created sprites:
 	for (int i = 0; i < 4; ++i)
 	{
@@ -125,6 +137,9 @@ bool Game::Initialise()
 	m_iLastTime = SDL_GetPerformanceCounter();
 	m_pRenderer->SetClearColour(0, 255, 255); 
 
+	//load soundsystem:
+	pSoundsystem->init();
+
 
 	return true;
 }
@@ -143,6 +158,8 @@ bool Game::DoGameLoop()
 		m_iLastTime = current;
 		m_fExecutionTime += deltaTime;
 		Process(deltaTime);
+
+		pSoundsystem->update();
 
 #ifdef USE_LAG
 		m_fLag += deltaTime;

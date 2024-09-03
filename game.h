@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "inputsystem.h"
+#include "soundsystem.h"
 
 // Forward declarations: 
 class Renderer;
@@ -40,6 +41,7 @@ private:
 	// Member data: 
 public:
 	void ToggleDebugWindow();
+	static SoundSystem* pSoundsystem;
 
 protected:
 	bool m_bShowDebugWindow;
@@ -68,7 +70,7 @@ protected:
 
 private:
 	InputSystem* m_pInputSystem;
-
+	
 };
 
 #endif //   GAME_H 

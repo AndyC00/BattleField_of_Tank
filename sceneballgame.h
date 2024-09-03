@@ -52,7 +52,9 @@ protected:
 	Ball* m_pPlayerBall; 
 
 private:
-
+	FMOD::Sound* hitsound1;
+	FMOD::Sound* hitsound2;
+	FMOD::Channel* channel;
 };
 
 #endif //   SCENEBALLGAME_H 

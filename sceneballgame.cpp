@@ -6,11 +6,14 @@
 #include "scene.h"
 #include "logmanager.h"
 #include "imgui/imgui.h"
+#include "soundsystem.h"
+#include "game.h"
 
 // Library includes:
 #include <vector>
 #include <cmath>
 #include "fmod.hpp"
+#include "soundsystem.h"
 
 using FMOD::System;
 using FMOD::Sound;
@@ -18,7 +21,10 @@ using FMOD::Channel;
 
 SceneBallGame::SceneBallGame()
 	: m_pRenderer(nullptr),
-	m_pPlayerBall(nullptr)
+	m_pPlayerBall(nullptr),
+	hitsound1(nullptr),
+	hitsound2(nullptr),
+	channel(nullptr)
 {
 }
 
@@ -47,14 +53,14 @@ bool SceneBallGame::Initialise(Renderer& renderer)
 	m_pPlayerBall->Position().y = renderer.GetHeight() / 2.0f;
 
 	// Spawn good balls
-	SpawnGoodBalls(10);  // specify the number of good balls to 10
+	SpawnGoodBalls(25);  // specify the number of good balls to 10
 
 	// Spawn bad balls
-	SpawnBadBalls(10);  // specify the number of bad balls to 10
+	SpawnBadBalls(25);  // specify the number of bad balls to 10
 
 	//initialise the sound:
-
-
+	Game::pSoundsystem->createSound("sounds\\hit.wav", FMOD_DEFAULT, &hitsound1);
+	Game::pSoundsystem->createSound("sounds\\hit2.wav", FMOD_DEFAULT, &hitsound2);
 
 	return true;
 }
@@ -120,7 +126,8 @@ void SceneBallGame::CheckCollisions()
 		{
 			m_pPlayerBall->Enlarge();  
 			goodBall->Kill();  
-			it = m_pGoodBalls.erase(it);  
+			it = m_pGoodBalls.erase(it);
+			Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channel);
 		}
 		else
 		{
@@ -136,6 +143,7 @@ void SceneBallGame::CheckCollisions()
 			m_pPlayerBall->Shrink(); 
 			badBall->Kill(); 
 			it = m_pBadBalls.erase(it);
+			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 		}
 		else
 		{

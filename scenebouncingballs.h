@@ -8,6 +8,7 @@
 class Renderer;
 class Ball;
 
+
 // Class declaration:
 class SceneBouncingBalls : public Scene
 {
