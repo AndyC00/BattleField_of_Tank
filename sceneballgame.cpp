@@ -8,6 +8,8 @@
 #include "imgui/imgui.h"
 #include "soundsystem.h"
 #include "game.h"
+#include "animatedsprite.h"
+#include "texture.h"
 
 // Library includes:
 #include <vector>
@@ -26,7 +28,8 @@ SceneBallGame::SceneBallGame()
 	hitsound1(nullptr),
 	hitsound2(nullptr),
 	channel(nullptr),
-	opening(nullptr)
+	opening(nullptr),
+	pAnimatedSprite(nullptr)
 {
 }
 
@@ -41,6 +44,22 @@ SceneBallGame::~SceneBallGame()
     {
         delete pBall;
     }
+	if (hitsound1) 
+	{
+		hitsound1->release();
+		hitsound1 = nullptr;
+	}
+	if (hitsound2) 
+	{
+		hitsound2->release();
+		hitsound2 = nullptr;
+	}
+	if (opening) 
+	{
+		opening->release();
+		opening = nullptr;
+	}
+	delete pAnimatedSprite;
 }
 
 bool SceneBallGame::Initialise(Renderer& renderer)
@@ -78,6 +97,16 @@ bool SceneBallGame::Initialise(Renderer& renderer)
 	}
 	Game::pSoundsystem->createSound("sounds\\opening.wav", FMOD_LOOP_NORMAL, &opening);
 	Game::pSoundsystem->playSound(opening, nullptr, false, &channel);
+
+	//animated sprite:
+	Texture* pTexture = new Texture();
+	pTexture->Initialise("Sprites\\explosion.png");
+
+	pAnimatedSprite = new AnimatedSprite();
+	pAnimatedSprite->Initialise(*pTexture);
+	pAnimatedSprite->SetupFrames(66, 66);
+	pAnimatedSprite->SetFrameDuration(0.2f);
+	pAnimatedSprite->SetLooping(false);
 
 	return true;
 }
@@ -132,6 +161,8 @@ void SceneBallGame::Process(float deltaTime, InputSystem& inputSystem)
 	}
 
 	CheckCollisions();
+
+	pAnimatedSprite->Process(deltaTime);
 }
 
 void SceneBallGame::CheckCollisions()
@@ -160,7 +191,12 @@ void SceneBallGame::CheckCollisions()
 			m_pPlayerBall->Shrink(); 
 			badBall->Kill(); 
 			it = m_pBadBalls.erase(it);
+			//play sound:
 			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+			//play animation:
+			pAnimatedSprite->SetX(static_cast<int>(badBall->Position().x));
+			pAnimatedSprite->SetY(static_cast<int>(badBall->Position().y));
+			pAnimatedSprite->Animate();
 		}
 		else
 		{
@@ -198,6 +234,8 @@ void SceneBallGame::Draw(Renderer& renderer)
 			badBall->Draw(renderer);
 		}
 	}
+
+	pAnimatedSprite->Draw(renderer);
 }
 
 void SceneBallGame::DebugDraw()
@@ -225,4 +263,6 @@ void SceneBallGame::DebugDraw()
 			badBall->DebugDraw();
 		}
 	}
+
+	pAnimatedSprite->DebugDraw();
 }

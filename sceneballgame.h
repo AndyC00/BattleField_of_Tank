@@ -4,6 +4,7 @@
 // Local includes:
 #include "scene.h"
 #include "inputsystem.h"
+#include "animatedsprite.h"
 
 // Library includes:
 #include <vector>
@@ -49,7 +50,8 @@ protected:
 	std::vector<Ball*> m_pGoodBalls;
 	std::vector<Ball*> m_pBadBalls;
 
-	Ball* m_pPlayerBall; 
+	Ball* m_pPlayerBall;
+	AnimatedSprite* pAnimatedSprite;
 
 private:
 	FMOD::Sound* hitsound1;

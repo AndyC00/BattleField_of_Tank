@@ -24,6 +24,7 @@ AnimatedSprite::AnimatedSprite()
 {
 
 }
+
 AnimatedSprite::~AnimatedSprite()
 {
 	delete m_pVertexData;
