@@ -185,6 +185,12 @@ void Game::Process(float deltaTime)
 	// TODO: Add game objects to process here!
 	m_scenes[m_iCurrentScene]->Process(deltaTime, *m_pInputSystem);
 
+	//right click mouse to move to next scene:
+	if (m_pInputSystem->GetMouseButtonState(SDL_BUTTON_RIGHT) == BS_PRESSED && m_iCurrentScene < m_scenes.size() - 1)
+	{
+		m_iCurrentScene++;
+	}
+
 	ButtonState leftArrowState = (m_pInputSystem->GetKeyState(SDL_SCANCODE_LEFT));
 
 	if (leftArrowState == BS_PRESSED)
