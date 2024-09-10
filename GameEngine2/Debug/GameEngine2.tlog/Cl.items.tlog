@@ -10,6 +10,7 @@ D:\Developing_Projects\GameEngine2\imgui\imgui_impl_sdl2.cpp;D:\Developing_Proje
 D:\Developing_Projects\GameEngine2\imgui\imgui_tables.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\imgui_tables.obj
 D:\Developing_Projects\GameEngine2\imgui\imgui_widgets.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\imgui_widgets.obj
 D:\Developing_Projects\GameEngine2\inputsystem.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\inputsystem.obj
+D:\Developing_Projects\GameEngine2\InstructionScene.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\InstructionScene.obj
 D:\Developing_Projects\GameEngine2\logmanager.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\logmanager.obj
 D:\Developing_Projects\GameEngine2\Main.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\Main.obj
 D:\Developing_Projects\GameEngine2\matrix4.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\matrix4.obj
@@ -23,5 +24,6 @@ D:\Developing_Projects\GameEngine2\soundsystem.cpp;D:\Developing_Projects\GameEn
 D:\Developing_Projects\GameEngine2\sprite.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\sprite.obj
 D:\Developing_Projects\GameEngine2\texture.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\texture.obj
 D:\Developing_Projects\GameEngine2\texturemanager.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\texturemanager.obj
+D:\Developing_Projects\GameEngine2\TitleScene.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\TitleScene.obj
 D:\Developing_Projects\GameEngine2\vector2.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\vector2.obj
 D:\Developing_Projects\GameEngine2\vertexarray.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\vertexarray.obj

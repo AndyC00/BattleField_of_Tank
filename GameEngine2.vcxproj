@@ -151,6 +151,7 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="inputsystem.cpp" />
+    <ClCompile Include="InstructionScene.cpp" />
     <ClCompile Include="logmanager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="matrix4.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="texturemanager.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="vector2.cpp" />
     <ClCompile Include="vertexarray.cpp" />
   </ItemGroup>
@@ -183,6 +185,7 @@
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="inlinehelpers.h" />
     <ClInclude Include="inputsystem.h" />
+    <ClInclude Include="InstructionScene.h" />
     <ClInclude Include="logmanager.h" />
     <ClInclude Include="matrix4.h" />
     <ClInclude Include="renderer.h" />
@@ -195,6 +198,7 @@
     <ClInclude Include="sprite.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="texturemanager.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="vector2.h" />
     <ClInclude Include="vertexarray.h" />
   </ItemGroup>

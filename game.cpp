@@ -9,6 +9,8 @@
 #include "inputsystem.h"
 #include "animatedsprite.h"
 #include "soundsystem.h"
+#include "TitleScene.h"
+#include "InstructionScene.h"
 
 // Library includes: 
 #include "renderer.h" 
@@ -17,7 +19,6 @@
 #include "fmod.hpp"
 #include "fmod.h"
 #include "fmod_errors.h"
-
 
 #include <vector>
 #include <SDL_ttf.h>
@@ -101,14 +102,14 @@ bool Game::Initialise()
 
 	//creating the scene:
 	Scene* pScene = 0;
-	pScene = new SceneCheckerboards();
+	pScene = new TitleScene();
 	pScene->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene);
 	m_iCurrentScene = 0;
 
 	//creating another scene for bouncing balls:
 	Scene* pScene2 = 0;
-	pScene2 = new SceneBouncingBalls();
+	pScene2 = new InstructionScene();
 	pScene2->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene2);
 
@@ -120,13 +121,13 @@ bool Game::Initialise()
 
 	// text renderer at last:
 	// Load static text textures into the Texture Manager... 
-	m_pRenderer->CreateStaticText("Andy's Game", 60);
+	m_pRenderer->CreateStaticText("Right Click to Continue", 60);
 	m_pRenderer->CreateStaticText("Boom!", 60);
 	m_pRenderer->CreateStaticText("Pow!!", 60);
 	m_pRenderer->CreateStaticText("Pop!!!", 60);
 
 	// Generate sprites that use the static text textures... 
-	m_pZapPow[0] = m_pRenderer->CreateSprite("Andy's Game");
+	m_pZapPow[0] = m_pRenderer->CreateSprite("Right Click to Continue");
 	m_pZapPow[0]->SetX(900);
 	m_pZapPow[0]->SetY(100);
 	m_pZapPow[0]->SetAngle(180);
