@@ -24,12 +24,12 @@ bool Enemy::Initialise(Renderer& renderer, int numEnemies)
     for (int i = 0; i < numEnemies; ++i)
     {
         Enemy* newEnemy = new Enemy();
-        if (!newEnemy->Initialise(renderer))
+        if (!newEnemy->Initialise(renderer, 0))
         {
             return false;
         }
         // Spawn at random position within screen
-        newEnemy->m_position = Vector2(rand() % 800, rand() % 600); // Assuming 800x600 screen resolution
+        newEnemy->m_position = Vector2(rand() % 1810, rand() % 1000); // within 1860x1050 screen resolution
         m_enemies.push_back(newEnemy);
     }
 
@@ -65,7 +65,7 @@ void Enemy::SpawnEnemies(int numEnemies)
     {
         // Create and initialise enemy instances
         Enemy* newEnemy = new Enemy();
-        newEnemy->m_position = Vector2(rand() % 800, rand() % 600); // Random position on screen
+        newEnemy->m_position = Vector2(rand() % 1810, rand() % 1000);
         m_enemies.push_back(newEnemy);
     }
 }
