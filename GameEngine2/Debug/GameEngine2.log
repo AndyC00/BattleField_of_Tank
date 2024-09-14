@@ -1,6 +1,3 @@
-﻿  Enemy.cpp
-D:\Developing_Projects\GameEngine2\Enemy.cpp(33,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(33,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(90,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(91,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+﻿  game.cpp
+D:\Developing_Projects\GameEngine2\game.cpp(188,93): warning C4018: '<': signed/unsigned mismatch
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe

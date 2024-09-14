@@ -4,6 +4,7 @@
 // Local includes:
 #include "entity.h"
 #include "vector2.h"
+#include "Bullet.h"
 
 // Forward declarations:
 class Renderer; 
@@ -30,7 +31,8 @@ public:
 	Vector2& GetVelocity();
 
 	bool IsCollidingWith(Entity& toCheck); 
-
+	bool IsCollidingWithBullet(Bullet* bullet);
+		
 protected:
 
 private:

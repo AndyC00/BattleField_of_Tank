@@ -104,3 +104,9 @@ bool Entity::IsCollidingWith(Entity& toCheck)
     float combinedRadius = GetRadius() + toCheck.GetRadius();
     return distanceSquared <= (combinedRadius * combinedRadius);
 }
+
+bool Entity::IsCollidingWithBullet(Bullet* bullet) {
+    float distanceSquared = (m_position - bullet->GetPosition()).LengthSquared();
+    float combinedRadius = GetRadius() + bullet->GetRadius();
+    return distanceSquared <= (combinedRadius * combinedRadius);
+}

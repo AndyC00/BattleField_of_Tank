@@ -70,7 +70,6 @@ protected:
 
 private:
 	InputSystem* m_pInputSystem;
-	
 };
 
 #endif //   GAME_H 

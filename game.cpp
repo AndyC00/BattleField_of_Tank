@@ -36,6 +36,11 @@ using FMOD::ChannelGroup;
 Game* Game::sm_pInstance = 0;
 SoundSystem* Game::pSoundsystem = nullptr;
 
+void SceneChange(int& currentScene)
+{
+	currentScene++;
+}
+
 Game& Game::GetInstance()
 {
 	if (sm_pInstance == 0)
@@ -112,8 +117,9 @@ bool Game::Initialise()
 	m_scenes.push_back(pScene2);
 
 	//creating the scene3 for the ball game:
-	Scene* pScene3 = 0;
+	SceneTankGame* pScene3 = 0;
 	pScene3 = new SceneTankGame();
+	pScene3->OnSceneChange(&m_iCurrentScene);
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
 

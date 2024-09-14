@@ -11,6 +11,7 @@
 #include "Enemy.h"
 #include "Entity.h"
 #include "TankGame.h"
+#include "Bullet.h"
 
 // Library includes:
 #include <vector>
@@ -142,12 +143,20 @@ void SceneTankGame::CheckCollisions()
 				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));
 				pAnimatedSprite->Animate();
 			}
+
+			if (m_pPlayer->IsCollidingWithBullet(enemy->GetBullet())) 
+			{
+				(*m_sceneIndex)++;
+				break;
+			}
 		}
 
-		//bullet collision check to add:
 	}
 }
 
+void SceneTankGame::OnSceneChange(int* sceneIndex) {
+	m_sceneIndex = sceneIndex;
+}
 
 void SceneTankGame::Draw(Renderer& renderer)
 {

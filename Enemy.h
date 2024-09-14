@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include "Bullet.h"
 
 class Enemy : public Entity
 {
@@ -22,10 +23,19 @@ public:
 
 	void RotateOverTime(float deltaTime);
 
+	void ShootBullet();
+
+	void Draw(Renderer& renderer);
+	Bullet* GetBullet();
+
 private:
 	float m_rotationTimer;
 	float m_rotationDuration;
 	bool m_isRotating;
 	float m_startAngle;
 	float m_targetAngle;
+	float m_bulletTimer;
+	float m_bulletInterval;
+
+	Bullet* bullet;
 };

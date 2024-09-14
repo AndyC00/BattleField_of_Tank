@@ -1,10 +1,14 @@
 ﻿//local includes:
 #include "Enemy.h"
 #include "sprite.h"
+#include "Bullet.h"
 
 //library includes:
 #include "renderer.h"
 #include <cstdlib>
+#include <cmath>
+
+const int bulletTimerTotal = 2;
 
 Enemy::Enemy()
 	: Entity()
@@ -13,13 +17,15 @@ Enemy::Enemy()
 	, m_isRotating(false)
 	, m_startAngle(0.0f)
 	, m_targetAngle(0.0f)
+	, bullet(nullptr)
+	, m_bulletTimer(0)
 {
 
 }
 
 Enemy::~Enemy()
 {
-
+	delete bullet;
 }
 
 bool Enemy::Initialise(Renderer& renderer)
@@ -32,6 +38,9 @@ bool Enemy::Initialise(Renderer& renderer)
 
 	m_position = Vector2(rand() % 1810, rand() % 1000);
 	m_velocity = Vector2(0.0f, 0.0f);
+
+	bullet = new Bullet();
+	bullet->Initialise(renderer);
 
 	return true;
 }
@@ -62,8 +71,25 @@ void Enemy::Process(float deltaTime)
 			RotateOverTime(deltaTime);
 		}
 
+		if (m_bulletTimer < 0) 
+		{
+			bullet->SetPosition(m_position, m_pSprite->GetAngle());
+			m_bulletTimer = bulletTimerTotal;
+		}
+		else
+		{
+			bullet->Process(deltaTime);
+			m_bulletTimer -= deltaTime;
+		}
+		
 		Entity::Process(deltaTime);
 	}
+}
+
+void Enemy::Draw(Renderer& renderer)
+{
+	bullet->Draw(renderer);
+	Entity::Draw(renderer);
 }
 
 void Enemy::RotateOverTime(float deltaTime)
@@ -78,8 +104,7 @@ void Enemy::RotateOverTime(float deltaTime)
 	{
 		currentAngle = m_targetAngle; 
 		m_isRotating = false;
-
-		float angleInRadians = currentAngle * 3.14159f / 180.0f;
+		float angleInRadians = - currentAngle *  M_PI / 180.0f - 90.0f;
 		m_velocity.x = cos(angleInRadians) * 10.0f;  // speed control
 		m_velocity.y = sin(angleInRadians) * 10.0f;
 	}
@@ -93,4 +118,9 @@ void Enemy::RotateRandomly()
 	int randomDirection = (rand() % 2 == 0) ? -45 : 45;
 
 	m_targetAngle = m_pSprite->GetAngle() + randomDirection;
+}
+
+Bullet* Enemy::GetBullet() 
+{
+	return bullet;
 }
