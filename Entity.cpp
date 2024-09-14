@@ -26,8 +26,7 @@ Entity::~Entity()
 // Initialise the entity
 bool Entity::Initialise(Renderer& renderer)
 {
-    // Assume there is a default sprite for the entity
-    m_pSprite = renderer.CreateSprite("Sprites\\default.png"); // replace the path with an actual sprite path
+    m_pSprite = renderer.CreateSprite("Sprites\\tank.png"); // replace the path with an actual sprite path
     if (!m_pSprite)
     {
         return false;
@@ -42,7 +41,6 @@ void Entity::Process(float deltaTime)
     m_pSprite->SetX(static_cast<int>(m_position.x));
     m_pSprite->SetY(static_cast<int>(m_position.y));
 
-    // If you want to do additional processing, add here
 
 
 }

@@ -9,6 +9,8 @@
 #include "game.h"
 #include "animatedsprite.h"
 #include "texture.h"
+#include "Enemy.h"
+#include "Entity.h"
 
 // Library includes:
 #include <vector>
@@ -27,7 +29,9 @@ SceneTankGame::SceneTankGame()
 	hitsound2(nullptr),
 	channel(nullptr),
 	opening(nullptr),
-	pAnimatedSprite(nullptr)
+	pAnimatedSprite(nullptr),
+	m_pPlayer(nullptr),
+	m_pEnemy(nullptr)
 {
 }
 
@@ -49,25 +53,29 @@ SceneTankGame::~SceneTankGame()
 		opening->release();
 		opening = nullptr;
 	}
+	for (Enemy* enemy : m_enemies)
+	{
+		delete enemy;
+	}
+	m_enemies.clear();
 	delete pAnimatedSprite;
+	delete m_pPlayer;
+	delete m_pEnemy;
 }
 
 bool SceneTankGame::Initialise(Renderer& renderer)
 {
 	m_pRenderer = &renderer;
 
-	// Initialize player ball
-	m_pPlayerBall = new Ball();
-	m_pPlayerBall->Initialise(renderer);
-	m_pPlayerBall->SetAsPlayer();  // Set the ball as the player ball
-	m_pPlayerBall->Position().x = renderer.GetWidth() / 2.0f;
-	m_pPlayerBall->Position().y = renderer.GetHeight() / 2.0f;
+	// Initialize player tank
+	m_pPlayer = new Entity();
+	m_pPlayer->Initialise(renderer);
+	m_pPlayer->Position().x = renderer.GetWidth() / 2.0f;
+	m_pPlayer->Position().y = renderer.GetHeight() / 2.0f;
 
-	// Spawn good balls
-	SpawnGoodBalls(25);  // specify the number of good balls to 10
-
-	// Spawn bad balls
-	SpawnBadBalls(25);  // specify the number of bad balls to 10
+	// Spawn enemies
+	m_pEnemy = new Enemy();
+	m_pEnemy->SpawnEnemies(15);
 
 	//initialise the sound:
 	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
@@ -101,55 +109,14 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	return true;
 }
 
-void SceneTankGame::SpawnGoodBalls(int number)
-{
-	for (int i = 0; i < number; ++i)
-	{
-		Ball* ball = new Ball();
-		ball->Initialise(*m_pRenderer);
-		ball->SetGood();  // Set the ball as a good ball
-
-		// Set initial position at the top of the screen, with random x
-		ball->Position().x = static_cast<float>(rand() % m_pRenderer->GetWidth());
-		ball->Position().y = 0;  // Start from the top
-
-		m_pGoodBalls.push_back(ball);
-	}
-}
-
-void SceneTankGame::SpawnBadBalls(int number)
-{
-	for (int i = 0; i < number; ++i)
-	{
-		Ball* ball = new Ball();
-		ball->Initialise(*m_pRenderer);
-		ball->SetBad();  // Set the ball as a bad ball
-
-		// Set initial position at the bottom of the screen, with random x
-		ball->Position().x = static_cast<float>(rand() % m_pRenderer->GetWidth());
-		ball->Position().y = static_cast<float>(m_pRenderer->GetHeight());  // Start from the bottom
-
-		m_pBadBalls.push_back(ball);
-	}
-}
-
 void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 {
-	Vector2 mousePosition = inputSystem.GetMousePosition();
-	m_pPlayerBall->Position() = mousePosition;
-
-	m_pPlayerBall->Process(deltaTime);
-
-	for (auto& goodBall : m_pGoodBalls)
+	m_pPlayer->Process(deltaTime);
+	for (int i = 0; i < 15; ++i)
 	{
-		goodBall->Process(deltaTime);
+		m_pEnemy->m_position = Vector2(rand() % 1810, rand() % 1000); // within 1860x1050 screen resolution
+		m_enemies.push_back(m_pEnemy);
 	}
-
-	for (auto& badBall : m_pBadBalls)
-	{
-		badBall->Process(deltaTime);
-	}
-
 	CheckCollisions();
 
 	pAnimatedSprite->Process(deltaTime);
@@ -157,71 +124,30 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 
 void SceneTankGame::CheckCollisions()
 {
-	for (auto it = m_pGoodBalls.begin(); it != m_pGoodBalls.end();)
-	{
-		Ball* goodBall = *it;
-		if (BallVsBall(m_pPlayerBall, goodBall))
-		{
-			m_pPlayerBall->Enlarge();
-			goodBall->Kill();
-			it = m_pGoodBalls.erase(it);
-			Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channel);
-		}
-		else
-		{
-			++it;
-		}
-	}
-
-	for (auto it = m_pBadBalls.begin(); it != m_pBadBalls.end();)
-	{
-		Ball* badBall = *it;
-		if (BallVsBall(m_pPlayerBall, badBall))
-		{
-			m_pPlayerBall->Shrink();
-			badBall->Kill();
-			it = m_pBadBalls.erase(it);
-			//play sound:
-			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
-			//play animation:
-			pAnimatedSprite->SetX(static_cast<int>(badBall->Position().x));
-			pAnimatedSprite->SetY(static_cast<int>(badBall->Position().y));
-			pAnimatedSprite->Animate();
-		}
-		else
-		{
-			++it;
-		}
-	}
+	
 }
 
-bool SceneTankGame::BallVsBall(Ball* p1, Ball* p2)
-{
-	float distanceSquared = (p1->Position() - p2->Position()).LengthSquared();
-	float combinedRadius = p1->GetRadius() + p2->GetRadius();
-	return distanceSquared <= (combinedRadius * combinedRadius);
-}
 
 void SceneTankGame::Draw(Renderer& renderer)
 {
-	if (m_pPlayerBall && m_pPlayerBall->IsAlive())
+	if (m_pPlayer && m_pPlayer->IsAlive())
 	{
-		m_pPlayerBall->Draw(renderer);
+		m_pPlayer->Draw(renderer);
 	}
 
-	for (auto& goodBall : m_pGoodBalls)
+	for (auto& enemies : m_enemies)
 	{
-		if (goodBall->IsAlive())
+		if (enemies->IsAlive())
 		{
-			goodBall->Draw(renderer);
+			enemies->Draw(renderer);
 		}
 	}
 
-	for (auto& badBall : m_pBadBalls)
+	for (auto& enemies : m_enemies)
 	{
-		if (badBall->IsAlive())
+		if (enemies->IsAlive())
 		{
-			badBall->Draw(renderer);
+			enemies->Draw(renderer);
 		}
 	}
 
@@ -230,27 +156,18 @@ void SceneTankGame::Draw(Renderer& renderer)
 
 void SceneTankGame::DebugDraw()
 {
-	if (m_pPlayerBall && m_pPlayerBall->IsAlive())
+	if (m_pPlayer && m_pPlayer->IsAlive())
 	{
-		ImGui::Text("Player Ball:");
-		m_pPlayerBall->DebugDraw();
+		ImGui::Text("Player Tank:");
+		m_pPlayer->DebugDraw();
 	}
 
-	ImGui::Text("Good Balls:");
-	for (auto& goodBall : m_pGoodBalls)
+	ImGui::Text("Enemies:");
+	for (auto& enemies : m_enemies)
 	{
-		if (goodBall->IsAlive())
+		if (enemies->IsAlive())
 		{
-			goodBall->DebugDraw();
-		}
-	}
-
-	ImGui::Text("Bad Balls:");
-	for (auto& badBall : m_pBadBalls)
-	{
-		if (badBall->IsAlive())
-		{
-			badBall->DebugDraw();
+			enemies->DebugDraw();
 		}
 	}
 

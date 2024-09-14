@@ -19,5 +19,5 @@ public:
     void RotateRandomly();
 
 private:
-    std::vector<Enemy*> m_enemies; // List of all enemy instances
+
 };
