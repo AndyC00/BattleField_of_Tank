@@ -45,8 +45,8 @@ public:
 protected:
 	Renderer* m_pRenderer;
 	Entity* m_pPlayer;
-	Enemy* m_pEnemy;
 	AnimatedSprite* pAnimatedSprite;
+	std::vector<Enemy*> m_pEnemies;
 
 private:
 	FMOD::Sound* hitsound1;
@@ -54,7 +54,6 @@ private:
 	FMOD::Sound* opening;
 	FMOD::Channel* channel;
 
-	
 };
 
 #endif //   TANKGAME_H 

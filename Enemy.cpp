@@ -1,10 +1,14 @@
+﻿//local includes:
 #include "Enemy.h"
+#include "sprite.h"
 
+//library includes:
 #include "renderer.h"
 #include <cstdlib>
 
 Enemy::Enemy()
-    : Entity()
+	: Entity()
+	, m_rotationTimer(0.0f)
 {
 
 }
@@ -14,44 +18,58 @@ Enemy::~Enemy()
 
 }
 
-bool Enemy::Initialise(Renderer& renderer, int numEnemies)
+bool Enemy::Initialise(Renderer& renderer)
 {
+	if (!Entity::Initialise(renderer))
+	{
+		printf("Enemy failed to spawn\n");
+		return false;
+	}
 
-    for (int i = 0; i < numEnemies; ++i)
-    {
-        std::unique_ptr<Enemy> newEnemy = std::make_unique<Enemy>();
-        if (!newEnemy->Entity::Initialise(renderer))
-        {
-            m_enemies.clear();
-            return false;
-        }
+	m_position = Vector2(rand() % 1810, rand() % 1000);
 
-        newEnemy->m_position = Vector2(rand() % 1810, rand() % 1000);
+	m_velocity = Vector2(0.0f, 0.0f);
 
-        m_enemies.push_back(std::move(newEnemy));
-    }
-
-    return true;
+	return true;
 }
 
 
 void Enemy::Process(float deltaTime)
 {
-	for (auto& enemy : m_enemies)
+	if (IsAlive())
 	{
-        if (enemy->IsAlive())
-        {
-            enemy->RotateRandomly();
+		m_rotationTimer += deltaTime;
+		//rotate every 1.5s
+		if (m_rotationTimer >= 1.5f)
+		{
+			// stop while rotate
+			m_velocity = Vector2(0.0f, 0.0f);
+			RotateRandomly();
+			m_rotationTimer = 0.0f;
+		}
+		else
+		{
+			m_position += m_velocity * deltaTime;
+		}
 
-            enemy->m_position += enemy->m_velocity * deltaTime;
 
-            enemy->Entity::Process(deltaTime);
-        }
+
+		Entity::Process(deltaTime);
 	}
 }
 
 void Enemy::RotateRandomly()
 {
 	int randomDirection = (rand() % 2 == 0) ? -45 : 45;
-	this->Rotate(static_cast<float>(randomDirection));
+
+	float currentAngle = m_pSprite->GetAngle();
+
+	float newAngle = currentAngle + randomDirection;
+
+	this->Rotate(newAngle);
+
+	float angleInRadians = newAngle * 3.14159f / 180.0f;
+
+	m_velocity.x = cos(angleInRadians) * 10.0f;          // speed control
+	m_velocity.y = sin(angleInRadians) * 10.0f;
 }

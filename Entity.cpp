@@ -29,7 +29,8 @@ Entity::~Entity()
 bool Entity::Initialise(Renderer& renderer)
 {
     m_pSprite = renderer.CreateSprite("Sprites\\tank.png"); // replace the path with an actual sprite path
-    m_pSprite->SetAngle(90.0f);
+    m_pSprite->SetScale(0.2f);
+    m_pSprite->SetAngle(0.0f);
 
     if (!m_pSprite)
     {

@@ -30,8 +30,7 @@ SceneTankGame::SceneTankGame()
 	channel(nullptr),
 	opening(nullptr),
 	pAnimatedSprite(nullptr),
-	m_pPlayer(nullptr),
-	m_pEnemy(nullptr)
+	m_pPlayer(nullptr)
 {
 	srand(static_cast<unsigned>(time(0)));
 }
@@ -54,11 +53,13 @@ SceneTankGame::~SceneTankGame()
 		opening->release();
 		opening = nullptr;
 	}
-
-	m_pEnemy->m_enemies.clear();
 	delete pAnimatedSprite;
 	delete m_pPlayer;
-	delete m_pEnemy;
+	for (auto& enemy : m_pEnemies)
+	{
+		delete enemy;
+	}
+	m_pEnemies.clear();
 }
 
 bool SceneTankGame::Initialise(Renderer& renderer)
@@ -71,10 +72,14 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pPlayer->GetPosition().x = renderer.GetWidth() / 2.0f;
 	m_pPlayer->GetPosition().y = renderer.GetHeight() / 2.0f;
 
-	// Spawn enemies
-	m_pEnemy = new Enemy();
-	m_pEnemy->Initialise(renderer, 15);
-
+	// Spawn 15 enemies:
+	for (int i = 0; i < 15; i++)
+	{
+		Enemy* enemy = new Enemy();
+		enemy->Initialise(renderer);
+		m_pEnemies.push_back(enemy);
+	}
+	
 	//initialise the sound:
 	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
 	if (result != FMOD_OK || hitsound1 == nullptr) {
@@ -110,13 +115,12 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 {
 	m_pPlayer->Process(deltaTime);
-	if (m_pEnemy)
+
+	for (auto& enemy : m_pEnemies)
 	{
-		for (auto& enemy : m_pEnemy->m_enemies)
-		{
-			enemy->Process(deltaTime);
-		}
+		enemy->Process(deltaTime);
 	}
+
 	CheckCollisions();
 
 	pAnimatedSprite->Process(deltaTime);
@@ -126,7 +130,7 @@ void SceneTankGame::CheckCollisions()
 {
 	if (m_pPlayer && m_pPlayer->IsAlive())
 	{
-		for (auto& enemy : m_pEnemy->m_enemies)
+		for (auto& enemy : m_pEnemies)
 		{
 			if (enemy->IsAlive() && m_pPlayer->IsCollidingWith(*enemy))
 			{
@@ -152,7 +156,7 @@ void SceneTankGame::Draw(Renderer& renderer)
 		m_pPlayer->Draw(renderer);
 	}
 
-	for (auto& enemies : m_pEnemy->m_enemies)
+	for (auto& enemies : m_pEnemies)
 	{
 		if (enemies->IsAlive())
 		{

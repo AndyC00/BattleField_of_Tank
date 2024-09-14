@@ -10,7 +10,7 @@ public:
     ~Enemy();
 
     // Initialise multiple enemies
-    bool Initialise(Renderer& renderer, int numEnemies);
+    bool Initialise(Renderer& renderer);
 
     void Process(float deltaTime);
 
@@ -20,8 +20,6 @@ public:
     // Randomly rotate the enemy
     void RotateRandomly();
 
-    std::vector<std::unique_ptr<Enemy>> m_enemies;
-
 private:
-
+    float m_rotationTimer;
 };
