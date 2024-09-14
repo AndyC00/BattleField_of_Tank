@@ -33,6 +33,7 @@ bool Entity::Initialise(Renderer& renderer)
 
     if (!m_pSprite)
     {
+        print:"Failed to load sprite!";
         return false;
     }
     return true;

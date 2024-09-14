@@ -13,6 +13,9 @@
 
 // Forward declarations:
 class Renderer;
+class Entity;
+class Enemy;
+
 
 // Class declaration:
 class SceneTankGame : public Scene
@@ -25,13 +28,9 @@ public:
 	virtual bool Initialise(Renderer& renderer);
 	virtual void Process(float deltaTime, InputSystem& inputSystem);
 	virtual void Draw(Renderer& renderer);
-
-
 	virtual void DebugDraw();
 
 protected:
-	void SpawnEnemy(int number);
-
 	void CheckCollisions();
 
 

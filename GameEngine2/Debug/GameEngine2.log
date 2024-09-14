@@ -1,45 +1,9 @@
-﻿  animatedsprite.cpp
-  ball.cpp
-  Enemy.cpp
+﻿  Enemy.cpp
 D:\Developing_Projects\GameEngine2\Enemy.cpp(29,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Developing_Projects\GameEngine2\Enemy.cpp(29,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Entity.cpp
-D:\Developing_Projects\GameEngine2\Entity.cpp(86,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Entity.cpp(86,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  game.cpp
-D:\Developing_Projects\GameEngine2\TankGame.h(48,8): error C2143: syntax error: missing ';' before '*'
-D:\Developing_Projects\GameEngine2\TankGame.h(48,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\Developing_Projects\GameEngine2\TankGame.h(48,19): error C2238: unexpected token(s) preceding ';'
-D:\Developing_Projects\GameEngine2\TankGame.h(49,7): error C2143: syntax error: missing ';' before '*'
-D:\Developing_Projects\GameEngine2\TankGame.h(49,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\Developing_Projects\GameEngine2\TankGame.h(49,17): error C2238: unexpected token(s) preceding ';'
-D:\Developing_Projects\GameEngine2\game.cpp(182,93): warning C4018: '<': signed/unsigned mismatch
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_impl_sdl2.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  inputsystem.cpp
-  InstructionScene.cpp
-  logmanager.cpp
-  Main.cpp
-  matrix4.cpp
-  renderer.cpp
-  scene.cpp
-  sceneballgame.cpp
+D:\Developing_Projects\GameEngine2\Entity.cpp(36,9): warning C4102: 'print': unreferenced label
+D:\Developing_Projects\GameEngine2\Entity.cpp(87,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Entity.cpp(87,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Generating Code...
-  Compiling...
-  scenebouncingballs.cpp
-  scenecheckerboards.cpp
-  shader.cpp
-  soundsystem.cpp
-  sprite.cpp
-  TankGame.cpp
-  texture.cpp
-  texturemanager.cpp
-  TitleScene.cpp
-  vector2.cpp
-  vertexarray.cpp
-  Generating Code...
+  GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe

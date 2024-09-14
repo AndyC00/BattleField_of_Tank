@@ -163,3 +163,7 @@ void SceneTankGame::Draw(Renderer& renderer)
 	pAnimatedSprite->Draw(renderer);
 }
 
+void SceneTankGame::DebugDraw()
+{
+	
+}
