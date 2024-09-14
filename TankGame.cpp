@@ -72,12 +72,13 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pPlayer->Initialise(renderer);
 	m_pPlayer->GetPosition().x = renderer.GetWidth() / 2.0f;
 	m_pPlayer->GetPosition().y = renderer.GetHeight() / 2.0f;
-
+	
 	// Spawn 15 enemies:
 	for (int i = 0; i < 15; i++)
 	{
 		Enemy* enemy = new Enemy();
 		enemy->Initialise(renderer);
+		enemy->m_pSprite->SetGreenTint(0.75f);
 		m_pEnemies.push_back(enemy);
 	}
 	
@@ -125,6 +126,14 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	CheckCollisions();
 
 	pAnimatedSprite->Process(deltaTime);
+
+	for (auto& enemies : m_pEnemies)
+	{
+		if (!enemies->IsAlive())
+		{
+			(*m_sceneIndex)+=2;
+		}
+	}
 }
 
 void SceneTankGame::CheckCollisions()
@@ -146,6 +155,12 @@ void SceneTankGame::CheckCollisions()
 
 			if (m_pPlayer->IsCollidingWithBullet(enemy->GetBullet())) 
 			{
+				Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channel);
+
+				pAnimatedSprite->SetX(static_cast<int>(m_pPlayer->GetPosition().x));
+				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));
+				pAnimatedSprite->Animate();
+
 				(*m_sceneIndex)++;
 				break;
 			}
@@ -154,7 +169,8 @@ void SceneTankGame::CheckCollisions()
 	}
 }
 
-void SceneTankGame::OnSceneChange(int* sceneIndex) {
+void SceneTankGame::OnSceneChange(int* sceneIndex) 
+{
 	m_sceneIndex = sceneIndex;
 }
 

@@ -41,9 +41,10 @@ private:
 
 	// Member data: 
 public:
-
-protected:
 	Sprite* m_pSprite;
+	
+protected:
+	
 	Vector2 m_position;
 	Vector2 m_velocity; 
 	bool m_bAlive;

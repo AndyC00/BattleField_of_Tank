@@ -9,11 +9,14 @@
 #include "inputsystem.h"
 #include "animatedsprite.h"
 #include "soundsystem.h"
-#include "TitleScene.h"
 #include "InstructionScene.h"
 #include "TankGame.h"
 #include "Enemy.h"
 #include "Entity.h"
+
+#include "TitleScene.h"
+#include "lose.h"
+#include "Win.h"
 
 // Library includes: 
 #include "renderer.h" 
@@ -103,25 +106,33 @@ bool Game::Initialise()
 		return false;
 	}
 
-	//creating the scene:
+	//creating the scenes:
 	Scene* pScene = 0;
 	pScene = new TitleScene();
 	pScene->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene);
 	m_iCurrentScene = 0;
 
-	//creating another scene for bouncing balls:
 	Scene* pScene2 = 0;
 	pScene2 = new InstructionScene();
 	pScene2->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene2);
 
-	//creating the scene3 for the ball game:
 	SceneTankGame* pScene3 = 0;
 	pScene3 = new SceneTankGame();
 	pScene3->OnSceneChange(&m_iCurrentScene);
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
+
+	Scene* pScene4 = 0;
+	pScene4 = new LoseScene();
+	pScene4->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene4);
+
+	Scene* pScene5 = 0;
+	pScene5 = new WinScene();
+	pScene5->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene5);
 
 	// text renderer at last:
 	// Load static text textures into the Texture Manager... 

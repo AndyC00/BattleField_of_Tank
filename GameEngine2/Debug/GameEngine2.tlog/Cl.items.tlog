@@ -14,6 +14,7 @@ D:\Developing_Projects\GameEngine2\imgui\imgui_widgets.cpp;D:\Developing_Project
 D:\Developing_Projects\GameEngine2\inputsystem.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\inputsystem.obj
 D:\Developing_Projects\GameEngine2\InstructionScene.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\InstructionScene.obj
 D:\Developing_Projects\GameEngine2\logmanager.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\logmanager.obj
+D:\Developing_Projects\GameEngine2\lose.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\lose.obj
 D:\Developing_Projects\GameEngine2\Main.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\Main.obj
 D:\Developing_Projects\GameEngine2\matrix4.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\matrix4.obj
 D:\Developing_Projects\GameEngine2\renderer.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\renderer.obj
@@ -30,3 +31,4 @@ D:\Developing_Projects\GameEngine2\texturemanager.cpp;D:\Developing_Projects\Gam
 D:\Developing_Projects\GameEngine2\TitleScene.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\TitleScene.obj
 D:\Developing_Projects\GameEngine2\vector2.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\vector2.obj
 D:\Developing_Projects\GameEngine2\vertexarray.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\vertexarray.obj
+D:\Developing_Projects\GameEngine2\Win.cpp;D:\Developing_Projects\GameEngine2\GameEngine2\Debug\Win.obj
