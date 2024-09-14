@@ -1,7 +1,6 @@
 ﻿  Enemy.cpp
-D:\Developing_Projects\GameEngine2\Enemy.cpp(29,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(29,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(31,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(75,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(76,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Enemy.cpp(33,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Enemy.cpp(33,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Enemy.cpp(90,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Enemy.cpp(91,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe
