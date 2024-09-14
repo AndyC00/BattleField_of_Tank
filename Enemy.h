@@ -18,6 +18,8 @@ public:
     // Randomly rotate the enemy
     void RotateRandomly();
 
+    std::vector<Enemy*> m_enemies;
+
 private:
 
 };

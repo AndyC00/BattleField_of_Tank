@@ -8,6 +8,9 @@
 
 // Library includes:
 #include <cassert>
+#include "imgui/imgui.h"
+#include "vector2.h"
+
 
 Entity::Entity()
     : m_pSprite(nullptr)
@@ -40,8 +43,6 @@ void Entity::Process(float deltaTime)
 
     m_pSprite->SetX(static_cast<int>(m_position.x));
     m_pSprite->SetY(static_cast<int>(m_position.y));
-
-
 
 }
 
@@ -99,4 +100,9 @@ bool Entity::IsCollidingWith(Entity& toCheck)
     float distanceSquared = (m_position - toCheck.GetPosition()).LengthSquared();
     float combinedRadius = GetRadius() + toCheck.GetRadius();
     return distanceSquared <= (combinedRadius * combinedRadius);
+}
+
+Vector2& Entity::Position()
+{
+    return m_position;
 }

@@ -12,6 +12,7 @@
 #include "Enemy.h"
 #include "Entity.h"
 
+
 // Library includes:
 #include <vector>
 #include <cmath>
@@ -53,11 +54,11 @@ SceneTankGame::~SceneTankGame()
 		opening->release();
 		opening = nullptr;
 	}
-	for (Enemy* enemy : m_enemies)
+	for (Enemy* enemy : m_pEnemy->m_enemies)
 	{
 		delete enemy;
 	}
-	m_enemies.clear();
+	m_pEnemy->m_enemies.clear();
 	delete pAnimatedSprite;
 	delete m_pPlayer;
 	delete m_pEnemy;
@@ -112,11 +113,12 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 {
 	m_pPlayer->Process(deltaTime);
-	for (int i = 0; i < 15; ++i)
+
+	for (Enemy* enemy : m_pEnemy->m_enemies)
 	{
-		m_pEnemy->m_position = Vector2(rand() % 1810, rand() % 1000); // within 1860x1050 screen resolution
-		m_enemies.push_back(m_pEnemy);
+		enemy->Process(deltaTime);
 	}
+
 	CheckCollisions();
 
 	pAnimatedSprite->Process(deltaTime);
@@ -124,7 +126,19 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 
 void SceneTankGame::CheckCollisions()
 {
-	
+	if (m_pPlayer && m_pPlayer->IsAlive())
+	{
+		for (Enemy* enemy : m_pEnemy->m_enemies)
+		{
+			if (enemy->IsAlive() && m_pPlayer->IsCollidingWith(*enemy))
+			{
+				m_pPlayer->SetDead();
+				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+			}
+		}
+
+		//bullet collision check to add:
+	}
 }
 
 
@@ -135,7 +149,7 @@ void SceneTankGame::Draw(Renderer& renderer)
 		m_pPlayer->Draw(renderer);
 	}
 
-	for (auto& enemies : m_enemies)
+	for (auto& enemies : m_pEnemy->m_enemies)
 	{
 		if (enemies->IsAlive())
 		{
@@ -143,7 +157,7 @@ void SceneTankGame::Draw(Renderer& renderer)
 		}
 	}
 
-	for (auto& enemies : m_enemies)
+	for (auto& enemies : m_pEnemy->m_enemies)
 	{
 		if (enemies->IsAlive())
 		{
@@ -154,22 +168,3 @@ void SceneTankGame::Draw(Renderer& renderer)
 	pAnimatedSprite->Draw(renderer);
 }
 
-void SceneTankGame::DebugDraw()
-{
-	if (m_pPlayer && m_pPlayer->IsAlive())
-	{
-		ImGui::Text("Player Tank:");
-		m_pPlayer->DebugDraw();
-	}
-
-	ImGui::Text("Enemies:");
-	for (auto& enemies : m_enemies)
-	{
-		if (enemies->IsAlive())
-		{
-			enemies->DebugDraw();
-		}
-	}
-
-	pAnimatedSprite->DebugDraw();
-}
