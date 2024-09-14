@@ -1,5 +1,4 @@
 // Local includes:
-#include "TankGame.h"
 #include "inputsystem.h"
 #include "renderer.h"
 #include "scene.h"
@@ -11,7 +10,7 @@
 #include "texture.h"
 #include "Enemy.h"
 #include "Entity.h"
-
+#include "TankGame.h"
 
 // Library includes:
 #include <vector>
@@ -19,7 +18,6 @@
 #include "fmod.hpp"
 #include "fmod_errors.h"
 #include <ctime>
-
 
 using FMOD::System;
 using FMOD::Sound;
@@ -56,10 +54,7 @@ SceneTankGame::~SceneTankGame()
 		opening->release();
 		opening = nullptr;
 	}
-	for (Enemy* enemy : m_pEnemy->m_enemies)
-	{
-		delete enemy;
-	}
+
 	m_pEnemy->m_enemies.clear();
 	delete pAnimatedSprite;
 	delete m_pPlayer;
@@ -78,7 +73,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 
 	// Spawn enemies
 	m_pEnemy = new Enemy();
-	m_pEnemy->SpawnEnemies(15);
+	m_pEnemy->Initialise(renderer, 15);
 
 	//initialise the sound:
 	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
@@ -115,12 +110,13 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 {
 	m_pPlayer->Process(deltaTime);
-
-	for (Enemy* enemy : m_pEnemy->m_enemies)
+	if (m_pEnemy)
 	{
-		enemy->Process(deltaTime);
+		for (auto& enemy : m_pEnemy->m_enemies)
+		{
+			enemy->Process(deltaTime);
+		}
 	}
-
 	CheckCollisions();
 
 	pAnimatedSprite->Process(deltaTime);
@@ -130,7 +126,7 @@ void SceneTankGame::CheckCollisions()
 {
 	if (m_pPlayer && m_pPlayer->IsAlive())
 	{
-		for (Enemy* enemy : m_pEnemy->m_enemies)
+		for (auto& enemy : m_pEnemy->m_enemies)
 		{
 			if (enemy->IsAlive() && m_pPlayer->IsCollidingWith(*enemy))
 			{
@@ -154,14 +150,6 @@ void SceneTankGame::Draw(Renderer& renderer)
 	if (m_pPlayer && m_pPlayer->IsAlive())
 	{
 		m_pPlayer->Draw(renderer);
-	}
-
-	for (auto& enemies : m_pEnemy->m_enemies)
-	{
-		if (enemies->IsAlive())
-		{
-			enemies->Draw(renderer);
-		}
 	}
 
 	for (auto& enemies : m_pEnemy->m_enemies)

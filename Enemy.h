@@ -1,5 +1,7 @@
 #include "Entity.h"
+
 #include <vector>
+#include <memory>
 
 class Enemy : public Entity
 {
@@ -18,7 +20,7 @@ public:
     // Randomly rotate the enemy
     void RotateRandomly();
 
-    std::vector<Enemy*> m_enemies;
+    std::vector<std::unique_ptr<Enemy>> m_enemies;
 
 private:
 

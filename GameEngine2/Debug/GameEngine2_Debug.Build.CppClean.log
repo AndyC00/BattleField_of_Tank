@@ -2,7 +2,6 @@ d:\developing_projects\gameengine2\gameengine2\debug\animatedsprite.obj
 d:\developing_projects\gameengine2\gameengine2\debug\ball.obj
 d:\developing_projects\gameengine2\gameengine2\debug\enemy.obj
 d:\developing_projects\gameengine2\gameengine2\debug\entity.obj
-d:\developing_projects\gameengine2\gameengine2\debug\game.obj
 d:\developing_projects\gameengine2\gameengine2\debug\imgui.obj
 d:\developing_projects\gameengine2\gameengine2\debug\imgui_demo.obj
 d:\developing_projects\gameengine2\gameengine2\debug\imgui_draw.obj
@@ -23,6 +22,7 @@ d:\developing_projects\gameengine2\gameengine2\debug\scenecheckerboards.obj
 d:\developing_projects\gameengine2\gameengine2\debug\shader.obj
 d:\developing_projects\gameengine2\gameengine2\debug\soundsystem.obj
 d:\developing_projects\gameengine2\gameengine2\debug\sprite.obj
+d:\developing_projects\gameengine2\gameengine2\debug\tankgame.obj
 d:\developing_projects\gameengine2\gameengine2\debug\texture.obj
 d:\developing_projects\gameengine2\gameengine2\debug\texturemanager.obj
 d:\developing_projects\gameengine2\gameengine2\debug\titlescene.obj

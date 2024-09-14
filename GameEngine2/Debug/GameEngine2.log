@@ -1,20 +1,18 @@
 ﻿  animatedsprite.cpp
   ball.cpp
   Enemy.cpp
+D:\Developing_Projects\GameEngine2\Enemy.cpp(29,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Enemy.cpp(29,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Entity.cpp
-D:\Developing_Projects\GameEngine2\Enemy.cpp(31,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(31,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(66,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(66,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Entity.cpp(85,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Entity.cpp(85,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Entity.cpp(86,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Entity.cpp(86,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   game.cpp
-D:\Developing_Projects\GameEngine2\TankGame.h(47,8): error C2143: syntax error: missing ';' before '*'
-D:\Developing_Projects\GameEngine2\TankGame.h(47,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\Developing_Projects\GameEngine2\TankGame.h(47,19): error C2238: unexpected token(s) preceding ';'
-D:\Developing_Projects\GameEngine2\TankGame.h(48,7): error C2143: syntax error: missing ';' before '*'
+D:\Developing_Projects\GameEngine2\TankGame.h(48,8): error C2143: syntax error: missing ';' before '*'
 D:\Developing_Projects\GameEngine2\TankGame.h(48,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\Developing_Projects\GameEngine2\TankGame.h(48,17): error C2238: unexpected token(s) preceding ';'
+D:\Developing_Projects\GameEngine2\TankGame.h(48,19): error C2238: unexpected token(s) preceding ';'
+D:\Developing_Projects\GameEngine2\TankGame.h(49,7): error C2143: syntax error: missing ';' before '*'
+D:\Developing_Projects\GameEngine2\TankGame.h(49,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\Developing_Projects\GameEngine2\TankGame.h(49,17): error C2238: unexpected token(s) preceding ';'
 D:\Developing_Projects\GameEngine2\game.cpp(182,93): warning C4018: '<': signed/unsigned mismatch
   imgui.cpp
   imgui_demo.cpp
@@ -39,54 +37,6 @@ D:\Developing_Projects\GameEngine2\game.cpp(182,93): warning C4018: '<': signed/
   soundsystem.cpp
   sprite.cpp
   TankGame.cpp
-D:\Developing_Projects\GameEngine2\TankGame.h(47,8): error C2143: syntax error: missing ';' before '*'
-D:\Developing_Projects\GameEngine2\TankGame.h(47,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\Developing_Projects\GameEngine2\TankGame.h(47,19): error C2238: unexpected token(s) preceding ';'
-D:\Developing_Projects\GameEngine2\TankGame.h(48,7): error C2143: syntax error: missing ';' before '*'
-D:\Developing_Projects\GameEngine2\TankGame.h(48,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\Developing_Projects\GameEngine2\TankGame.h(48,17): error C2238: unexpected token(s) preceding ';'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(34,2): error C2614: 'SceneTankGame': illegal member initialization: 'm_pPlayer' is not a base or member
-D:\Developing_Projects\GameEngine2\TankGame.cpp(35,2): error C2614: 'SceneTankGame': illegal member initialization: 'm_pEnemy' is not a base or member
-D:\Developing_Projects\GameEngine2\TankGame.cpp(57,22): error C2065: 'm_pEnemy': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(57,20): error C2143: syntax error: missing ';' before ':'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(57,41): error C2143: syntax error: missing ';' before ')'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(61,2): error C2065: 'm_pEnemy': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(63,9): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(63,2): error C2541: 'delete': cannot delete objects that are not pointers
-D:\Developing_Projects\GameEngine2\TankGame.cpp(64,9): error C2065: 'm_pEnemy': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(64,2): error C2541: 'delete': cannot delete objects that are not pointers
-D:\Developing_Projects\GameEngine2\TankGame.cpp(72,2): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(73,2): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(74,2): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(75,2): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(78,2): error C2065: 'm_pEnemy': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(79,2): error C2065: 'm_pEnemy': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(115,2): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(117,22): error C2065: 'm_pEnemy': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(117,20): error C2143: syntax error: missing ';' before ':'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(117,41): error C2143: syntax error: missing ';' before ')'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(129,6): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(129,19): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(131,23): error C2065: 'm_pEnemy': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(131,21): error C2143: syntax error: missing ';' before ':'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(131,42): error C2143: syntax error: missing ';' before ')'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(133,28): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(135,5): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(139,44): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(140,44): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(152,6): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(152,19): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(154,3): error C2065: 'm_pPlayer': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(157,23): error C2065: 'm_pEnemy': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(157,13): error C2530: 'enemies': references must be initialized
-D:\Developing_Projects\GameEngine2\TankGame.cpp(157,13): error C3531: 'enemies': a symbol whose type contains 'auto' must have an initializer
-D:\Developing_Projects\GameEngine2\TankGame.cpp(157,21): error C2143: syntax error: missing ';' before ':'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(157,42): error C2143: syntax error: missing ';' before ')'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(165,23): error C2065: 'm_pEnemy': undeclared identifier
-D:\Developing_Projects\GameEngine2\TankGame.cpp(165,13): error C2530: 'enemies': references must be initialized
-D:\Developing_Projects\GameEngine2\TankGame.cpp(165,13): error C3531: 'enemies': a symbol whose type contains 'auto' must have an initializer
-D:\Developing_Projects\GameEngine2\TankGame.cpp(165,21): error C2143: syntax error: missing ';' before ':'
-D:\Developing_Projects\GameEngine2\TankGame.cpp(165,42): error C2143: syntax error: missing ';' before ')'
   texture.cpp
   texturemanager.cpp
   TitleScene.cpp

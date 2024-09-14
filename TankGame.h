@@ -2,6 +2,7 @@
 #define  TANKGAME_H 
 
 // Local includes:
+#include "renderer.h"
 #include "scene.h"
 #include "inputsystem.h"
 #include "animatedsprite.h"
