@@ -1,13 +1,11 @@
-#include "enemy.h"
+#include "Enemy.h"
 #include "renderer.h"
 #include "vector2.h"
 #include <cstdlib>
-#include <ctime>
 
 Enemy::Enemy()
 {
-    // Seed random once for the entire game
-    srand(static_cast<unsigned>(time(0)));
+    
 }
 
 Enemy::~Enemy()

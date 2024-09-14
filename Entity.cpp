@@ -4,7 +4,6 @@
 // Local includes:
 #include "renderer.h"
 #include "sprite.h"
-#include "vector2.h"
 
 // Library includes:
 #include <cassert>
@@ -30,6 +29,8 @@ Entity::~Entity()
 bool Entity::Initialise(Renderer& renderer)
 {
     m_pSprite = renderer.CreateSprite("Sprites\\tank.png"); // replace the path with an actual sprite path
+    m_pSprite->SetAngle(90.0f);
+
     if (!m_pSprite)
     {
         return false;
@@ -100,9 +101,4 @@ bool Entity::IsCollidingWith(Entity& toCheck)
     float distanceSquared = (m_position - toCheck.GetPosition()).LengthSquared();
     float combinedRadius = GetRadius() + toCheck.GetRadius();
     return distanceSquared <= (combinedRadius * combinedRadius);
-}
-
-Vector2& Entity::Position()
-{
-    return m_position;
 }

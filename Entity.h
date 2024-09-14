@@ -47,7 +47,7 @@ protected:
 	bool m_bAlive;
 
 private:
-	Vector2& Position();
+	
 };
 
 #endif //   ENTITY_H 

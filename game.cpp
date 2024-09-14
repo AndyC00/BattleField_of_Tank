@@ -11,6 +11,9 @@
 #include "soundsystem.h"
 #include "TitleScene.h"
 #include "InstructionScene.h"
+#include "TankGame.h"
+#include "Enemy.h"
+#include "Entity.h"
 
 // Library includes: 
 #include "renderer.h" 
@@ -39,7 +42,6 @@ Game& Game::GetInstance()
 	{
 		sm_pInstance = new Game();
 	}
-
 	return (*sm_pInstance);
 }
 
@@ -49,7 +51,7 @@ void Game::DestroyInstance()
 	sm_pInstance = 0;
 }
 
-Game::Game():
+Game::Game() :
 	m_pRenderer(0),
 	m_bLooping(true),
 	m_pInputSystem(0)
@@ -63,17 +65,13 @@ Game::~Game()
 	m_pRenderer = 0;
 
 	delete m_pInputSystem;
-    m_pInputSystem = 0;
+	m_pInputSystem = 0;
 
 	delete pSoundsystem;
 	pSoundsystem = 0;
 
-	//deleting created sprites:
-	for (int i = 0; i < 4; ++i)
-	{
-		delete m_pZapPow[i];
-		m_pZapPow[i] = 0;
-	}
+	delete m_pZapPow[0];
+	m_pZapPow[0] = 0;
 }
 
 void Game::Quit()
@@ -115,31 +113,25 @@ bool Game::Initialise()
 
 	//creating the scene3 for the ball game:
 	Scene* pScene3 = 0;
-	pScene3 = new SceneBallGame();
+	pScene3 = new SceneTankGame();
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
 
 	// text renderer at last:
 	// Load static text textures into the Texture Manager... 
 	m_pRenderer->CreateStaticText("Right Click to Continue", 60);
-	m_pRenderer->CreateStaticText("Boom!", 60);
-	m_pRenderer->CreateStaticText("Pow!!", 60);
-	m_pRenderer->CreateStaticText("Pop!!!", 60);
 
 	// Generate sprites that use the static text textures... 
 	m_pZapPow[0] = m_pRenderer->CreateSprite("Right Click to Continue");
 	m_pZapPow[0]->SetX(900);
 	m_pZapPow[0]->SetY(100);
 	m_pZapPow[0]->SetAngle(180);
-	m_pZapPow[1] = m_pRenderer->CreateSprite("Boom!");
-	m_pZapPow[2] = m_pRenderer->CreateSprite("Pow!!");
-	m_pZapPow[3] = m_pRenderer->CreateSprite("Pop!!!");
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();
 
 	m_iLastTime = SDL_GetPerformanceCounter();
-	m_pRenderer->SetClearColour(0, 255, 255); 
+	m_pRenderer->SetClearColour(0, 255, 255);
 
 	return true;
 }
@@ -245,13 +237,8 @@ void Game::Draw(Renderer& renderer)
 	m_scenes[m_iCurrentScene]->Draw(renderer);
 
 	//draw the fonts:
-	for (int i = 0; i < 4; ++i)
-	{
-		if (m_pZapPow[i])
-		{
-			m_pZapPow[i]->Draw(renderer);
-		}
-	}
+	m_pZapPow[0]->Draw(renderer);
+
 
 	DebugDraw();
 

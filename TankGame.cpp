@@ -18,6 +18,7 @@
 #include <cmath>
 #include "fmod.hpp"
 #include "fmod_errors.h"
+#include <ctime>
 
 
 using FMOD::System;
@@ -34,6 +35,7 @@ SceneTankGame::SceneTankGame()
 	m_pPlayer(nullptr),
 	m_pEnemy(nullptr)
 {
+	srand(static_cast<unsigned>(time(0)));
 }
 
 SceneTankGame::~SceneTankGame()
@@ -71,8 +73,8 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	// Initialize player tank
 	m_pPlayer = new Entity();
 	m_pPlayer->Initialise(renderer);
-	m_pPlayer->Position().x = renderer.GetWidth() / 2.0f;
-	m_pPlayer->Position().y = renderer.GetHeight() / 2.0f;
+	m_pPlayer->GetPosition().x = renderer.GetWidth() / 2.0f;
+	m_pPlayer->GetPosition().y = renderer.GetHeight() / 2.0f;
 
 	// Spawn enemies
 	m_pEnemy = new Enemy();
@@ -133,7 +135,12 @@ void SceneTankGame::CheckCollisions()
 			if (enemy->IsAlive() && m_pPlayer->IsCollidingWith(*enemy))
 			{
 				m_pPlayer->SetDead();
+
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+
+				pAnimatedSprite->SetX(static_cast<int>(m_pPlayer->GetPosition().x));
+				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));
+				pAnimatedSprite->Animate();
 			}
 		}
 
