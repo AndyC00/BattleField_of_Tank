@@ -126,16 +126,16 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	ButtonState RKeyState = inputSystem.GetKeyState(SDL_SCANCODE_RIGHT);
 	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
 
-	if (LKeyState == BS_PRESSED || LKeyState == BS_HELD)
+	if (LKeyState == BS_PRESSED)
 	{
-		printf("key 'A' detected.");
+		printf("key 'left arrow' detected.");
 		float currentAngle = m_pPlayer->GetAngle();
 		float newAngle = NormalizeAngle(currentAngle - 45.0f);
 		m_pPlayer->SetAngle(newAngle);
 	}
-	if (RKeyState == BS_PRESSED || RKeyState == BS_HELD)
+	if (RKeyState == BS_PRESSED)
 	{
-		printf("key 'D' detected.");
+		printf("key 'right arrow' detected.");
 		float currentAngle = m_pPlayer->GetAngle();
 		float newAngle = NormalizeAngle(currentAngle + 45.0f);
 		m_pPlayer->SetAngle(newAngle);
@@ -143,7 +143,7 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	if (sKeyState == BS_PRESSED)
 	{
 		//PlayerBullet->SetPosition(m_position, m_pSprite->GetAngle());
-		printf("key 'D' detected.");
+		printf("key 'Space' detected.");
 	}
 
 	m_pPlayer->Process(deltaTime);
