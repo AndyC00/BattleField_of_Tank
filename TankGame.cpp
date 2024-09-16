@@ -161,12 +161,19 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 
 	pAnimatedSprite->Process(deltaTime);
 
-	for (auto& enemies : m_pEnemies)
+	//judge if all enemies destroyed
+	bool allEnemiesDestroyed = true;
+	for (const auto& enemy : m_pEnemies)
 	{
-		if (!enemies->IsAlive())
+		if (enemy->IsAlive())
 		{
-			(*m_sceneIndex)+=2;
+			allEnemiesDestroyed = false;
+			break;
 		}
+	}
+	if (allEnemiesDestroyed)
+	{
+		(*m_sceneIndex) += 2;
 	}
 }
 
