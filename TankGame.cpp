@@ -142,11 +142,15 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	}
 	if (sKeyState == BS_PRESSED)
 	{
-		//PlayerBullet->SetPosition(m_position, m_pSprite->GetAngle());
 		printf("key 'Space' detected.");
+		Vector2 playerPosition = m_pPlayer->GetPosition();
+		float playerAngle = m_pPlayer->GetAngle();
+		PlayerBullet->SetPosition(playerPosition, playerAngle);
 	}
 
 	m_pPlayer->Process(deltaTime);
+
+	PlayerBullet->Process(deltaTime);
 
 	for (auto& enemy : m_pEnemies)
 	{
@@ -194,6 +198,18 @@ void SceneTankGame::CheckCollisions()
 				(*m_sceneIndex)++;
 				break;
 			}
+
+			if (enemy->IsAlive() && enemy->IsCollidingWithBullet(PlayerBullet))
+			{
+				enemy->SetDead();
+
+				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+
+				pAnimatedSprite->SetX(static_cast<int>(enemy->GetPosition().x));
+				pAnimatedSprite->SetY(static_cast<int>(enemy->GetPosition().y));
+				pAnimatedSprite->Animate();
+			}
+
 		}
 
 	}
@@ -210,6 +226,7 @@ void SceneTankGame::Draw(Renderer& renderer)
 	{
 		m_pPlayer->Draw(renderer);
 	}
+	PlayerBullet->Draw(renderer);
 
 	for (auto& enemies : m_pEnemies)
 	{

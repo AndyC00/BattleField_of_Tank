@@ -1,7 +1,7 @@
 ﻿  TankGame.cpp
   Generating code
-  1 of 2432 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 2432 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    40 functions had inline decision re-evaluated but remain unchanged
+    55 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Release\GameEngine2_Released.exe

@@ -42,16 +42,6 @@ void Bullet::SetPosition(const Vector2& position, float angle)
 
 void Bullet::Process(float deltaTime)
 {
-    //if (m_isAlive)
-    //{
-    //    m_position += m_velocity * deltaTime;
-
-    //    m_lifetime -= deltaTime;
-    //    if (m_lifetime <= 0.0f)
-    //    {
-    //        m_isAlive = false;
-    //    }
-    //}
 
     m_position += m_velocity * deltaTime;
 
