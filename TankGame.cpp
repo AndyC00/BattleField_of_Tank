@@ -74,7 +74,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pPlayer->Initialise(renderer);
 	m_pPlayer->GetPosition().x = renderer.GetWidth() / 2.0f;
 	m_pPlayer->GetPosition().y = renderer.GetHeight() / 2.0f;
-	//initialise playerbullet
+	//initialise player bullet
 	PlayerBullet = new Bullet();
 	PlayerBullet->Initialise(renderer);
 	
@@ -122,20 +122,20 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 {
 	//reading input
-	ButtonState aKeyState = inputSystem.GetKeyState(SDL_SCANCODE_A);
-	ButtonState dKeyState = inputSystem.GetKeyState(SDL_SCANCODE_D);
+	ButtonState LKeyState = inputSystem.GetKeyState(SDL_SCANCODE_LEFT);
+	ButtonState RKeyState = inputSystem.GetKeyState(SDL_SCANCODE_RIGHT);
 	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
 
-	if (aKeyState == BS_PRESSED)
+	if (LKeyState == BS_PRESSED || LKeyState == BS_HELD)
 	{
 		printf("key 'A' detected.");
 		float currentAngle = m_pPlayer->GetAngle();
 		float newAngle = NormalizeAngle(currentAngle - 45.0f);
 		m_pPlayer->SetAngle(newAngle);
 	}
-	if (dKeyState == BS_PRESSED)
+	if (RKeyState == BS_PRESSED || RKeyState == BS_HELD)
 	{
-		LogManager::GetInstance().Log("key 'D' detected.");
+		printf("key 'D' detected.");
 		float currentAngle = m_pPlayer->GetAngle();
 		float newAngle = NormalizeAngle(currentAngle + 45.0f);
 		m_pPlayer->SetAngle(newAngle);
@@ -143,7 +143,7 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	if (sKeyState == BS_PRESSED)
 	{
 		//PlayerBullet->SetPosition(m_position, m_pSprite->GetAngle());
-
+		printf("key 'D' detected.");
 	}
 
 	m_pPlayer->Process(deltaTime);

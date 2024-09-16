@@ -52,6 +52,7 @@ bool InputSystem::Initialise()
 
 	return true;
 }
+
 void InputSystem::ProcessInput()
 {
 	// Store the old state...

@@ -1,9 +1,2 @@
-﻿  Enemy.cpp
-  TankGame.cpp
-D:\Developing_Projects\GameEngine2\Enemy.cpp(39,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(39,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(107,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  game.cpp
-D:\Developing_Projects\GameEngine2\game.cpp(199,93): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+﻿  TankGame.cpp
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Debug\GameEngine2_Debug.exe
