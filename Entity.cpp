@@ -16,6 +16,7 @@ Entity::Entity()
     , m_position(0.0f, 0.0f)
     , m_velocity(0.0f, 0.0f)
     , m_bAlive(true)
+    , m_angle(0.0f)
 {
 }
 
@@ -98,6 +99,20 @@ Vector2& Entity::GetVelocity()
     return m_velocity;
 }
 
+float Entity::GetAngle() const
+{
+    return m_angle;
+}
+
+void Entity::SetAngle(float angle)
+{
+    m_angle = angle;
+    if (m_pSprite)
+    {
+        m_pSprite->SetAngle(m_angle);
+    }
+}
+
 bool Entity::IsCollidingWith(Entity& toCheck)
 {
     float distanceSquared = (m_position - toCheck.GetPosition()).LengthSquared();
@@ -110,3 +125,4 @@ bool Entity::IsCollidingWithBullet(Bullet* bullet) {
     float combinedRadius = GetRadius() + bullet->GetRadius();
     return distanceSquared <= (combinedRadius * combinedRadius);
 }
+

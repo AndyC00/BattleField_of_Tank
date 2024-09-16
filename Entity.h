@@ -24,7 +24,10 @@ public:
 	void Rotate(float direction); 
 	bool IsAlive() const;
 	void SetDead();
+
 	float GetRadius();
+	float GetAngle() const;
+	void SetAngle(float angle);
 	Vector2 GetFacingDirection();
 
 	Vector2& GetPosition(); 
@@ -50,7 +53,7 @@ protected:
 	bool m_bAlive;
 
 private:
-	
+	float m_angle;
 };
 
 #endif //   ENTITY_H 

@@ -7,6 +7,7 @@
 #include "inputsystem.h"
 #include "animatedsprite.h"
 #include "game.h"
+#include "Bullet.h"
 
 // Library includes:
 #include <vector>
@@ -39,8 +40,7 @@ protected:
 private:
 	SceneTankGame(const SceneTankGame& SceneTankGame);
 	SceneTankGame& operator=(const SceneTankGame& SceneTankGame);
-
-	int* m_sceneIndex;
+	float NormalizeAngle(float angle);
 
 	// Member data: 
 public:
@@ -57,6 +57,10 @@ private:
 	FMOD::Sound* hitsound2;
 	FMOD::Sound* opening;
 	FMOD::Channel* channel;
+
+	int* m_sceneIndex;
+	Bullet* PlayerBullet;
+
 };
 
 #endif //   TANKGAME_H 

@@ -142,7 +142,7 @@ bool Game::Initialise()
 	m_pZapPow[0] = m_pRenderer->CreateSprite("Right Click to Continue");
 	m_pZapPow[0]->SetX(900);
 	m_pZapPow[0]->SetY(100);
-	m_pZapPow[0]->SetAngle(180);
+	m_pZapPow[0]->SetAngle(0);
 
 	bbWidth = m_pRenderer->GetWidth();
 	bbHeight = m_pRenderer->GetHeight();

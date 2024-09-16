@@ -19,6 +19,7 @@
 #include "fmod.hpp"
 #include "fmod_errors.h"
 #include <ctime>
+#include "inputsystem.h"
 
 using FMOD::System;
 using FMOD::Sound;
@@ -31,14 +32,14 @@ SceneTankGame::SceneTankGame()
 	channel(nullptr),
 	opening(nullptr),
 	pAnimatedSprite(nullptr),
-	m_pPlayer(nullptr)
+	m_pPlayer(nullptr),
+	PlayerBullet(nullptr)
 {
 	srand(static_cast<unsigned>(time(0)));
 }
 
 SceneTankGame::~SceneTankGame()
 {
-
 	if (hitsound1)
 	{
 		hitsound1->release();
@@ -61,6 +62,7 @@ SceneTankGame::~SceneTankGame()
 		delete enemy;
 	}
 	m_pEnemies.clear();
+	delete PlayerBullet;
 }
 
 bool SceneTankGame::Initialise(Renderer& renderer)
@@ -72,9 +74,12 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pPlayer->Initialise(renderer);
 	m_pPlayer->GetPosition().x = renderer.GetWidth() / 2.0f;
 	m_pPlayer->GetPosition().y = renderer.GetHeight() / 2.0f;
+	//initialise playerbullet
+	PlayerBullet = new Bullet();
+	PlayerBullet->Initialise(renderer);
 	
-	// Spawn 15 enemies:
-	for (int i = 0; i < 15; i++)
+	// Spawn a setting number of enemies:
+	for (int i = 0; i < 7; i++)
 	{
 		Enemy* enemy = new Enemy();
 		enemy->Initialise(renderer);
@@ -116,6 +121,31 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 
 void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 {
+	//reading input
+	ButtonState aKeyState = inputSystem.GetKeyState(SDL_SCANCODE_A);
+	ButtonState dKeyState = inputSystem.GetKeyState(SDL_SCANCODE_D);
+	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
+
+	if (aKeyState == BS_PRESSED)
+	{
+		printf("key 'A' detected.");
+		float currentAngle = m_pPlayer->GetAngle();
+		float newAngle = NormalizeAngle(currentAngle - 45.0f);
+		m_pPlayer->SetAngle(newAngle);
+	}
+	if (dKeyState == BS_PRESSED)
+	{
+		LogManager::GetInstance().Log("key 'D' detected.");
+		float currentAngle = m_pPlayer->GetAngle();
+		float newAngle = NormalizeAngle(currentAngle + 45.0f);
+		m_pPlayer->SetAngle(newAngle);
+	}
+	if (sKeyState == BS_PRESSED)
+	{
+		//PlayerBullet->SetPosition(m_position, m_pSprite->GetAngle());
+
+	}
+
 	m_pPlayer->Process(deltaTime);
 
 	for (auto& enemy : m_pEnemies)
@@ -195,4 +225,13 @@ void SceneTankGame::Draw(Renderer& renderer)
 void SceneTankGame::DebugDraw()
 {
 	
+}
+
+float SceneTankGame::NormalizeAngle(float angle)
+{
+	while (angle >= 360.0f)
+		angle -= 360.0f;
+	while (angle < 0.0f)
+		angle += 360.0f;
+	return angle;
 }

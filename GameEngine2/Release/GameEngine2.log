@@ -1,0 +1,10 @@
+﻿  Enemy.cpp
+D:\Developing_Projects\GameEngine2\Enemy.cpp(39,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Enemy.cpp(39,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Enemy.cpp(107,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  TankGame.cpp
+  Generating code
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 2432 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Release\GameEngine2_Released.exe

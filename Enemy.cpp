@@ -57,7 +57,7 @@ void Enemy::Process(float deltaTime)
 			{
 				m_isRotating = true;
 				m_startAngle = m_pSprite->GetAngle();
-
+				//rotate 45 degrees every time
 				m_targetAngle = m_startAngle + ((rand() % 2 == 0) ? -45.0f : 45.0f);
 				m_rotationTimer = 0.0f;
 			}
@@ -104,14 +104,13 @@ void Enemy::RotateOverTime(float deltaTime)
 	{
 		currentAngle = m_targetAngle; 
 		m_isRotating = false;
-		float angleInRadians = - currentAngle *  M_PI / 180.0f - 90.0f;
+		float angleInRadians = currentAngle *  M_PI / 180.0f + 90.0f;
 		m_velocity.x = cos(angleInRadians) * 10.0f;  // speed control
 		m_velocity.y = sin(angleInRadians) * 10.0f;
 	}
 
 	this->Rotate(currentAngle);
 }
-
 
 void Enemy::RotateRandomly()
 {

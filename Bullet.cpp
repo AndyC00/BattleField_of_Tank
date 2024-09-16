@@ -24,7 +24,7 @@ Bullet::~Bullet()
 bool Bullet::Initialise(Renderer& renderer)
 {
     m_pSprite = renderer.CreateSprite("Sprites\\ball.png");
-    m_pSprite->SetScale(0.2);
+    m_pSprite->SetScale(0.05);
 
     return (m_pSprite != nullptr);
 }
@@ -34,8 +34,8 @@ void Bullet::SetPosition(const Vector2& position, float angle)
     m_position = position;
     m_angle = angle;
 
-    const float SPEED = -800;
-    float angleInRadians = m_angle * 3.14159f / 180.0f;
+    const float SPEED = 800;
+    float angleInRadians = - m_angle * 3.14159f / 180.0f;
     m_velocity.x = sin(angleInRadians) * SPEED;
     m_velocity.y = cos(angleInRadians) * SPEED;
 }

@@ -12,7 +12,7 @@
 
 WinScene::WinScene() :
 	m_pCentre(0),
-	m_angle(180.0f),
+	m_angle(0.0f),
 	m_rotationSpeed(0.0f)
 {
 
