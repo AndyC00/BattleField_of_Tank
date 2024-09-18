@@ -71,7 +71,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 {
 	m_pRenderer = &renderer;
 
-	//initialise the backgroud pic
+	//initialise the background pic
 	m_pBackground = renderer.CreateSprite("Sprites\\background.png");
 	m_pBackground->SetX(1860 / 2);
 	m_pBackground->SetY(1060 / 2);
@@ -155,6 +155,7 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	if (sKeyState == BS_PRESSED)
 	{
 		printf("key 'Space' detected.");
+		Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channel);
 		Vector2 playerPosition = m_pPlayer->GetPosition();
 		float playerAngle = m_pPlayer->GetAngle();
 		PlayerBullet->SetPosition(playerPosition, playerAngle);
@@ -220,7 +221,7 @@ void SceneTankGame::CheckCollisions()
 
 			if (m_pPlayer->IsCollidingWithBullet(enemy->GetBullet())) 
 			{
-				Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channel);
+				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
 				pAnimatedSprite->SetX(static_cast<int>(m_pPlayer->GetPosition().x));
 				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));

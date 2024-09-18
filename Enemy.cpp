@@ -36,7 +36,10 @@ bool Enemy::Initialise(Renderer& renderer)
 		return false;
 	}
 
-	m_position = Vector2(rand() % 1810, rand() % 1000);
+	int m_x = ((rand() % 2 == 0) ? (rand() % 910 + 10) : (rand() % 910 + 940));
+	int m_y = ((rand() % 2 == 0) ? (rand() % 910 + 10) : (rand() % 910 + 940));
+
+	m_position = Vector2(m_x, m_y);
 	m_velocity = Vector2(0.0f, 0.0f);
 
 	bullet = new Bullet();
@@ -71,7 +74,7 @@ void Enemy::Process(float deltaTime)
 			RotateOverTime(deltaTime);
 		}
 
-		if (m_bulletTimer < 0) 
+		if (m_bulletTimer < 0)
 		{
 			bullet->SetPosition(m_position, m_pSprite->GetAngle());
 			m_bulletTimer = bulletTimerTotal;
@@ -81,7 +84,7 @@ void Enemy::Process(float deltaTime)
 			bullet->Process(deltaTime);
 			m_bulletTimer -= deltaTime;
 		}
-		
+
 		Entity::Process(deltaTime);
 	}
 }
@@ -102,9 +105,9 @@ void Enemy::RotateOverTime(float deltaTime)
 
 	if ((angleDifference > 0 && currentAngle >= m_targetAngle) || (angleDifference < 0 && currentAngle <= m_targetAngle))
 	{
-		currentAngle = m_targetAngle; 
+		currentAngle = m_targetAngle;
 		m_isRotating = false;
-		float angleInRadians = currentAngle *  M_PI / 180.0f + 90.0f;
+		float angleInRadians = currentAngle * M_PI / 180.0f + 90.0f;
 		m_velocity.x = cos(angleInRadians) * 10.0f;  // speed control
 		m_velocity.y = sin(angleInRadians) * 10.0f;
 	}
@@ -119,7 +122,7 @@ void Enemy::RotateRandomly()
 	m_targetAngle = m_pSprite->GetAngle() + randomDirection;
 }
 
-Bullet* Enemy::GetBullet() 
+Bullet* Enemy::GetBullet()
 {
 	return bullet;
 }
