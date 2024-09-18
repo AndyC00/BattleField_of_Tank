@@ -51,6 +51,7 @@ protected:
 	Entity* m_pPlayer;
 	AnimatedSprite* pAnimatedSprite;
 	std::vector<Enemy*> m_pEnemies;
+	Sprite* m_pBackground;
 
 private:
 	FMOD::Sound* hitsound1;

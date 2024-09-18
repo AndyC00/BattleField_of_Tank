@@ -1,6 +1,10 @@
 ﻿  TankGame.cpp
+D:\Developing_Projects\GameEngine2\TankGame.cpp(166,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  game.cpp
+D:\Developing_Projects\GameEngine2\game.cpp(199,93): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 2432 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  11 of 2432 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    77 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Release\GameEngine2_Released.exe

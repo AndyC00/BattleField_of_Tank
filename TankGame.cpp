@@ -33,7 +33,8 @@ SceneTankGame::SceneTankGame()
 	opening(nullptr),
 	pAnimatedSprite(nullptr),
 	m_pPlayer(nullptr),
-	PlayerBullet(nullptr)
+	PlayerBullet(nullptr),
+	m_pBackground(nullptr)
 {
 	srand(static_cast<unsigned>(time(0)));
 }
@@ -63,11 +64,17 @@ SceneTankGame::~SceneTankGame()
 	}
 	m_pEnemies.clear();
 	delete PlayerBullet;
+	delete m_pBackground;
 }
 
 bool SceneTankGame::Initialise(Renderer& renderer)
 {
 	m_pRenderer = &renderer;
+
+	//initialise the backgroud pic
+	m_pBackground = renderer.CreateSprite("Sprites\\background.png");
+	m_pBackground->SetX(1860 / 2);
+	m_pBackground->SetY(1060 / 2);
 
 	// Initialize player tank
 	m_pPlayer = new Entity();
@@ -121,10 +128,15 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 
 void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 {
+	//process the background
+	m_pBackground->SetAngle(0);
+	m_pBackground->Process(deltaTime);
+
 	//reading input
 	ButtonState LKeyState = inputSystem.GetKeyState(SDL_SCANCODE_LEFT);
 	ButtonState RKeyState = inputSystem.GetKeyState(SDL_SCANCODE_RIGHT);
 	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
+	ButtonState FKeyState = inputSystem.GetKeyState(SDL_SCANCODE_UP);
 
 	if (LKeyState == BS_PRESSED)
 	{
@@ -146,6 +158,18 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 		Vector2 playerPosition = m_pPlayer->GetPosition();
 		float playerAngle = m_pPlayer->GetAngle();
 		PlayerBullet->SetPosition(playerPosition, playerAngle);
+	}
+	if (FKeyState == BS_HELD)
+	{
+		printf("key 'up arrow' detected.");
+		float playerAngle = m_pPlayer->GetAngle();
+		float angleInRadians = playerAngle * M_PI / 180.0f + 45.0f;
+
+		const float speed = 20.0f;  // set the speed for the tank
+
+		Vector2 direction(cos(angleInRadians), sin(angleInRadians));
+
+		m_pPlayer->GetPosition() += direction * speed * deltaTime;
 	}
 
 	m_pPlayer->Process(deltaTime);
@@ -229,6 +253,8 @@ void SceneTankGame::OnSceneChange(int* sceneIndex)
 
 void SceneTankGame::Draw(Renderer& renderer)
 {
+	m_pBackground->Draw(renderer);
+
 	if (m_pPlayer && m_pPlayer->IsAlive())
 	{
 		m_pPlayer->Draw(renderer);
