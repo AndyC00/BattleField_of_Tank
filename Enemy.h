@@ -37,5 +37,7 @@ private:
 	float m_bulletTimer;
 	float m_bulletInterval;
 
+	bool IsNearBoundary(Vector2 m_position);
+
 	Bullet* bullet;
 };

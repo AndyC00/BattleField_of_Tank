@@ -36,8 +36,8 @@ bool Enemy::Initialise(Renderer& renderer)
 		return false;
 	}
 
-	int m_x = ((rand() % 2 == 0) ? (rand() % 910 + 10) : (rand() % 910 + 940));
-	int m_y = ((rand() % 2 == 0) ? (rand() % 910 + 10) : (rand() % 910 + 940));
+	int m_x = ((rand() % 2 == 0) ? (rand() % 890 + 10) : (rand() % 890 + 910));
+	int m_y = ((rand() % 2 == 0) ? (rand() % 490 + 10) : (rand() % 480 + 550));
 
 	m_position = Vector2(m_x, m_y);
 	m_velocity = Vector2(0.0f, 0.0f);
@@ -55,6 +55,21 @@ void Enemy::Process(float deltaTime)
 		if (!m_isRotating)
 		{
 			m_rotationTimer += deltaTime;
+
+			//detect if meet the edge of the screen
+			if (IsNearBoundary(m_position))
+			{
+				m_isRotating = true;
+				m_startAngle = m_pSprite->GetAngle();
+
+				Vector2 center(930.0f, 530.0f); // 屏幕中心坐标 (1860/2, 1060/2)
+				Vector2 direction = center - m_position;
+				float angleToCenter = atan2(direction.y, direction.x) * 180.0f / M_PI - 90.0f;
+
+				m_targetAngle = angleToCenter;
+				m_rotationTimer = 0.0f;
+			}
+
 			// rotate every 1.5s
 			if (m_rotationTimer >= 1.5f)
 			{
@@ -65,7 +80,7 @@ void Enemy::Process(float deltaTime)
 				m_rotationTimer = 0.0f;
 			}
 			else
-			{
+			{				
 				m_position += m_velocity * deltaTime;
 			}
 		}
@@ -125,4 +140,12 @@ void Enemy::RotateRandomly()
 Bullet* Enemy::GetBullet()
 {
 	return bullet;
+}
+
+bool Enemy::IsNearBoundary(Vector2 m_position)
+{
+	float margin = 35.0f; //the distence to trigger the function
+
+	return (m_position.x <= margin || m_position.x >= 1860.0f - margin ||
+		m_position.y <= margin || m_position.y >= 1060.0f - margin);
 }

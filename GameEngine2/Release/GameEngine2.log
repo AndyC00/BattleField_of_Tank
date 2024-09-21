@@ -1,10 +1,11 @@
 ﻿  Enemy.cpp
 D:\Developing_Projects\GameEngine2\Enemy.cpp(42,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Developing_Projects\GameEngine2\Enemy.cpp(42,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\GameEngine2\Enemy.cpp(110,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Enemy.cpp(67,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\GameEngine2\Enemy.cpp(125,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Generating code
-  0 of 2432 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  4 of 2434 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    41 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GameEngine2.vcxproj -> D:\Developing_Projects\GameEngine2\Release\GameEngine2_Released.exe
