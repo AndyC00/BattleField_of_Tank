@@ -120,7 +120,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	pAnimatedSprite = new AnimatedSprite();
 	pAnimatedSprite->Initialise(*pTexture);
 	pAnimatedSprite->SetupFrames(66, 66);
-	pAnimatedSprite->SetFrameDuration(0.2f);
+	pAnimatedSprite->SetFrameDuration(0.1f);
 	pAnimatedSprite->SetLooping(false);
 
 	return true;
@@ -214,6 +214,7 @@ void SceneTankGame::CheckCollisions()
 
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
+				pAnimatedSprite->Restart();
 				pAnimatedSprite->SetX(static_cast<int>(m_pPlayer->GetPosition().x));
 				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));
 				pAnimatedSprite->Animate();
@@ -223,6 +224,7 @@ void SceneTankGame::CheckCollisions()
 			{
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
+				pAnimatedSprite->Restart();
 				pAnimatedSprite->SetX(static_cast<int>(m_pPlayer->GetPosition().x));
 				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));
 				pAnimatedSprite->Animate();
@@ -237,6 +239,7 @@ void SceneTankGame::CheckCollisions()
 
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
+				pAnimatedSprite->Restart();
 				pAnimatedSprite->SetX(static_cast<int>(enemy->GetPosition().x));
 				pAnimatedSprite->SetY(static_cast<int>(enemy->GetPosition().y));
 				pAnimatedSprite->Animate();
