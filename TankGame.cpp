@@ -114,11 +114,16 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	Game::pSoundsystem->playSound(opening, nullptr, false, &channel);
 
 	//animated sprite:
-	Texture* pTexture = new Texture();
+	/*Texture* pTexture = new Texture();
 	pTexture->Initialise("Sprites\\explosion.png");
 
 	pAnimatedSprite = new AnimatedSprite();
 	pAnimatedSprite->Initialise(*pTexture);
+	pAnimatedSprite->SetupFrames(66, 66);
+	pAnimatedSprite->SetFrameDuration(0.1f);
+	pAnimatedSprite->SetLooping(false);*/
+
+	pAnimatedSprite = m_pRenderer->CreateAnimatedSprite("Sprites\\explosion.png");
 	pAnimatedSprite->SetupFrames(66, 66);
 	pAnimatedSprite->SetFrameDuration(0.1f);
 	pAnimatedSprite->SetLooping(false);
@@ -184,6 +189,7 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 
 	CheckCollisions();
 
+	//processing animated sprite
 	pAnimatedSprite->Process(deltaTime);
 
 	//judge if all enemies destroyed
@@ -214,7 +220,6 @@ void SceneTankGame::CheckCollisions()
 
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
-				pAnimatedSprite->Restart();
 				pAnimatedSprite->SetX(static_cast<int>(m_pPlayer->GetPosition().x));
 				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));
 				pAnimatedSprite->Animate();
@@ -224,7 +229,6 @@ void SceneTankGame::CheckCollisions()
 			{
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
-				pAnimatedSprite->Restart();
 				pAnimatedSprite->SetX(static_cast<int>(m_pPlayer->GetPosition().x));
 				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));
 				pAnimatedSprite->Animate();
@@ -239,7 +243,6 @@ void SceneTankGame::CheckCollisions()
 
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
-				pAnimatedSprite->Restart();
 				pAnimatedSprite->SetX(static_cast<int>(enemy->GetPosition().x));
 				pAnimatedSprite->SetY(static_cast<int>(enemy->GetPosition().y));
 				pAnimatedSprite->Animate();
@@ -273,6 +276,7 @@ void SceneTankGame::Draw(Renderer& renderer)
 		}
 	}
 
+	//draw animated sprites
 	pAnimatedSprite->Draw(renderer);
 }
 
@@ -288,4 +292,25 @@ float SceneTankGame::NormalizeAngle(float angle)
 	while (angle < 0.0f)
 		angle += 360.0f;
 	return angle;
+}
+
+void SceneTankGame::UpdateExplosions(float deltaTime)
+{
+	for (auto it = m_explosions.begin(); it != m_explosions.end();)
+	{
+		m_animated = *it;
+
+		m_animated->Process(deltaTime);  // process the animation
+
+		// Remove and delete the explosion if it's done animating
+		if (!m_animated->IsAnimating())
+		{
+			delete m_animated;
+			it = m_explosions.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
 }

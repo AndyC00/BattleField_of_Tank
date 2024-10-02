@@ -17,6 +17,7 @@
 class Renderer;
 class Entity;
 class Enemy;
+class AnimatedSprite;
 
 
 // Class declaration:
@@ -61,7 +62,6 @@ private:
 
 	int* m_sceneIndex;
 	Bullet* PlayerBullet;
-
 };
 
 #endif //   TANKGAME_H 
