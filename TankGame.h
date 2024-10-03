@@ -42,6 +42,8 @@ private:
 	SceneTankGame(const SceneTankGame& SceneTankGame);
 	SceneTankGame& operator=(const SceneTankGame& SceneTankGame);
 	float NormalizeAngle(float angle);
+	void UpdateExplosions(float deltaTime);
+	void CreateExplosion(float x, float y);
 
 	// Member data: 
 public:
@@ -50,7 +52,7 @@ public:
 protected:
 	Renderer* m_pRenderer;
 	Entity* m_pPlayer;
-	AnimatedSprite* pAnimatedSprite;
+	std::vector<AnimatedSprite*> m_explosions;
 	std::vector<Enemy*> m_pEnemies;
 	Sprite* m_pBackground;
 

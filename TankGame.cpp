@@ -31,7 +31,6 @@ SceneTankGame::SceneTankGame()
 	hitsound2(nullptr),
 	channel(nullptr),
 	opening(nullptr),
-	pAnimatedSprite(nullptr),
 	m_pPlayer(nullptr),
 	PlayerBullet(nullptr),
 	m_pBackground(nullptr)
@@ -56,8 +55,12 @@ SceneTankGame::~SceneTankGame()
 		opening->release();
 		opening = nullptr;
 	}
-	delete pAnimatedSprite;
 	delete m_pPlayer;
+	for (auto& pAnimatedSprite : m_explosions)
+	{
+		delete pAnimatedSprite;
+	}
+	m_explosions.clear();
 	for (auto& enemy : m_pEnemies)
 	{
 		delete enemy;
@@ -112,21 +115,6 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	}
 	Game::pSoundsystem->createSound("sounds\\opening.wav", FMOD_LOOP_NORMAL, &opening);
 	Game::pSoundsystem->playSound(opening, nullptr, false, &channel);
-
-	//animated sprite:
-	/*Texture* pTexture = new Texture();
-	pTexture->Initialise("Sprites\\explosion.png");
-
-	pAnimatedSprite = new AnimatedSprite();
-	pAnimatedSprite->Initialise(*pTexture);
-	pAnimatedSprite->SetupFrames(66, 66);
-	pAnimatedSprite->SetFrameDuration(0.1f);
-	pAnimatedSprite->SetLooping(false);*/
-
-	pAnimatedSprite = m_pRenderer->CreateAnimatedSprite("Sprites\\explosion.png");
-	pAnimatedSprite->SetupFrames(66, 66);
-	pAnimatedSprite->SetFrameDuration(0.1f);
-	pAnimatedSprite->SetLooping(false);
 
 	return true;
 }
@@ -190,7 +178,7 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	CheckCollisions();
 
 	//processing animated sprite
-	pAnimatedSprite->Process(deltaTime);
+	UpdateExplosions(deltaTime);
 
 	//judge if all enemies destroyed
 	bool allEnemiesDestroyed = true;
@@ -220,18 +208,14 @@ void SceneTankGame::CheckCollisions()
 
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
-				pAnimatedSprite->SetX(static_cast<int>(m_pPlayer->GetPosition().x));
-				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));
-				pAnimatedSprite->Animate();
+				CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
 			}
 
 			if (m_pPlayer->IsCollidingWithBullet(enemy->GetBullet())) 
 			{
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
-				pAnimatedSprite->SetX(static_cast<int>(m_pPlayer->GetPosition().x));
-				pAnimatedSprite->SetY(static_cast<int>(m_pPlayer->GetPosition().y));
-				pAnimatedSprite->Animate();
+				CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
 
 				(*m_sceneIndex)++;
 				break;
@@ -243,9 +227,7 @@ void SceneTankGame::CheckCollisions()
 
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
-				pAnimatedSprite->SetX(static_cast<int>(enemy->GetPosition().x));
-				pAnimatedSprite->SetY(static_cast<int>(enemy->GetPosition().y));
-				pAnimatedSprite->Animate();
+				CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
 			}
 
 		}
@@ -277,7 +259,10 @@ void SceneTankGame::Draw(Renderer& renderer)
 	}
 
 	//draw animated sprites
-	pAnimatedSprite->Draw(renderer);
+	for (auto& explosion : m_explosions)
+	{
+		explosion->Draw(renderer);
+	}
 }
 
 void SceneTankGame::DebugDraw()
@@ -298,14 +283,13 @@ void SceneTankGame::UpdateExplosions(float deltaTime)
 {
 	for (auto it = m_explosions.begin(); it != m_explosions.end();)
 	{
-		m_animated = *it;
+		AnimatedSprite* explosion = *it;
 
-		m_animated->Process(deltaTime);  // process the animation
+		explosion->Process(deltaTime);
 
-		// Remove and delete the explosion if it's done animating
-		if (!m_animated->IsAnimating())
+		if (!explosion->IsAnimating())
 		{
-			delete m_animated;
+			delete explosion;
 			it = m_explosions.erase(it);
 		}
 		else
@@ -313,4 +297,17 @@ void SceneTankGame::UpdateExplosions(float deltaTime)
 			++it;
 		}
 	}
+}
+
+
+void SceneTankGame::CreateExplosion(float x, float y)
+{
+	AnimatedSprite* newExplosion = m_pRenderer->CreateAnimatedSprite("Sprites\\explosion.png");
+	newExplosion->SetupFrames(66, 66);
+	newExplosion->SetFrameDuration(0.1f);
+	newExplosion->SetLooping(false);
+	newExplosion->SetX(static_cast<int>(x));
+	newExplosion->SetY(static_cast<int>(y));
+	newExplosion->Animate();
+	m_explosions.push_back(newExplosion);
 }
