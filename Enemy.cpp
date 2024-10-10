@@ -56,13 +56,13 @@ void Enemy::Process(float deltaTime)
 		{
 			m_rotationTimer += deltaTime;
 
-			//detect if meet the edge of the screen
+			//go back if near the edge of the screen
 			if (IsNearBoundary(m_position))
 			{
 				m_isRotating = true;
 				m_startAngle = m_pSprite->GetAngle();
 
-				Vector2 center(930.0f, 530.0f); // 屏幕中心坐标 (1860/2, 1060/2)
+				Vector2 center(930.0f, 530.0f); // the center of the screen (1860/2, 1060/2)
 				Vector2 direction = center - m_position;
 				float angleToCenter = atan2(direction.y, direction.x) * 180.0f / M_PI - 90.0f;
 
@@ -144,7 +144,7 @@ Bullet* Enemy::GetBullet()
 
 bool Enemy::IsNearBoundary(Vector2 m_position)
 {
-	float margin = 35.0f; //the distence to trigger the function
+	float margin = 35.0f; //the distance to trigger the function
 
 	return (m_position.x <= margin || m_position.x >= 1860.0f - margin ||
 		m_position.y <= margin || m_position.y >= 1060.0f - margin);

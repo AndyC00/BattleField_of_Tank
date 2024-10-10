@@ -15,15 +15,10 @@ public:
 
 	void Process(float deltaTime);
 
-	// Function to spawn enemies at random positions
-	void SpawnEnemies(int numEnemies);
-
 	// Randomly rotate the enemy
 	void RotateRandomly();
 
 	void RotateOverTime(float deltaTime);
-
-	void ShootBullet();
 
 	void Draw(Renderer& renderer);
 	Bullet* GetBullet();
@@ -35,7 +30,6 @@ private:
 	float m_startAngle;
 	float m_targetAngle;
 	float m_bulletTimer;
-	float m_bulletInterval;
 
 	bool IsNearBoundary(Vector2 m_position);
 

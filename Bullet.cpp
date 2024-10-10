@@ -35,7 +35,7 @@ void Bullet::SetPosition(const Vector2& position, float angle)
     m_angle = angle;
 
     const float SPEED = 800;
-    float angleInRadians = - m_angle * 3.14159f / 180.0f;
+    float angleInRadians = - m_angle * M_PI / 180.0f;
     m_velocity.x = sin(angleInRadians) * SPEED;
     m_velocity.y = cos(angleInRadians) * SPEED;
 }
