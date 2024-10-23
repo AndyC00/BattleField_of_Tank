@@ -4,6 +4,10 @@
 //local includes:
 #include "scene.h"
 
+//library includes:
+#include <vector>
+
+
 //Forward declarations:
 class Renderer;
 class Sprite;
@@ -31,12 +35,10 @@ public:
 	virtual void DebugDraw();
 
 protected:
-	Sprite* m_pCentre;
-
-	float m_angle;
-	float m_rotationSpeed;
+	std::vector<Sprite*> m_pictures;
 
 private:
+	int m_CurrentPicture;
 
 };
 

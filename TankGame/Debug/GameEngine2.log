@@ -1,12 +1,3 @@
-﻿  Entity.cpp
-  InstructionScene.cpp
-  TankGame.cpp
-D:\Developing_Projects\TankGame\Entity.cpp(38,9): warning C4102: 'print': unreferenced label
-D:\Developing_Projects\TankGame\Entity.cpp(89,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Entity.cpp(89,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\TankGame.cpp(160,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  TitleScene.cpp
-  Win.cpp
-  lose.cpp
-  Generating Code...
+﻿  TitleScene.cpp
+D:\Developing_Projects\TankGame\TitleScene.cpp(54,89): warning C4018: '<': signed/unsigned mismatch
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe
