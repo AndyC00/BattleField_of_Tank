@@ -9,11 +9,11 @@
 #include "inputsystem.h"
 #include "animatedsprite.h"
 #include "soundsystem.h"
-#include "InstructionScene.h"
 #include "TankGame.h"
 #include "Enemy.h"
 #include "Entity.h"
 
+//scenes include:
 #include "TitleScene.h"
 #include "lose.h"
 #include "Win.h"
@@ -107,41 +107,38 @@ bool Game::Initialise()
 	}
 
 	//creating the scenes:
-	Scene* pScene = 0;
-	pScene = new TitleScene();
-	pScene->Initialise(*m_pRenderer);
-	m_scenes.push_back(pScene);
 	m_iCurrentScene = 0;
 
-	Scene* pScene2 = 0;
-	pScene2 = new InstructionScene();
+	TitleScene* pScene1 = 0;
+	pScene1 = new TitleScene();
+	pScene1->OnSceneChange(&m_iCurrentScene);
+	pScene1->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene1);
+
+	SceneTankGame* pScene2 = 0;
+	pScene2 = new SceneTankGame();
+	pScene2->OnSceneChange(&m_iCurrentScene);
 	pScene2->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene2);
 
-	SceneTankGame* pScene3 = 0;
-	pScene3 = new SceneTankGame();
-	pScene3->OnSceneChange(&m_iCurrentScene);
+	Scene* pScene3 = 0;
+	pScene3 = new LoseScene();
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
 
 	Scene* pScene4 = 0;
-	pScene4 = new LoseScene();
+	pScene4 = new WinScene();
 	pScene4->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene4);
 
-	Scene* pScene5 = 0;
-	pScene5 = new WinScene();
-	pScene5->Initialise(*m_pRenderer);
-	m_scenes.push_back(pScene5);
-
 	// text renderer at last:
 	// Load static text textures into the Texture Manager... 
-	m_pRenderer->CreateStaticText("left Click to Continue", 60);
+	m_pRenderer->CreateStaticText("left Click to Continue", 35);
 
 	// Generate sprites that use the static text textures... 
 	m_pZapPow[0] = m_pRenderer->CreateSprite("left Click to Continue");
-	m_pZapPow[0]->SetX(900);
-	m_pZapPow[0]->SetY(100);
+	m_pZapPow[0]->SetX(300);
+	m_pZapPow[0]->SetY(80);
 	m_pZapPow[0]->SetAngle(0);
 
 	bbWidth = m_pRenderer->GetWidth();

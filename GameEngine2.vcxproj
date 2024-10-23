@@ -154,7 +154,6 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="inputsystem.cpp" />
-    <ClCompile Include="InstructionScene.cpp" />
     <ClCompile Include="logmanager.cpp" />
     <ClCompile Include="lose.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -193,7 +192,6 @@
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="inlinehelpers.h" />
     <ClInclude Include="inputsystem.h" />
-    <ClInclude Include="InstructionScene.h" />
     <ClInclude Include="logmanager.h" />
     <ClInclude Include="lose.h" />
     <ClInclude Include="matrix4.h" />

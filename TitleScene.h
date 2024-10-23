@@ -23,6 +23,7 @@ public:
 	virtual bool Initialise(Renderer& renderer);
 	virtual void Process(float deltaTime, InputSystem& inputSystem);
 	virtual void Draw(Renderer& renderer);
+	void OnSceneChange(int* sceneIndex);
 
 protected:
 
@@ -39,7 +40,7 @@ protected:
 
 private:
 	int m_CurrentPicture;
-
+	int* m_sceneIndex;
 };
 
 #endif // _TITLESCENE_H_

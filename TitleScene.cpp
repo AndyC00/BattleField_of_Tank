@@ -52,15 +52,27 @@ void TitleScene::Process(float deltaTime, InputSystem& inputSystem)
 {
 	m_pictures[m_CurrentPicture]->Process(deltaTime);
 
-	if (inputSystem.GetMouseButtonState(SDL_BUTTON_LEFT) == BS_PRESSED && m_CurrentPicture < m_pictures.size() - 1)
+	if (inputSystem.GetMouseButtonState(SDL_BUTTON_LEFT) == BS_PRESSED)
 	{
-		m_CurrentPicture++;
+		if (m_CurrentPicture < m_pictures.size() - 1)
+		{
+			m_CurrentPicture++;
+		}
+		else
+		{
+			(*m_sceneIndex)++;
+		}
 	}
 }
 
 void TitleScene::Draw(Renderer& renderer)
 {
 	m_pictures[m_CurrentPicture]->Draw(renderer);
+}
+
+void TitleScene::OnSceneChange(int* sceneIndex)
+{
+	m_sceneIndex = sceneIndex;
 }
 
 void TitleScene::DebugDraw()
