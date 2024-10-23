@@ -26,7 +26,7 @@ WinScene::~WinScene()
 
 bool WinScene::Initialise(Renderer& renderer)
 {
-	m_pCentre = renderer.CreateSprite("Sprites\\win.png");
+	m_pCentre = renderer.CreateSprite("Sprites\\Scene\\win.png");
 
 	const int BOARD_HALF_WIDTH = m_pCentre->GetWidth() / 2;
 	const int BOARD_HALF_HEIGHT = m_pCentre->GetHeight() / 2;

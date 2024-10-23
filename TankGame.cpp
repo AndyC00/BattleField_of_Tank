@@ -75,7 +75,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pRenderer = &renderer;
 
 	//initialise the background pic
-	m_pBackground = renderer.CreateSprite("Sprites\\background.png");
+	m_pBackground = renderer.CreateSprite("Sprites\\Scene\\background.png");
 	m_pBackground->SetX(1860 / 2);
 	m_pBackground->SetY(1060 / 2);
 
