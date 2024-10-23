@@ -299,7 +299,6 @@ void SceneTankGame::UpdateExplosions(float deltaTime)
 	}
 }
 
-
 void SceneTankGame::CreateExplosion(float x, float y)
 {
 	AnimatedSprite* newExplosion = m_pRenderer->CreateAnimatedSprite("Sprites\\explosion.png");

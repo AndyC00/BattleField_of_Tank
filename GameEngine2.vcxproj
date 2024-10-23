@@ -24,6 +24,7 @@
     <ProjectGuid>{b100c8b8-07a1-438d-8fbd-eb7d02233173}</ProjectGuid>
     <RootNamespace>GameEngine2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>TankGame</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -82,12 +83,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Developing_Projects\GameEngine2\Assets\SDL2-2.0.22\include;D:\Developing_Projects\GameEngine2\Assets\SDL2_image-2.6.1\include;D:\Developing_Projects\GameEngine2\Assets\glew-2.1.0\include;D:\Developing_Projects\GameEngine2\Assets\SDL2_ttf-2.22.0\include;D:\Developing_Projects\GameEngine2\Assets\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assets\SDL2-2.0.22\include;$(SolutionDir)Assets\SDL2_image-2.6.1\include;$(SolutionDir)Assets\glew-2.1.0\include;$(SolutionDir)Assets\SDL2_ttf-2.22.0\include;$(SolutionDir)Assets\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Developing_Projects\GameEngine2\Assets\FMOD Studio API Windows\api\core\lib\x86;D:\Developing_Projects\GameEngine2\Assets\SDL2-2.0.22\lib\x86;D:\Developing_Projects\GameEngine2\Assets\SDL2_image-2.6.1\lib\x86;D:\Developing_Projects\GameEngine2\Assets\glew-2.1.0\lib\x86;D:\Developing_Projects\GameEngine2\Assets\SDL2_ttf-2.22.0\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Assets\FMOD Studio API Windows\api\core\lib\x86;$(SolutionDir)Assets\SDL2-2.0.22\lib\x86;$(SolutionDir)Assets\SDL2_image-2.6.1\lib\x86;$(SolutionDir)Assets\glew-2.1.0\lib\x86;$(SolutionDir)Assets\SDL2_ttf-2.22.0\lib\x86</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -99,14 +100,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Developing_Projects\GameEngine2\Assets\SDL2-2.0.22\include;D:\Developing_Projects\GameEngine2\Assets\SDL2_image-2.6.1\include;D:\Developing_Projects\GameEngine2\Assets\glew-2.1.0\include;D:\Developing_Projects\GameEngine2\Assets\SDL2_ttf-2.22.0\include;D:\Developing_Projects\GameEngine2\Assets\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assets\SDL2-2.0.22\include;$(SolutionDir)Assets\SDL2_image-2.6.1\include;$(SolutionDir)Assets\glew-2.1.0\include;$(SolutionDir)Assets\SDL2_ttf-2.22.0\include;$(SolutionDir)Assets\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Developing_Projects\GameEngine2\Assets\SDL2-2.0.22\lib\x86;D:\Developing_Projects\GameEngine2\Assets\SDL2_image-2.6.1\lib\x86;D:\Developing_Projects\GameEngine2\Assets\glew-2.1.0\lib\x86;D:\Developing_Projects\GameEngine2\Assets\SDL2_ttf-2.22.0\lib\x86;D:\Developing_Projects\GameEngine2\Assets\FMOD Studio API Windows\api\core\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Assets\SDL2-2.0.22\lib\x86;$(SolutionDir)Assets\SDL2_image-2.6.1\lib\x86;$(SolutionDir)Assets\glew-2.1.0\lib\x86;$(SolutionDir)Assets\SDL2_ttf-2.22.0\lib\x86;$(SolutionDir)Assets\FMOD Studio API Windows\api\core\lib\x86</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
