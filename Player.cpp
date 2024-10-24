@@ -89,23 +89,22 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	{
 		printf("key 'up arrow' detected.");
 		float playerAngle = m_pSprite->GetAngle();
-		float angleInRadians = (playerAngle - 90.0f) * M_PI / 180.0f;
+		float angleInRadians = (playerAngle + 90.0f) * M_PI / 180.0f;
 
 		const float speed = 20.0f;  // set the speed for the tank
 
 		Vector2 direction(cos(angleInRadians), sin(angleInRadians));
 
-		Vector2 currentPosition(m_pSprite->GetX(), m_pSprite->GetY());
-		currentPosition += direction * speed * deltaTime;
-
-		m_pSprite->SetX(static_cast<int>(currentPosition.x));
-		m_pSprite->SetY(static_cast<int>(currentPosition.y));
+		m_velocity = direction * speed;
+	}
+	else
+	{
+		m_velocity = Vector2(0.0f, 0.0f);
 	}
 
-	PlayerBullet->Process(deltaTime);
-
-    // Call base Entity process (if needed)
     Entity::Process(deltaTime);
+
+	PlayerBullet->Process(deltaTime);
 }
 
 void Player::Draw(Renderer& renderer)
@@ -155,4 +154,6 @@ void Player::SetPosition(int x, int y)
 {
 	m_pSprite->SetX(x);
 	m_pSprite->SetY(y);
+	m_position.x = static_cast<float>(x);
+	m_position.y = static_cast<float>(y);
 }

@@ -80,7 +80,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	// Initialize player tank
 	m_pPlayer = new Player();
 	m_pPlayer->Initialise(renderer);
-	m_pPlayer->SetPosition(renderer.GetWidth() / 2.0f, renderer.GetHeight() / 2.0f);
+	m_pPlayer->SetPosition(static_cast<int>(renderer.GetWidth() / 2.0f), static_cast<int>(renderer.GetHeight() / 2.0f));
 	
 	// Spawn a setting number of enemies:
 	for (int i = 0; i < 7; i++)
