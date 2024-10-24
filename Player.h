@@ -56,6 +56,11 @@ protected:
 private:
     FMOD::Sound* hitsound1;
     FMOD::Channel* channel;
+
+    float m_currentSpeed;
+    float m_maxSpeed;
+    float m_acceleration;
+
 };
 
 #endif // _PLAYER_H_
