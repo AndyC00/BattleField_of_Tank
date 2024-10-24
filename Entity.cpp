@@ -7,6 +7,7 @@
 
 // Library includes:
 #include <cassert>
+#include <vector>
 #include "imgui/imgui.h"
 #include "vector2.h"
 
@@ -27,9 +28,9 @@ Entity::~Entity()
 }
 
 // Initialise the entity
-bool Entity::Initialise(Renderer& renderer)
+bool Entity::Initialise(Renderer& renderer, const char* pcFilename)
 {
-    m_pSprite = renderer.CreateSprite("Sprites\\Tanks\\tank.png"); // replace the path with an actual sprite path
+    m_pSprite = renderer.CreateSprite(pcFilename); // replace the path with an actual sprite path
     m_pSprite->SetScale(0.2f);
     m_pSprite->SetAngle(0.0f);
 

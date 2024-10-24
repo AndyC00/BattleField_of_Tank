@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 
 const int bulletTimerTotal = 2;
 
@@ -30,15 +31,18 @@ Enemy::~Enemy()
 
 bool Enemy::Initialise(Renderer& renderer)
 {
-	if (!Entity::Initialise(renderer))
+	const char* pcFilename = "Sprites\\Tanks\\tank.png";
+
+	if (!Entity::Initialise(renderer, pcFilename))
 	{
-		printf("Enemy failed to spawn\n");
+		std::cout << "Enemy failed to spawn" << std::endl;
 		return false;
 	}
 
 	int m_x = ((rand() % 2 == 0) ? (rand() % 890 + 10) : (rand() % 890 + 910));
 	int m_y = ((rand() % 2 == 0) ? (rand() % 490 + 10) : (rand() % 480 + 550));
 
+	m_pSprite->SetScale(0.2f);
 	m_position = Vector2(m_x, m_y);
 	m_velocity = Vector2(0.0f, 0.0f);
 

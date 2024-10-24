@@ -18,7 +18,7 @@ public:
 	Entity();
 	~Entity();
 
-	bool Initialise(Renderer& renderer);
+	bool Initialise(Renderer& renderer, const char* pcFilename);
 	void Process(float deltaTime);
 	void Draw(Renderer& renderer);
 	void Rotate(float direction); 

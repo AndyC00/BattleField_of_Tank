@@ -2,7 +2,6 @@
 #include "inputsystem.h"
 #include "renderer.h"
 #include "scene.h"
-#include "logmanager.h"
 #include "imgui/imgui.h"
 #include "soundsystem.h"
 #include "game.h"
@@ -12,6 +11,7 @@
 #include "Entity.h"
 #include "TankGame.h"
 #include "Bullet.h"
+#include "Player.h"
 
 // Library includes:
 #include <vector>
@@ -29,10 +29,9 @@ SceneTankGame::SceneTankGame()
 	: m_pRenderer(nullptr),
 	hitsound1(nullptr),
 	hitsound2(nullptr),
+	m_pPlayer(nullptr),
 	channel(nullptr),
 	opening(nullptr),
-	m_pPlayer(nullptr),
-	PlayerBullet(nullptr),
 	m_pBackground(nullptr)
 {
 	srand(static_cast<unsigned>(time(0)));
@@ -66,7 +65,6 @@ SceneTankGame::~SceneTankGame()
 		delete enemy;
 	}
 	m_pEnemies.clear();
-	delete PlayerBullet;
 	delete m_pBackground;
 }
 
@@ -80,13 +78,9 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pBackground->SetY(1060 / 2);
 
 	// Initialize player tank
-	m_pPlayer = new Entity();
+	m_pPlayer = new Player();
 	m_pPlayer->Initialise(renderer);
-	m_pPlayer->GetPosition().x = renderer.GetWidth() / 2.0f;
-	m_pPlayer->GetPosition().y = renderer.GetHeight() / 2.0f;
-	//initialise player bullet
-	PlayerBullet = new Bullet();
-	PlayerBullet->Initialise(renderer);
+	m_pPlayer->SetPosition(renderer.GetWidth() / 2.0f, renderer.GetHeight() / 2.0f);
 	
 	// Spawn a setting number of enemies:
 	for (int i = 0; i < 7; i++)
@@ -125,50 +119,7 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	m_pBackground->SetAngle(0);
 	m_pBackground->Process(deltaTime);
 
-	//reading input
-	ButtonState LKeyState = inputSystem.GetKeyState(SDL_SCANCODE_LEFT);
-	ButtonState RKeyState = inputSystem.GetKeyState(SDL_SCANCODE_RIGHT);
-	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
-	ButtonState FKeyState = inputSystem.GetKeyState(SDL_SCANCODE_UP);
-
-	if (LKeyState == BS_PRESSED)
-	{
-		printf("key 'left arrow' detected.");
-		float currentAngle = m_pPlayer->GetAngle();
-		float newAngle = NormalizeAngle(currentAngle - 45.0f);
-		m_pPlayer->SetAngle(newAngle);
-	}
-	if (RKeyState == BS_PRESSED)
-	{
-		printf("key 'right arrow' detected.");
-		float currentAngle = m_pPlayer->GetAngle();
-		float newAngle = NormalizeAngle(currentAngle + 45.0f);
-		m_pPlayer->SetAngle(newAngle);
-	}
-	if (sKeyState == BS_PRESSED)
-	{
-		printf("key 'Space' detected.");
-		Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channel);
-		Vector2 playerPosition = m_pPlayer->GetPosition();
-		float playerAngle = m_pPlayer->GetAngle();
-		PlayerBullet->SetPosition(playerPosition, playerAngle);
-	}
-	if (FKeyState == BS_HELD)
-	{
-		printf("key 'up arrow' detected.");
-		float playerAngle = m_pPlayer->GetAngle();
-		float angleInRadians = playerAngle * M_PI / 180.0f + 45.0f;
-
-		const float speed = 20.0f;  // set the speed for the tank
-
-		Vector2 direction(cos(angleInRadians), sin(angleInRadians));
-
-		m_pPlayer->GetPosition() += direction * speed * deltaTime;
-	}
-
-	m_pPlayer->Process(deltaTime);
-
-	PlayerBullet->Process(deltaTime);
+	m_pPlayer->Process(deltaTime, inputSystem);
 
 	for (auto& enemy : m_pEnemies)
 	{
@@ -221,7 +172,7 @@ void SceneTankGame::CheckCollisions()
 				break;
 			}
 
-			if (enemy->IsAlive() && enemy->IsCollidingWithBullet(PlayerBullet))
+			if (enemy->IsAlive() && enemy->IsCollidingWithBullet(m_pPlayer->GetBullet()))
 			{
 				enemy->SetDead();
 
@@ -248,7 +199,6 @@ void SceneTankGame::Draw(Renderer& renderer)
 	{
 		m_pPlayer->Draw(renderer);
 	}
-	PlayerBullet->Draw(renderer);
 
 	for (auto& enemies : m_pEnemies)
 	{
@@ -268,15 +218,6 @@ void SceneTankGame::Draw(Renderer& renderer)
 void SceneTankGame::DebugDraw()
 {
 	
-}
-
-float SceneTankGame::NormalizeAngle(float angle)
-{
-	while (angle >= 360.0f)
-		angle -= 360.0f;
-	while (angle < 0.0f)
-		angle += 360.0f;
-	return angle;
 }
 
 void SceneTankGame::UpdateExplosions(float deltaTime)

@@ -129,6 +129,9 @@
     <ClCompile Include="vector2.cpp">
       <Filter>framework\sources</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="vertexarray.h">
       <Filter>framework\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

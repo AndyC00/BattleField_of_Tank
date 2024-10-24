@@ -1,3 +1,22 @@
-﻿  game.cpp
+﻿  Enemy.cpp
+D:\Developing_Projects\TankGame\Enemy.cpp(46,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(46,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(71,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(129,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Entity.cpp
+D:\Developing_Projects\TankGame\Entity.cpp(39,9): warning C4102: 'print': unreferenced label
+D:\Developing_Projects\TankGame\Entity.cpp(90,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Entity.cpp(90,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Player.cpp
+D:\Developing_Projects\TankGame\Player.cpp(84,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Player.cpp(84,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Player.cpp(92,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Player.cpp(98,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Player.cpp(98,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  TankGame.cpp
+D:\Developing_Projects\TankGame\TankGame.cpp(83,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Developing_Projects\TankGame\TankGame.cpp(83,45): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  game.cpp
 D:\Developing_Projects\TankGame\game.cpp(196,93): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe

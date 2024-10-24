@@ -8,6 +8,7 @@
 #include "animatedsprite.h"
 #include "game.h"
 #include "Bullet.h"
+#include "Player.h"
 
 // Library includes:
 #include <vector>
@@ -41,7 +42,6 @@ protected:
 private:
 	SceneTankGame(const SceneTankGame& SceneTankGame);
 	SceneTankGame& operator=(const SceneTankGame& SceneTankGame);
-	float NormalizeAngle(float angle);
 	void UpdateExplosions(float deltaTime);
 	void CreateExplosion(float x, float y);
 
@@ -51,7 +51,6 @@ public:
 
 protected:
 	Renderer* m_pRenderer;
-	Entity* m_pPlayer;
 	std::vector<AnimatedSprite*> m_explosions;
 	std::vector<Enemy*> m_pEnemies;
 	Sprite* m_pBackground;
@@ -62,8 +61,9 @@ private:
 	FMOD::Sound* opening;
 	FMOD::Channel* channel;
 
+	Player* m_pPlayer;
+
 	int* m_sceneIndex;
-	Bullet* PlayerBullet;
 };
 
 #endif //   TANKGAME_H 
