@@ -19,7 +19,10 @@ Player::Player()
 	channel(nullptr),
 	hitsound1(nullptr),
     PlayerBullet(nullptr),
-    m_bAlive(true)
+    m_bAlive(true),
+	m_currentSpeed(0.0f),
+	m_maxSpeed(20.0f),		//Maximum speed can achieve
+	m_acceleration(20.0f)	//accelerations to achieve maximum speed
 {
 
 }
@@ -91,11 +94,14 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		float playerAngle = m_pSprite->GetAngle();
 		float angleInRadians = (playerAngle + 90.0f) * M_PI / 180.0f;
 
-		const float speed = 20.0f;  // set the speed for the tank
+		m_currentSpeed += m_acceleration * deltaTime;
+		if (m_currentSpeed > m_maxSpeed)
+		{
+			m_currentSpeed = m_maxSpeed;
+		}
 
 		Vector2 direction(cos(angleInRadians), sin(angleInRadians));
-
-		m_velocity = direction * speed;
+		m_velocity = direction * m_currentSpeed;
 	}
 	else
 	{
