@@ -1,7 +1,7 @@
 ﻿  Player.cpp
-D:\Developing_Projects\TankGame\Player.cpp(87,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(87,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(95,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Player.cpp(144,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Player.cpp(144,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Player.cpp(156,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   TankGame.cpp
   game.cpp
 D:\Developing_Projects\TankGame\game.cpp(196,93): warning C4018: '<': signed/unsigned mismatch

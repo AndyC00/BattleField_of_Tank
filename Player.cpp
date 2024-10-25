@@ -16,10 +16,13 @@ Player::Player()
     : Entity(),
     m_lives(5),
     m_invincibilityRemaining(0.0f),
-	channel(nullptr),
 	hitsound1(nullptr),
 	deadsound(nullptr),
 	engineSound(nullptr),
+	channelEngineLeft(nullptr),
+	channelEngineRight(nullptr),
+	channelEngineForward(nullptr),
+	channelFire(nullptr),
     PlayerBullet(nullptr),
     m_bAlive(true),
 	m_currentSpeed(0.0f),
@@ -93,42 +96,62 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
 	ButtonState FKeyState = inputSystem.GetKeyState(SDL_SCANCODE_UP);
 
-	if (LKeyState == BS_PRESSED)
+	if (LKeyState == BS_HELD)
 	{
-		printf("key 'left arrow' detected.");
-
-		Game::pSoundsystem->playSound(engineSound, nullptr, false, &channel);
-
+		if (!channelEngineLeft)
+		{
+			Game::pSoundsystem->playSound(engineSound, nullptr, false, &channelEngineLeft);
+		}
 		float currentAngle = m_pSprite->GetAngle();
 		float newAngle = NormalizeAngle(currentAngle - 45.0f);
 		m_pSprite->SetAngle(newAngle);
 	}
-	if (RKeyState == BS_PRESSED)
+	else if ((LKeyState == BS_RELEASED))
 	{
-		printf("key 'right arrow' detected.");
+		if (channelEngineLeft)
+		{
+			channelEngineLeft->stop();
+			channelEngineLeft = nullptr;
+		}
+	}
 
-		Game::pSoundsystem->playSound(engineSound, nullptr, false, &channel);
+	if (RKeyState == BS_HELD)
+	{
+		if (!channelEngineRight)
+		{
+			Game::pSoundsystem->playSound(engineSound, nullptr, false, &channelEngineRight);
+		}
 
 		float currentAngle = m_pSprite->GetAngle();
-		float newAngle = NormalizeAngle(currentAngle + 45.0f);
+		float newAngle = NormalizeAngle(currentAngle + 45.0f * deltaTime);
 		m_pSprite->SetAngle(newAngle);
 	}
+	else if (RKeyState == BS_RELEASED)
+	{
+		if (channelEngineRight)
+		{
+			channelEngineRight->stop();
+			channelEngineRight = nullptr;
+		}
+	}
+
 	if (sKeyState == BS_PRESSED)
 	{
-		printf("key 'Space' detected.");
-
-		Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channel);
-
+		if (!channelFire)
+		{
+			Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channelFire);
+		}
 		Vector2 playerPosition = Vector2(m_pSprite->GetX(), m_pSprite->GetY());
 		float playerAngle = m_pSprite->GetAngle();
 		PlayerBullet->SetPosition(playerPosition, playerAngle);
 	}
+
 	if (FKeyState == BS_HELD)
 	{
-		printf("key 'up arrow' detected.");
-
-		Game::pSoundsystem->playSound(engineSound, nullptr, false, &channel);
-
+		if (!channelEngineForward)
+		{
+			Game::pSoundsystem->playSound(engineSound, nullptr, false, &channelEngineForward);
+		}
 		float playerAngle = m_pSprite->GetAngle();
 		float angleInRadians = (playerAngle + 90.0f) * M_PI / 180.0f;
 
@@ -141,8 +164,13 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		Vector2 direction(cos(angleInRadians), sin(angleInRadians));
 		m_velocity = direction * m_currentSpeed;
 	}
-	else
+	else if (FKeyState == BS_RELEASED)
 	{
+		if (channelEngineForward)
+		{
+			channelEngineForward->stop();
+			channelEngineForward = nullptr;
+		}
 		m_velocity = Vector2(0.0f, 0.0f);
 	}
 

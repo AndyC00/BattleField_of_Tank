@@ -57,7 +57,11 @@ private:
     FMOD::Sound* deadsound;
     FMOD::Sound* hitsound1;
     FMOD::Sound* engineSound;
-    FMOD::Channel* channel;
+    FMOD::Channel* channelEngineLeft;
+    FMOD::Channel* channelEngineRight;
+    FMOD::Channel* channelEngineForward;
+    FMOD::Channel* channelFire;
+
 
     float m_currentSpeed;
     float m_maxSpeed;
