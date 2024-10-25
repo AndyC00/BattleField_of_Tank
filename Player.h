@@ -54,7 +54,9 @@ public:
 protected:
 
 private:
+    FMOD::Sound* deadsound;
     FMOD::Sound* hitsound1;
+    FMOD::Sound* engineSound;
     FMOD::Channel* channel;
 
     float m_currentSpeed;

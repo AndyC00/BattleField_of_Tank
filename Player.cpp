@@ -18,6 +18,8 @@ Player::Player()
     m_invincibilityRemaining(0.0f),
 	channel(nullptr),
 	hitsound1(nullptr),
+	deadsound(nullptr),
+	engineSound(nullptr),
     PlayerBullet(nullptr),
     m_bAlive(true),
 	m_currentSpeed(0.0f),
@@ -30,10 +32,20 @@ Player::Player()
 Player::~Player()
 {
     delete  PlayerBullet;
+	if (deadsound)
+	{
+		deadsound->release();
+		deadsound = nullptr;
+	}
 	if (hitsound1)
 	{
 		hitsound1->release();
 		hitsound1 = nullptr;
+	}
+	if (engineSound)
+	{
+		engineSound->release();
+		engineSound = nullptr;
 	}
 }
 
@@ -46,13 +58,28 @@ bool Player::Initialise(Renderer& renderer)
     PlayerBullet = new Bullet();
     PlayerBullet->Initialise(renderer);
 
-	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
-	if (result != FMOD_OK || hitsound1 == nullptr) {
-		printf("Failed to load hit.wav: %s\n", FMOD_ErrorString(result));
+	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\largeExplosion.flac", FMOD_DEFAULT, &deadsound);
+	if (result != FMOD_OK || deadsound == nullptr) {
+		printf("Failed to load largeExplosion.flac: %s\n", FMOD_ErrorString(result));
 	}
 	else {
-		printf("Successfully loaded hit.wav\n");
+		printf("Successfully loaded largeExplosion.flac\n");
 	}
+	FMOD_RESULT result2 = Game::pSoundsystem->createSound("sounds\\fire.wav", FMOD_DEFAULT, &hitsound1);
+	if (result2 != FMOD_OK || hitsound1 == nullptr) {
+		printf("Failed to load sounds\\fire.wav: %s\n", FMOD_ErrorString(result2));
+	}
+	else {
+		printf("Successfully loaded sounds\\fire.wav\n");
+	}
+	FMOD_RESULT result3 = Game::pSoundsystem->createSound("sounds\\engine.wav", FMOD_DEFAULT, &engineSound);
+	if (result3 != FMOD_OK || engineSound == nullptr) {
+		printf("Failed to load sounds\\engine.wav: %s\n", FMOD_ErrorString(result3));
+	}
+	else {
+		printf("Successfully loaded sounds\\engine.wav\n");
+	}
+
 
     return true;
 }
@@ -69,6 +96,9 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	if (LKeyState == BS_PRESSED)
 	{
 		printf("key 'left arrow' detected.");
+
+		Game::pSoundsystem->playSound(engineSound, nullptr, false, &channel);
+
 		float currentAngle = m_pSprite->GetAngle();
 		float newAngle = NormalizeAngle(currentAngle - 45.0f);
 		m_pSprite->SetAngle(newAngle);
@@ -76,6 +106,9 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	if (RKeyState == BS_PRESSED)
 	{
 		printf("key 'right arrow' detected.");
+
+		Game::pSoundsystem->playSound(engineSound, nullptr, false, &channel);
+
 		float currentAngle = m_pSprite->GetAngle();
 		float newAngle = NormalizeAngle(currentAngle + 45.0f);
 		m_pSprite->SetAngle(newAngle);
@@ -83,7 +116,9 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	if (sKeyState == BS_PRESSED)
 	{
 		printf("key 'Space' detected.");
+
 		Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channel);
+
 		Vector2 playerPosition = Vector2(m_pSprite->GetX(), m_pSprite->GetY());
 		float playerAngle = m_pSprite->GetAngle();
 		PlayerBullet->SetPosition(playerPosition, playerAngle);
@@ -91,6 +126,9 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	if (FKeyState == BS_HELD)
 	{
 		printf("key 'up arrow' detected.");
+
+		Game::pSoundsystem->playSound(engineSound, nullptr, false, &channel);
+
 		float playerAngle = m_pSprite->GetAngle();
 		float angleInRadians = (playerAngle + 90.0f) * M_PI / 180.0f;
 
