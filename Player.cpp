@@ -25,6 +25,7 @@ Player::Player()
 	channelFire(nullptr),
     PlayerBullet(nullptr),
     m_bAlive(true),
+	rotationSpeed(40.0f),	//the speed to rotate the tank
 	m_currentSpeed(0.0f),
 	m_maxSpeed(20.0f),		//Maximum speed can achieve
 	m_acceleration(20.0f)	//accelerations to achieve maximum speed
@@ -103,7 +104,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 			Game::pSoundsystem->playSound(engineSound, nullptr, false, &channelEngineLeft);
 		}
 		float currentAngle = m_pSprite->GetAngle();
-		float newAngle = NormalizeAngle(currentAngle - 45.0f);
+		float newAngle = NormalizeAngle(currentAngle - rotationSpeed * deltaTime);
 		m_pSprite->SetAngle(newAngle);
 	}
 	else if ((LKeyState == BS_RELEASED))
@@ -123,7 +124,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		}
 
 		float currentAngle = m_pSprite->GetAngle();
-		float newAngle = NormalizeAngle(currentAngle + 45.0f * deltaTime);
+		float newAngle = NormalizeAngle(currentAngle + rotationSpeed * deltaTime);
 		m_pSprite->SetAngle(newAngle);
 	}
 	else if (RKeyState == BS_RELEASED)
@@ -137,10 +138,14 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 
 	if (sKeyState == BS_PRESSED)
 	{
-		if (!channelFire)
+		if (channelFire)
 		{
-			Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channelFire);
+			channelFire->stop();
+			channelFire = nullptr;
 		}
+
+		Game::pSoundsystem->playSound(hitsound1, nullptr, false, &channelFire);
+
 		Vector2 playerPosition = Vector2(m_pSprite->GetX(), m_pSprite->GetY());
 		float playerAngle = m_pSprite->GetAngle();
 		PlayerBullet->SetPosition(playerPosition, playerAngle);

@@ -1,4 +1,7 @@
-26/10 Sound assets implemented
+
+
+26/10 Sound assets implemented, sound bugs fixed
+	  Changed rotation angle from 45 degree every time to real time
 
 24/10 Rearranged the classes, separate the Player part to be a individual class while it was part of the battle class
 	  More sound Assets added

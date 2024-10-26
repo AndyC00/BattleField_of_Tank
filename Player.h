@@ -62,7 +62,7 @@ private:
     FMOD::Channel* channelEngineForward;
     FMOD::Channel* channelFire;
 
-
+    float rotationSpeed;
     float m_currentSpeed;
     float m_maxSpeed;
     float m_acceleration;
