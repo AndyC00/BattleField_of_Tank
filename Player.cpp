@@ -97,6 +97,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
 	ButtonState FKeyState = inputSystem.GetKeyState(SDL_SCANCODE_UP);
 
+	//when press left arrow buttom:
 	if (LKeyState == BS_HELD)
 	{
 		if (!channelEngineLeft)
@@ -116,6 +117,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		}
 	}
 
+	//when press right arrow buttom:
 	if (RKeyState == BS_HELD)
 	{
 		if (!channelEngineRight)
@@ -136,6 +138,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		}
 	}
 
+	//when press space buttom
 	if (sKeyState == BS_PRESSED)
 	{
 		if (channelFire)
@@ -151,6 +154,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		PlayerBullet->SetPosition(playerPosition, playerAngle);
 	}
 
+	//when press up arrow buttom:
 	if (FKeyState == BS_HELD)
 	{
 		if (!channelEngineForward)
