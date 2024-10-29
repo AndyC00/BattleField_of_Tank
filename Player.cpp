@@ -17,6 +17,7 @@ Player::Player()
 	m_invincibilityRemaining(2.0f),
 	hitsound1(nullptr),
 	deadsound(nullptr),
+	engineSound(nullptr),
 	channelEngineLeft(nullptr),
 	channelEngineRight(nullptr),
 	channelEngineForward(nullptr),
@@ -46,6 +47,11 @@ Player::~Player()
 	{
 		hitsound1->release();
 		hitsound1 = nullptr;
+	}
+	if (engineSound)
+	{
+		engineSound->release();
+		engineSound = nullptr;
 	}
 	if (channelEngineLeft)
 	{
