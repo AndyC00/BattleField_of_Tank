@@ -9,6 +9,7 @@
 #include "game.h"
 #include "Bullet.h"
 #include "Player.h"
+#include "Trap.h"
 
 // Library includes:
 #include <vector>
@@ -53,6 +54,7 @@ protected:
 	Renderer* m_pRenderer;
 	std::vector<AnimatedSprite*> m_explosions;
 	std::vector<Enemy*> m_pEnemies;
+	std::vector<Trap*> m_Traps;
 	Sprite* m_pBackground;
 
 private:

@@ -171,6 +171,7 @@
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="texturemanager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="Trap.cpp" />
     <ClCompile Include="vector2.cpp" />
     <ClCompile Include="vertexarray.cpp" />
     <ClCompile Include="Win.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="texture.h" />
     <ClInclude Include="texturemanager.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="Trap.h" />
     <ClInclude Include="vector2.h" />
     <ClInclude Include="vertexarray.h" />
     <ClInclude Include="Win.h" />

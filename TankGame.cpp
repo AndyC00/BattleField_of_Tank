@@ -65,6 +65,11 @@ SceneTankGame::~SceneTankGame()
 		delete enemy;
 	}
 	m_pEnemies.clear();
+	for (auto& trap : m_Traps)
+	{
+		delete trap;
+	}
+	m_Traps.clear();
 	delete m_pBackground;
 }
 
