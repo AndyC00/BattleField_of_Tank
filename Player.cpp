@@ -13,9 +13,8 @@ using FMOD::Sound;
 using FMOD::Channel;
 
 Player::Player()
-    : Entity(),
-    m_lives(5),
-    m_invincibilityRemaining(0.0f),
+	: Entity(),
+	m_invincibilityRemaining(0.0f),
 	hitsound1(nullptr),
 	deadsound(nullptr),
 	engineSound(nullptr),
@@ -23,8 +22,10 @@ Player::Player()
 	channelEngineRight(nullptr),
 	channelEngineForward(nullptr),
 	channelFire(nullptr),
-    PlayerBullet(nullptr),
-    m_bAlive(true),
+	PlayerBullet(nullptr),
+	m_bAlive(true),
+	HP(3),					//the health points of the player
+	CurrentSprite(0),
 	rotationSpeed(40.0f),	//the speed to rotate the tank
 	m_currentSpeed(0.0f),
 	m_maxSpeed(20.0f),		//Maximum speed can achieve
@@ -51,12 +52,28 @@ Player::~Player()
 		engineSound->release();
 		engineSound = nullptr;
 	}
+	for (auto sprite : TankStates)
+	{
+		delete sprite;
+	}
+	TankStates.clear();
 }
 
 bool Player::Initialise(Renderer& renderer)
 {
-    m_pSprite = renderer.CreateSprite("Sprites\\Tanks\\tank.png");
-    m_pSprite->SetScale(0.2f);
+    Sprite* m_pSprite1 = renderer.CreateSprite("Sprites\\Tanks\\tank.png");
+	m_pSprite1->SetScale(0.2f);
+	TankStates.push_back(m_pSprite1);
+
+	Sprite* m_pSprite2 = renderer.CreateSprite("Sprites\\Tanks\\tank_damaged.png");
+	m_pSprite2->SetScale(0.2f);
+	TankStates.push_back(m_pSprite2);
+
+	Sprite* m_pSprite3 = renderer.CreateSprite("Sprites\\Tanks\\tank_dying.png");
+	m_pSprite3->SetScale(0.2f);
+	TankStates.push_back(m_pSprite3);
+
+	m_pSprite = TankStates[CurrentSprite];
 
     //initialise player bullet
     PlayerBullet = new Bullet();
@@ -88,9 +105,14 @@ bool Player::Initialise(Renderer& renderer)
     return true;
 }
 
-
 void Player::Process(float deltaTime, InputSystem& inputSystem)
 {
+	// Update invincibility timer
+	if (m_invincibilityRemaining > 0.0f)
+	{
+		m_invincibilityRemaining -= deltaTime;
+	}
+
 	//reading input
 	ButtonState LKeyState = inputSystem.GetKeyState(SDL_SCANCODE_LEFT);
 	ButtonState RKeyState = inputSystem.GetKeyState(SDL_SCANCODE_RIGHT);
@@ -117,7 +139,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		}
 	}
 
-	//when press right arrow buttom:
+	//when press right arrow button:
 	if (RKeyState == BS_HELD)
 	{
 		if (!channelEngineRight)
@@ -138,7 +160,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		}
 	}
 
-	//when press space buttom
+	//when press space button:
 	if (sKeyState == BS_PRESSED)
 	{
 		if (channelFire)
@@ -154,7 +176,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		PlayerBullet->SetPosition(playerPosition, playerAngle);
 	}
 
-	//when press up arrow buttom:
+	//when press up arrow button:
 	if (FKeyState == BS_HELD)
 	{
 		if (!channelEngineForward)
@@ -199,16 +221,31 @@ void Player::Draw(Renderer& renderer)
 
 int Player::GetLives() const
 {
-    return m_lives;
+    return HP;
 }
 
 void Player::TakeDamage(int damage)
 {
     if (m_invincibilityRemaining <= 0.0f)  // Check if player is invincible
     {
-        m_lives -= damage;
-        // Set the invincibility timer
+        HP -= damage;
         m_invincibilityRemaining = 2.0f;
+
+		if (HP == 2)
+		{
+			CurrentSprite++;
+		}
+		else if (HP == 1)
+		{
+			CurrentSprite++;
+		}
+
+		if (CurrentSprite >= TankStates.size())
+		{
+			CurrentSprite = static_cast<int>(TankStates.size()) - 1;
+		}
+
+		m_pSprite = TankStates[CurrentSprite];
     }
 }
 

@@ -42,14 +42,10 @@ private:
 // Member data:
 public:
     bool m_bAlive;
-    Vector2 m_facingDirection;  // The direction the player is facing
     float m_invincibilityRemaining;
-    float m_moveSpeed;
-    int m_currentWeapon;
-    int m_lives;  // Player's remaining lives
-    float m_attackCooldownRemaining;
-    float m_attackCooldown;
     Bullet* PlayerBullet;
+    int HP;
+    int CurrentSprite;
 
 protected:
 
@@ -67,6 +63,7 @@ private:
     float m_maxSpeed;
     float m_acceleration;
 
+    std::vector<Sprite*> TankStates;
 };
 
 #endif // _PLAYER_H_
