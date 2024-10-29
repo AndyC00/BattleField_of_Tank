@@ -1,3 +1,5 @@
+29/10 HP added, implement sprite changed when HP changed
+
 28/10 Planning: Adding a sprite changed with the Player Tank, having different sprites represent for the HP level,
 			Having tank body and turret separately: major body for movement and turret rotation for shoot angle
 			

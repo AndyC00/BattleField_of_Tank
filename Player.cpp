@@ -118,6 +118,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	ButtonState RKeyState = inputSystem.GetKeyState(SDL_SCANCODE_RIGHT);
 	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
 	ButtonState FKeyState = inputSystem.GetKeyState(SDL_SCANCODE_UP);
+	ButtonState BKeyState = inputSystem.GetKeyState(SDL_SCANCODE_DOWN);
 
 	//when press left arrow buttom:
 	if (LKeyState == BS_HELD)
@@ -205,6 +206,35 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		m_velocity = Vector2(0.0f, 0.0f);
 	}
 
+	//when press down arrow button:
+	if (BKeyState == BS_HELD)
+	{
+		if (!channelEngineForward)
+		{
+			Game::pSoundsystem->playSound(engineSound, nullptr, false, &channelEngineForward);
+		}
+		float playerAngle = m_pSprite->GetAngle();
+		float angleInRadians = - (playerAngle + 90.0f) * M_PI / 180.0f;
+
+		m_currentSpeed += m_acceleration * deltaTime;
+		if (m_currentSpeed > m_maxSpeed - 10.0f)
+		{
+			m_currentSpeed = m_maxSpeed - 10.0f;
+		}
+
+		Vector2 direction(cos(angleInRadians), sin(angleInRadians));
+		m_velocity = direction * m_currentSpeed;
+	}
+	else if (BKeyState == BS_RELEASED)
+	{
+		if (channelEngineForward)
+		{
+			channelEngineForward->stop();
+			channelEngineForward = nullptr;
+		}
+		m_velocity = Vector2(0.0f, 0.0f);
+	}
+
     Entity::Process(deltaTime);
 
 	PlayerBullet->Process(deltaTime);
@@ -231,6 +261,8 @@ void Player::TakeDamage(int damage)
         HP -= damage;
         m_invincibilityRemaining = 2.0f;
 
+		float currentAngle = m_pSprite->GetAngle();
+
 		if (HP == 2)
 		{
 			CurrentSprite++;
@@ -246,6 +278,7 @@ void Player::TakeDamage(int damage)
 		}
 
 		m_pSprite = TankStates[CurrentSprite];
+		m_pSprite->SetAngle(currentAngle);
     }
 }
 
