@@ -52,7 +52,7 @@ protected:
 private:
     FMOD::Sound* deadsound;
     FMOD::Sound* hitsound1;
-    FMOD::Sound* engineSound;
+    FMOD::Channel* channelEngineBackward;
     FMOD::Channel* channelEngineLeft;
     FMOD::Channel* channelEngineRight;
     FMOD::Channel* channelEngineForward;

@@ -159,7 +159,7 @@ void SceneTankGame::CheckCollisions()
 
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
-				CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
+				CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
 
 				if (m_pPlayer->GetLives() <= 0)
 				{
@@ -171,7 +171,7 @@ void SceneTankGame::CheckCollisions()
 			{
 				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
-				CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
+				CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
 
 				m_pPlayer->TakeDamage(1);
 				

@@ -14,13 +14,13 @@ using FMOD::Channel;
 
 Player::Player()
 	: Entity(),
-	m_invincibilityRemaining(0.0f),
+	m_invincibilityRemaining(2.0f),
 	hitsound1(nullptr),
 	deadsound(nullptr),
-	engineSound(nullptr),
 	channelEngineLeft(nullptr),
 	channelEngineRight(nullptr),
 	channelEngineForward(nullptr),
+	channelEngineBackward(nullptr),
 	channelFire(nullptr),
 	PlayerBullet(nullptr),
 	m_bAlive(true),
@@ -47,10 +47,25 @@ Player::~Player()
 		hitsound1->release();
 		hitsound1 = nullptr;
 	}
-	if (engineSound)
+	if (channelEngineLeft)
 	{
-		engineSound->release();
-		engineSound = nullptr;
+		channelEngineLeft->stop();
+		channelEngineLeft = nullptr;
+	}
+	if (channelEngineRight)
+	{
+		channelEngineRight->stop();
+		channelEngineRight = nullptr;
+	}
+	if (channelEngineForward)
+	{
+		channelEngineForward->stop();
+		channelEngineForward = nullptr;
+	}
+	if (channelEngineBackward)
+	{
+		channelEngineBackward->stop();
+		channelEngineBackward = nullptr;
 	}
 	for (auto sprite : TankStates)
 	{
