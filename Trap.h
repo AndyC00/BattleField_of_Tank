@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "animatedsprite.h"
 
 #include <vector>
 

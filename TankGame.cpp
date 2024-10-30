@@ -95,6 +95,12 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 		enemy->m_pSprite->SetGreenTint(0.75f);
 		m_pEnemies.push_back(enemy);
 	}
+	for (int i = 0; i < 3; i++)
+	{
+		Trap* trap = new Trap();
+		trap->Initialise(renderer);
+		m_Traps.push_back(trap);
+	}
 	
 	//initialise the sound:
 	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
@@ -129,6 +135,11 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	for (auto& enemy : m_pEnemies)
 	{
 		enemy->Process(deltaTime);
+	}
+
+	for (auto& trap : m_Traps)
+	{
+		trap->Process(deltaTime);
 	}
 
 	CheckCollisions();
@@ -223,7 +234,14 @@ void SceneTankGame::Draw(Renderer& renderer)
 		}
 	}
 
-	//draw animated sprites
+	for (auto& trap : m_Traps)
+	{
+		if (trap->IsAlive())
+		{
+			trap->Draw(renderer);
+		}
+	}
+
 	for (auto& explosion : m_explosions)
 	{
 		explosion->Draw(renderer);

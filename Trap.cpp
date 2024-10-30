@@ -1,6 +1,6 @@
 //local includes:
 #include "Trap.h"
-#include "animatedsprite.h"
+
 
 //library includes:
 #include "renderer.h"
@@ -11,7 +11,8 @@
 
 Trap::Trap()
 	: Entity(),
-	m_pRenderer(nullptr)
+	m_pRenderer(nullptr),
+	m_trap(nullptr)
 {
 
 }
@@ -48,8 +49,6 @@ void Trap::Process(float deltaTime)
 	if (IsAlive())
 	{
 		m_trap->Process(deltaTime);
-
-		
 	}
 }
 
