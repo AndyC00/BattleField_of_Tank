@@ -86,7 +86,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pPlayer = new Player();
 	m_pPlayer->Initialise(renderer);
 	m_pPlayer->SetPosition(static_cast<int>(renderer.GetWidth() / 2.0f), static_cast<int>(renderer.GetHeight() / 2.0f));
-	
+
 	// Spawn a setting number of enemies:
 	for (int i = 0; i < 7; i++)
 	{
@@ -101,7 +101,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 		trap->Initialise(renderer);
 		m_Traps.push_back(trap);
 	}
-	
+
 	//initialise the sound:
 	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
 	if (result != FMOD_OK || hitsound1 == nullptr) {
@@ -165,54 +165,53 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 
 void SceneTankGame::CheckCollisions()
 {
-	if (m_pPlayer && m_pPlayer->IsAlive())
+	if (!m_pPlayer) return;
+	if (!m_pPlayer->IsAlive()) return;
+
+	for (auto& enemy : m_pEnemies)
 	{
-		for (auto& enemy : m_pEnemies)
+		if (enemy->IsAlive() && m_pPlayer->IsCollidingWith(*enemy))
 		{
-			if (enemy->IsAlive() && m_pPlayer->IsCollidingWith(*enemy))
+			m_pPlayer->TakeDamage(1);
+
+			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+
+			CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
+
+			if (m_pPlayer->GetLives() <= 0)
 			{
-				m_pPlayer->TakeDamage(1);
-
-				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
-
-				CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
-
-				if (m_pPlayer->GetLives() <= 0)
-				{
-					(*m_sceneIndex)++;
-				}
+				(*m_sceneIndex)++;
 			}
+		}
 
-			if (m_pPlayer->IsCollidingWithBullet(enemy->GetBullet())) 
+		if (m_pPlayer->IsCollidingWithBullet(enemy->GetBullet()))
+		{
+			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+
+			CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
+
+			m_pPlayer->TakeDamage(1);
+
+			if (m_pPlayer->GetLives() <= 0)
 			{
-				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
-
-				CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
-
-				m_pPlayer->TakeDamage(1);
-				
-				if (m_pPlayer->GetLives()<=0)
-				{
-					(*m_sceneIndex)++;
-				}
-				break;
+				(*m_sceneIndex)++;
 			}
+			break;
+		}
 
-			if (enemy->IsAlive() && enemy->IsCollidingWithBullet(m_pPlayer->GetBullet()))
-			{
-				enemy->SetDead();
+		if (enemy->IsAlive() && enemy->IsCollidingWithBullet(m_pPlayer->GetBullet()))
+		{
+			enemy->SetDead();
 
-				Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
-				CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
-			}
-
+			CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
 		}
 
 	}
 }
 
-void SceneTankGame::OnSceneChange(int* sceneIndex) 
+void SceneTankGame::OnSceneChange(int* sceneIndex)
 {
 	m_sceneIndex = sceneIndex;
 }
@@ -250,7 +249,7 @@ void SceneTankGame::Draw(Renderer& renderer)
 
 void SceneTankGame::DebugDraw()
 {
-	
+
 }
 
 void SceneTankGame::UpdateExplosions(float deltaTime)

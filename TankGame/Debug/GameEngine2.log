@@ -1,8 +1,2 @@
-﻿  game.cpp
-D:\Developing_Projects\TankGame\game.cpp(196,93): warning C4018: '<': signed/unsigned mismatch
-  TankGame.cpp
-  Trap.cpp
-D:\Developing_Projects\TankGame\Trap.cpp(39,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Trap.cpp(39,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
+﻿  TankGame.cpp
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe
