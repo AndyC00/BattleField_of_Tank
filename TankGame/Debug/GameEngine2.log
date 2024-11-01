@@ -1,23 +1,5 @@
-﻿  Enemy.cpp
-D:\Developing_Projects\TankGame\Enemy.cpp(46,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(46,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(71,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(129,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Entity.cpp
-D:\Developing_Projects\TankGame\Entity.cpp(39,9): warning C4102: 'print': unreferenced label
-D:\Developing_Projects\TankGame\Entity.cpp(90,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Entity.cpp(90,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Player.cpp
-D:\Developing_Projects\TankGame\Player.cpp(196,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(196,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(209,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(238,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(296,21): warning C4018: '>=': signed/unsigned mismatch
-  TankGame.cpp
-  Trap.cpp
+﻿  Trap.cpp
 D:\Developing_Projects\TankGame\Trap.cpp(39,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Developing_Projects\TankGame\Trap.cpp(39,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  game.cpp
-D:\Developing_Projects\TankGame\game.cpp(196,93): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+D:\Developing_Projects\TankGame\Trap.cpp(75,1): warning C4715: 'Trap::GetRadius': not all control paths return a value
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe

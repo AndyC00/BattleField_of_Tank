@@ -204,6 +204,12 @@ void SceneTankGame::CheckCollisions()
 	{
 		if (m_pPlayer->IsCollidingWith(*trap))
 		{
+			trap->SetDead();
+
+			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+
+			CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
+
 			ReceiveDamage(1);
 		}
 	}

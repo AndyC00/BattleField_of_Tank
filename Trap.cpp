@@ -46,10 +46,9 @@ bool Trap::Initialise(Renderer& renderer)
 
 void Trap::Process(float deltaTime)
 {
-	if (IsAlive())
-	{
-		m_trap->Process(deltaTime);
-	}
+	if (!IsAlive()) return;
+
+	m_trap->Process(deltaTime);
 }
 
 void Trap::Draw(Renderer& renderer)
@@ -59,7 +58,7 @@ void Trap::Draw(Renderer& renderer)
 
 float Trap::GetRadius() const
 {
-	if (m_trap)
+	if (IsAlive())
 	{
 		int frameWidth = 112;
 		int frameHeight = 60;
@@ -72,9 +71,5 @@ float Trap::GetRadius() const
 		float radius = (actualWidth + actualHeight) / 4.0f;
 
 		return radius;
-	}
-	else
-	{
-		return 0.0f;
 	}
 }
