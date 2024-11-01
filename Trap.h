@@ -13,6 +13,7 @@ public:
 	bool Initialise(Renderer& renderer);
 	void Process(float deltaTime);
 	void Draw(Renderer& renderer);
+	float GetRadius() const override;
 
 private:
 	AnimatedSprite* m_trap;

@@ -56,3 +56,25 @@ void Trap::Draw(Renderer& renderer)
 {
 	m_trap->Draw(renderer);
 }
+
+float Trap::GetRadius() const
+{
+	if (m_trap)
+	{
+		int frameWidth = 112;
+		int frameHeight = 60;
+
+		float scale = m_trap->GetScale();
+
+		float actualWidth = frameWidth * scale;
+		float actualHeight = frameHeight * scale;
+
+		float radius = (actualWidth + actualHeight) / 4.0f;
+
+		return radius;
+	}
+	else
+	{
+		return 0.0f;
+	}
+}

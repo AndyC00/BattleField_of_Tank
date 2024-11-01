@@ -25,7 +25,7 @@ public:
 	bool IsAlive() const;
 	void SetDead();
 
-	float GetRadius();
+	virtual float GetRadius() const;
 	float GetAngle() const;
 	void SetAngle(float angle);
 	Vector2 GetFacingDirection();

@@ -78,7 +78,7 @@ void Entity::SetDead()
 }
 
 // Get the radius of the entity (based on the sprite's size)
-float Entity::GetRadius()
+float Entity::GetRadius() const
 {
     return (m_pSprite->GetWidth() / 2.0f) * m_pSprite->GetScale();
 }
