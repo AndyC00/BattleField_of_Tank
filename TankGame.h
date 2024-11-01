@@ -45,6 +45,7 @@ private:
 	SceneTankGame& operator=(const SceneTankGame& SceneTankGame);
 	void UpdateExplosions(float deltaTime);
 	void CreateExplosion(float x, float y);
+	void ReceiveDamage(int num);
 
 	// Member data: 
 public:

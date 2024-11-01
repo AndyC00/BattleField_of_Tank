@@ -168,20 +168,16 @@ void SceneTankGame::CheckCollisions()
 	if (!m_pPlayer) return;
 	if (!m_pPlayer->IsAlive()) return;
 
+	//collision check with enemies
 	for (auto& enemy : m_pEnemies)
 	{
 		if (enemy->IsAlive() && m_pPlayer->IsCollidingWith(*enemy))
 		{
-			m_pPlayer->TakeDamage(1);
-
 			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
 
 			CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
 
-			if (m_pPlayer->GetLives() <= 0)
-			{
-				(*m_sceneIndex)++;
-			}
+			ReceiveDamage(1);
 		}
 
 		if (m_pPlayer->IsCollidingWithBullet(enemy->GetBullet()))
@@ -190,13 +186,7 @@ void SceneTankGame::CheckCollisions()
 
 			CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
 
-			m_pPlayer->TakeDamage(1);
-
-			if (m_pPlayer->GetLives() <= 0)
-			{
-				(*m_sceneIndex)++;
-			}
-			break;
+			ReceiveDamage(1);
 		}
 
 		if (enemy->IsAlive() && enemy->IsCollidingWithBullet(m_pPlayer->GetBullet()))
@@ -207,7 +197,15 @@ void SceneTankGame::CheckCollisions()
 
 			CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
 		}
+	}
 
+	//collision check with traps:
+	for (auto& trap : m_Traps)
+	{
+		if (m_pPlayer->IsCollidingWith(*trap))
+		{
+			ReceiveDamage(1);
+		}
 	}
 }
 
@@ -282,4 +280,14 @@ void SceneTankGame::CreateExplosion(float x, float y)
 	newExplosion->SetY(static_cast<int>(y));
 	newExplosion->Animate();
 	m_explosions.push_back(newExplosion);
+}
+
+void SceneTankGame::ReceiveDamage(int num)
+{
+	m_pPlayer->TakeDamage(num);
+
+	if (m_pPlayer->GetLives() <= 0)
+	{
+		(*m_sceneIndex)++;
+	}
 }
