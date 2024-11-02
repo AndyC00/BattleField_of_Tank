@@ -1,3 +1,10 @@
+01/11 getting better coding standard,
+	  Plane assets found
+	  Trap collision implemented
+		plan: 1. Enemies face player once in range and move towards player
+			2. press "enter" to use skill which calls planes to boom
+			3. enemies all using different sprites
+
 29/10 HP added, 
 	  implement sprite changed when HP changed,
 	  Back button added,
