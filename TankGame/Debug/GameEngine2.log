@@ -1,5 +1,6 @@
-﻿  Trap.cpp
-D:\Developing_Projects\TankGame\Trap.cpp(39,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Trap.cpp(39,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Trap.cpp(75,1): warning C4715: 'Trap::GetRadius': not all control paths return a value
+﻿  Enemy.cpp
+D:\Developing_Projects\TankGame\Enemy.cpp(58,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(58,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(83,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(141,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe

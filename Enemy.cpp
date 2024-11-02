@@ -31,6 +31,18 @@ Enemy::~Enemy()
 
 bool Enemy::Initialise(Renderer& renderer)
 {
+	//std::vector<const char*> filenames = {
+	//		"Sprites\\Enemies\\hummel.png",
+	//		"Sprites\\Enemies\\panther.png",
+	//		"Sprites\\Enemies\\panzer4.png",
+	//		"Sprites\\Enemies\\stug3.png",
+	//		"Sprites\\Enemies\\tiger.png",
+	//};
+
+	//int selection = rand() % filenames.size();
+
+	//const char* pcFilename = filenames[selection];
+
 	const char* pcFilename = "Sprites\\Tanks\\tank.png";
 
 	if (!Entity::Initialise(renderer, pcFilename))
