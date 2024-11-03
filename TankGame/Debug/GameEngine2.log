@@ -1,6 +1,6 @@
-﻿  Enemy.cpp
-D:\Developing_Projects\TankGame\Enemy.cpp(58,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(58,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(83,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(141,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Clouds.cpp
+D:\Developing_Projects\TankGame\Clouds.cpp(50,31): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Clouds.cpp(51,31): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  TankGame.cpp
+  Generating Code...
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe

@@ -102,6 +102,9 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 		m_Traps.push_back(trap);
 	}
 
+	//initialise the clouds:
+	m_clouds.Initialise(renderer);
+
 	//initialise the sound:
 	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
 	if (result != FMOD_OK || hitsound1 == nullptr) {
@@ -141,6 +144,8 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	{
 		trap->Process(deltaTime);
 	}
+
+	m_clouds.Process(deltaTime);
 
 	CheckCollisions();
 
@@ -236,6 +241,8 @@ void SceneTankGame::Draw(Renderer& renderer)
 			enemies->Draw(renderer);
 		}
 	}
+
+	m_clouds.Draw(renderer);
 
 	for (auto& trap : m_Traps)
 	{

@@ -15,6 +15,6 @@ public:
 	void Draw(Renderer& renderer);
 
 private:
-	std::vector <Entity*> m_clouds;
 	Renderer* m_pRenderer;
+	std::vector <Entity*> m_clouds;
 };

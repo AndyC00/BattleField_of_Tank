@@ -10,6 +10,7 @@
 #include "Bullet.h"
 #include "Player.h"
 #include "Trap.h"
+#include "Clouds.h"
 
 // Library includes:
 #include <vector>
@@ -65,6 +66,7 @@ private:
 	FMOD::Channel* channel;
 
 	Player* m_pPlayer;
+	Clouds m_clouds;
 
 	int* m_sceneIndex;
 };
