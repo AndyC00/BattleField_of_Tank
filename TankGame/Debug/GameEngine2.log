@@ -1,3 +1,2 @@
-﻿  Aircraft.cpp
-D:\Developing_Projects\TankGame\Aircraft.cpp(112,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+﻿  TankGame.cpp
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe

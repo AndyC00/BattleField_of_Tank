@@ -12,25 +12,26 @@
 
 Aircraft::Aircraft() :
 	m_pRenderer(nullptr),
-	planeTimer(3.5f)
+	spawnInterval(0),
+	planeTimer(4.0f)	//how often to spawn a plane
 {
 
 }
 
 Aircraft::~Aircraft()
 {
-	for (auto& plane : m_planes)
+	for (auto& plane : m_activePlanes)
 	{
 		delete plane;
 	}
-	m_planes.clear();
+	m_activePlanes.clear();
 }
 
 bool Aircraft::Initialise(Renderer& renderer)
 {
 	m_pRenderer = &renderer;
 
-	planeTimer = spawnInterval;
+	spawnInterval = planeTimer;
 
 		planeFiles = {
 		"Sprites\\Planes\\allies\\UK_Beaufighter.png",
@@ -115,7 +116,7 @@ void Aircraft::SpawnPlane()
 	direction.Normalise();
 
 	//set the speed
-	float speed = static_cast<float>(rand() % 30 + 80);
+	float speed = static_cast<float>(rand() % 30 + 130);
 	newPlane->GetVelocity() = direction * speed;
 
 	m_activePlanes.push_back(newPlane);

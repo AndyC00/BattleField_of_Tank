@@ -260,9 +260,9 @@ void SceneTankGame::Draw(Renderer& renderer)
 		explosion->Draw(renderer);
 	}
 
-	m_clouds.Draw(renderer);
-
 	m_aircraft.Draw(renderer);
+
+	m_clouds.Draw(renderer);
 }
 
 void SceneTankGame::DebugDraw()

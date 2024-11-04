@@ -19,7 +19,6 @@ public:
 
 private:
 	Renderer* m_pRenderer;
-	std::vector <Entity*> m_planes;
 	std::vector <Entity*> m_activePlanes;
 	std::vector<std::string> planeFiles;
 
