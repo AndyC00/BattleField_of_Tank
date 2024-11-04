@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Aircraft.cpp" />
     <ClCompile Include="animatedsprite.cpp" />
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Win.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aircraft.h" />
     <ClInclude Include="animatedsprite.h" />
     <ClInclude Include="ball.h" />
     <ClInclude Include="Bullet.h" />

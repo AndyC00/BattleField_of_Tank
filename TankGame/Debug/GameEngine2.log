@@ -1,6 +1,3 @@
-﻿  Clouds.cpp
-D:\Developing_Projects\TankGame\Clouds.cpp(50,31): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Clouds.cpp(51,31): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  TankGame.cpp
-  Generating Code...
+﻿  Aircraft.cpp
+D:\Developing_Projects\TankGame\Aircraft.cpp(112,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe

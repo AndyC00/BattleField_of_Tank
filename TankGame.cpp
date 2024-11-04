@@ -105,6 +105,9 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	//initialise the clouds:
 	m_clouds.Initialise(renderer);
 
+	//initialise the planes:
+	m_aircraft.Initialise(renderer);
+
 	//initialise the sound:
 	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
 	if (result != FMOD_OK || hitsound1 == nullptr) {
@@ -146,6 +149,8 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	}
 
 	m_clouds.Process(deltaTime);
+
+	m_aircraft.Process(deltaTime);
 
 	CheckCollisions();
 
@@ -242,8 +247,6 @@ void SceneTankGame::Draw(Renderer& renderer)
 		}
 	}
 
-	m_clouds.Draw(renderer);
-
 	for (auto& trap : m_Traps)
 	{
 		if (trap->IsAlive())
@@ -256,6 +259,10 @@ void SceneTankGame::Draw(Renderer& renderer)
 	{
 		explosion->Draw(renderer);
 	}
+
+	m_clouds.Draw(renderer);
+
+	m_aircraft.Draw(renderer);
 }
 
 void SceneTankGame::DebugDraw()

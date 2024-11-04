@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "Trap.h"
 #include "Clouds.h"
+#include "Aircraft.h"
 
 // Library includes:
 #include <vector>
@@ -66,7 +67,9 @@ private:
 	FMOD::Channel* channel;
 
 	Player* m_pPlayer;
+
 	Clouds m_clouds;
+	Aircraft m_aircraft;
 
 	int* m_sceneIndex;
 };
