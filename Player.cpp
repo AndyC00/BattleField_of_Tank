@@ -29,6 +29,8 @@ Player::Player()
 	CurrentSprite(0),
 	rotationSpeed(40.0f),	//the speed to rotate the tank
 	m_currentSpeed(0.0f),
+	shootTimer(1.7f),		//how often to fire
+	shootInterval(0),
 	m_maxSpeed(20.0f),		//Maximum speed can achieve
 	m_acceleration(20.0f)	//accelerations to achieve maximum speed
 {
@@ -122,6 +124,7 @@ bool Player::Initialise(Renderer& renderer)
 		printf("Successfully loaded sounds\\engine.wav\n");
 	}
 
+	shootInterval = shootTimer;
 
     return true;
 }
@@ -132,6 +135,11 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	if (m_invincibilityRemaining > 0.0f)
 	{
 		m_invincibilityRemaining -= deltaTime;
+	}
+
+	if (shootTimer > 0.0f)
+	{
+		shootTimer -= deltaTime;
 	}
 
 	//reading input
@@ -183,7 +191,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	}
 
 	//when press space button:
-	if (sKeyState == BS_PRESSED)
+	if (shootTimer <= 0.0f && sKeyState == BS_PRESSED)
 	{
 		if (channelFire)
 		{
@@ -196,6 +204,8 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		Vector2 playerPosition = Vector2(m_pSprite->GetX(), m_pSprite->GetY());
 		float playerAngle = m_pSprite->GetAngle();
 		PlayerBullet->SetPosition(playerPosition, playerAngle);
+
+		shootTimer = shootInterval;
 	}
 
 	//when press up arrow button:

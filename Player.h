@@ -24,7 +24,6 @@ public:
 // Member methods:
     bool Initialise(Renderer& renderer);
     void Process(float deltaTime, InputSystem& inputSystem);
-    void Attack(Renderer& renderer);
     void Draw(Renderer& renderer);
     int GetLives() const;
     void SetDead();
@@ -63,6 +62,8 @@ private:
     float m_currentSpeed;
     float m_maxSpeed;
     float m_acceleration;
+    float shootTimer;
+    float shootInterval;
 
     std::vector<Sprite*> TankStates;
 };

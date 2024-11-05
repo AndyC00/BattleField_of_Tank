@@ -1,4 +1,4 @@
-
+05/11 Allie planes implemented
 
 04/11 clouds implemented
 
@@ -10,8 +10,8 @@
 			2. press "enter" to use skill which calls planes to boom
 			3. enemies all using different sprites
 			4. enemies all spawn in the top half screen, player spawn in the bottom half screen
-			5. Allies planes comes from bottom edge to top edge, Axis planes comes from top edge to bottom edge
-			6. Set a timer for player to shoot
+			5. Allies planes comes from bottom edge to top edge, Axis planes comes from top edge to bottom edge		(partly done)
+			6. Set a timer for player to shoot															(done)
 
 29/10 HP added, 
 	  implement sprite changed when HP changed,
