@@ -2,8 +2,8 @@
 D:\Developing_Projects\TankGame\Aircraft.cpp(164,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 D:\Developing_Projects\TankGame\Aircraft.cpp(188,15): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Generating code
-  4 of 2762 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 2762 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    51 functions had inline decision re-evaluated but remain unchanged
+    39 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Release\TankGame_Released.exe

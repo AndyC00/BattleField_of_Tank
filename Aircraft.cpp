@@ -182,7 +182,7 @@ void Aircraft::SpawnAxisPlane()
 
 	Entity* axisPlane = new Entity();
 	axisPlane->m_pSprite = m_pRenderer->CreateSprite(axisPlaneFiles[axisPlaneTypeIndex].c_str());
-	axisPlane->m_pSprite->SetScale(1.0f);
+	axisPlane->m_pSprite->SetScale(-1.0f);
 
 	float startX = static_cast<float>(rand() % (screenWidth / 2) + (screenWidth / 8));
 	float startY = -axisPlane->m_pSprite->GetHeight();
