@@ -54,10 +54,6 @@ bool Aircraft::Initialise(Renderer& renderer)
 	"Sprites\\Planes\\allies\\USSR_La5.png",
 	"Sprites\\Planes\\allies\\USSR_Lagg3.png" };
 
-	for (const auto& filePath : planeFiles)
-	{
-		renderer.CreateSprite(filePath.c_str());
-	}
 
 	//axies' planes:
 	axisSpawnInterval = axisPlaneTimer;
@@ -72,11 +68,6 @@ bool Aircraft::Initialise(Renderer& renderer)
 		"Sprites\\Planes\\axis\\JAP_Ki51.png",
 		"Sprites\\Planes\\axis\\JAP_Ki61.png"
 	};
-
-	for (const auto& filePath : axisPlaneFiles)
-	{
-		renderer.CreateSprite(filePath.c_str());
-	}
 
 	return true;
 }
@@ -125,10 +116,10 @@ void Aircraft::Process(float deltaTime)
 		axisPlane->m_pSprite->SetX(static_cast<int>(axisPlane->GetPosition().x));
 		axisPlane->m_pSprite->SetY(static_cast<int>(axisPlane->GetPosition().y));
 
-		if (axisPlane->GetPosition().y <= m_pRenderer->GetHeight() + axisPlane->m_pSprite->GetHeight())
+		if (axisPlane->GetPosition().y >= m_pRenderer->GetHeight() + axisPlane->m_pSprite->GetHeight())
 		{
 			delete axisPlane;
-			it = m_alliesPlanes.erase(it);
+			it = m_axisPlanes.erase(it);
 		}
 		else
 		{
@@ -162,14 +153,14 @@ void Aircraft::SpawnPlane()
 	newPlane->m_pSprite->SetScale(1.0f);
 
 	//start position:
-	float startX = static_cast<float>(rand() % (screenWidth / 2) + (screenWidth / 4));
+	float startX = static_cast<float>(rand() % (screenWidth / 2) + (screenWidth / 8));
 	float startY = static_cast<float>(screenHeight + newPlane->m_pSprite->GetHeight());
 
 	newPlane->GetPosition().x = startX;
 	newPlane->GetPosition().y = startY;
 
 	//destination position
-	float endX = static_cast<float>(rand() % (screenWidth / 2) + (screenWidth / 4));
+	float endX = static_cast<float>(rand() % (screenWidth / 2) + (screenWidth / 8));
 	float endY = -newPlane->m_pSprite->GetHeight();
 
 	Vector2 direction = Vector2(endX, endY) - Vector2(startX, startY);
