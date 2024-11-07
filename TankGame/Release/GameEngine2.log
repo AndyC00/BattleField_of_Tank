@@ -1,68 +1,12 @@
 ﻿  Aircraft.cpp
-D:\Developing_Projects\TankGame\Aircraft.cpp(113,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  animatedsprite.cpp
-  ball.cpp
-  Bullet.cpp
-D:\Developing_Projects\TankGame\Bullet.cpp(27,25): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Developing_Projects\TankGame\Bullet.cpp(38,26): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Bullet.cpp(48,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Developing_Projects\TankGame\Bullet.cpp(49,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Developing_Projects\TankGame\Bullet.cpp(69,34): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-  Clouds.cpp
-D:\Developing_Projects\TankGame\Clouds.cpp(50,31): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Clouds.cpp(51,31): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Enemy.cpp
-D:\Developing_Projects\TankGame\Enemy.cpp(58,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(58,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(83,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(141,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Entity.cpp
-D:\Developing_Projects\TankGame\Entity.cpp(39,9): warning C4102: 'print': unreferenced label
-D:\Developing_Projects\TankGame\Entity.cpp(90,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Entity.cpp(90,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Aircraft.cpp(173,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Aircraft.cpp(197,15): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  TankGame.cpp
   game.cpp
 D:\Developing_Projects\TankGame\game.cpp(196,93): warning C4018: '<': signed/unsigned mismatch
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_impl_sdl2.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  inputsystem.cpp
-  logmanager.cpp
-  lose.cpp
-  Main.cpp
-  matrix4.cpp
-  Compiling...
-  Player.cpp
-D:\Developing_Projects\TankGame\Player.cpp(204,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(204,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(219,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(248,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Player.cpp(306,21): warning C4018: '>=': signed/unsigned mismatch
-  renderer.cpp
-  scene.cpp
-  sceneballgame.cpp
-  scenebouncingballs.cpp
-  scenecheckerboards.cpp
-  shader.cpp
-  soundsystem.cpp
-  sprite.cpp
-  TankGame.cpp
-  texture.cpp
-  texturemanager.cpp
-  TitleScene.cpp
-D:\Developing_Projects\TankGame\TitleScene.cpp(57,24): warning C4018: '<': signed/unsigned mismatch
-  Trap.cpp
-D:\Developing_Projects\TankGame\Trap.cpp(39,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Trap.cpp(39,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  vector2.cpp
-  vertexarray.cpp
-  Win.cpp
   Generating code
-  Previous IPDB not found, fall back to full compilation.
-D:\Developing_Projects\TankGame\Trap.cpp(75): warning C4715: 'Trap::GetRadius': not all control paths return a value
-  All 2764 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  21 of 2765 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    95 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Release\TankGame_Released.exe
