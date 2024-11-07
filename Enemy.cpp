@@ -66,58 +66,57 @@ bool Enemy::Initialise(Renderer& renderer)
 
 void Enemy::Process(float deltaTime)
 {
-	if (IsAlive())
+	if (!IsAlive()) return;
+
+	if (!m_isRotating)
 	{
-		if (!m_isRotating)
+		m_rotationTimer += deltaTime;
+
+		//go back if near the edge of the screen
+		if (IsNearBoundary(m_position))
 		{
-			m_rotationTimer += deltaTime;
+			m_isRotating = true;
+			m_startAngle = m_pSprite->GetAngle();
 
-			//go back if near the edge of the screen
-			if (IsNearBoundary(m_position))
-			{
-				m_isRotating = true;
-				m_startAngle = m_pSprite->GetAngle();
+			Vector2 center(930.0f, 530.0f); // the center of the screen (1860/2, 1060/2)
+			Vector2 direction = center - m_position;
+			float angleToCenter = atan2(direction.y, direction.x) * 180.0f / M_PI - 90.0f;
 
-				Vector2 center(930.0f, 530.0f); // the center of the screen (1860/2, 1060/2)
-				Vector2 direction = center - m_position;
-				float angleToCenter = atan2(direction.y, direction.x) * 180.0f / M_PI - 90.0f;
+			m_targetAngle = angleToCenter;
+			m_rotationTimer = 0.0f;
+		}
 
-				m_targetAngle = angleToCenter;
-				m_rotationTimer = 0.0f;
-			}
-
-			// rotate every 1.5s
-			if (m_rotationTimer >= 1.5f)
-			{
-				m_isRotating = true;
-				m_startAngle = m_pSprite->GetAngle();
-				//rotate 45 degrees every time
-				m_targetAngle = m_startAngle + ((rand() % 2 == 0) ? -45.0f : 45.0f);
-				m_rotationTimer = 0.0f;
-			}
-			else
-			{				
-				m_position += m_velocity * deltaTime;
-			}
+		// rotate every 1.5s
+		if (m_rotationTimer >= 1.5f)
+		{
+			m_isRotating = true;
+			m_startAngle = m_pSprite->GetAngle();
+			//rotate 45 degrees every time
+			m_targetAngle = m_startAngle + ((rand() % 2 == 0) ? -45.0f : 45.0f);
+			m_rotationTimer = 0.0f;
 		}
 		else
 		{
-			RotateOverTime(deltaTime);
+			m_position += m_velocity * deltaTime;
 		}
-
-		if (m_bulletTimer < 0)
-		{
-			bullet->SetPosition(m_position, m_pSprite->GetAngle());
-			m_bulletTimer = bulletTimerTotal;
-		}
-		else
-		{
-			bullet->Process(deltaTime);
-			m_bulletTimer -= deltaTime;
-		}
-
-		Entity::Process(deltaTime);
 	}
+	else
+	{
+		RotateOverTime(deltaTime);
+	}
+
+	if (m_bulletTimer < 0)
+	{
+		bullet->SetPosition(m_position, m_pSprite->GetAngle());
+		m_bulletTimer = bulletTimerTotal;
+	}
+	else
+	{
+		bullet->Process(deltaTime);
+		m_bulletTimer -= deltaTime;
+	}
+
+	Entity::Process(deltaTime);
 }
 
 void Enemy::Draw(Renderer& renderer)
