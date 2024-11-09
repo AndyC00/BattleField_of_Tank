@@ -1,6 +1,8 @@
-﻿  Aircraft.cpp
-D:\Developing_Projects\TankGame\Aircraft.cpp(164,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Aircraft.cpp(188,15): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+﻿  Enemy.cpp
+D:\Developing_Projects\TankGame\Enemy.cpp(58,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(58,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(83,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(140,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Generating code
   1 of 2762 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
