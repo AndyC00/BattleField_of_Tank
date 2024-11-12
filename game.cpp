@@ -62,6 +62,7 @@ void Game::DestroyInstance()
 Game::Game() :
 	m_pRenderer(0),
 	m_bLooping(true),
+	m_iCurrentScene(0),
 	m_pInputSystem(0)
 {
 	pSoundsystem = new SoundSystem();
@@ -106,9 +107,6 @@ bool Game::Initialise()
 		return false;
 	}
 
-	//creating the scenes:
-	m_iCurrentScene = 0;
-
 	TitleScene* pScene1 = 0;
 	pScene1 = new TitleScene();
 	pScene1->OnSceneChange(&m_iCurrentScene);
@@ -122,7 +120,7 @@ bool Game::Initialise()
 	m_scenes.push_back(pScene2);
 
 	Scene* pScene3 = 0;
-	pScene3 = new LoseScene();
+	pScene3 = new LoseScene(*this);
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
 
@@ -277,4 +275,13 @@ void Game::ToggleDebugWindow()
 	m_bShowDebugWindow = !m_bShowDebugWindow;
 
 	m_pInputSystem->ShowMouseCursor(m_bShowDebugWindow);
+}
+
+void Game::ChangeScene(Scene* newScene)
+{
+	if (m_scenes[m_iCurrentScene])
+	{
+		delete m_scenes[m_iCurrentScene];
+	}
+	m_scenes[m_iCurrentScene] = newScene;
 }

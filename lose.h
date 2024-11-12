@@ -14,7 +14,7 @@ class LoseScene :public Scene
 {
 	//member methods:
 public:
-	LoseScene();
+	LoseScene(Game& game);
 	virtual ~LoseScene();
 
 	virtual bool Initialise(Renderer& renderer);
@@ -38,8 +38,11 @@ protected:
 
 	float m_angle;
 	float m_rotationSpeed;
+	Renderer* m_pRenderer;
 
 private:
+
+	Game& m_game;
 
 };
 

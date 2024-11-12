@@ -4,6 +4,7 @@
 //local includes:
 #include "renderer.h"
 #include "sprite.h"
+#include "game.h"
 #include "TankGame.h"
 
 #include "imgui/imgui.h"
@@ -13,12 +14,13 @@
 #include <cstdlib>
 
 
-LoseScene::LoseScene() :
+LoseScene::LoseScene(Game& game) :
 	m_pCentre(0),
 	m_quit(0),
 	m_restart(0),
 	m_angle(0.0f),
-	m_rotationSpeed(0.0f)
+	m_rotationSpeed(0.0f),
+	m_game(game)
 {
 
 }
@@ -35,6 +37,8 @@ LoseScene::~LoseScene()
 
 bool LoseScene::Initialise(Renderer& renderer)
 {
+	m_pRenderer = &renderer;
+
 	m_pCentre = renderer.CreateSprite("Sprites\\Scene\\lose.png");
 
 	m_quit = renderer.CreateSprite("Sprites\\Buttons\\QButton.png");
@@ -71,8 +75,17 @@ void LoseScene::Process(float deltaTime, InputSystem& inputSystem)
 
 	if (RKeyState == BS_PRESSED)
 	{
-		//TODO: restart the game
+		//Restart the Playing Scene
+		Scene* newScene = new SceneTankGame();
 
+		if (newScene->Initialise(*m_pRenderer))
+		{
+			m_game.ChangeScene(newScene);
+		}
+		else
+		{
+			delete newScene;
+		}
 	}
 
 	if (QKeyState == BS_PRESSED)

@@ -25,6 +25,7 @@ public:
 	bool Initialise(); 
 	bool DoGameLoop(); 
 	void Quit();
+	void ChangeScene(Scene* newScene);
 
 protected:
 	void Process(float deltaTime); 
@@ -70,6 +71,7 @@ protected:
 
 private:
 	InputSystem* m_pInputSystem;
+	int m_iCurrentScene;
 };
 
 #endif //   GAME_H 
