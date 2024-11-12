@@ -3,6 +3,7 @@
 
 //local includes:
 #include "scene.h"
+#include "InputSystem.h"
 
 //Forward declarations:
 class Renderer;
@@ -32,6 +33,8 @@ public:
 
 protected:
 	Sprite* m_pCentre;
+	Sprite* m_quit;
+	Sprite* m_restart;
 
 	float m_angle;
 	float m_rotationSpeed;
