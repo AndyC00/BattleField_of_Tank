@@ -1,4 +1,10 @@
-08/11 
+13/11 restart game, need to add an Scene manager to delete current game and create new game
+
+12/11 quit game implemented
+
+09/11 tank asset added
+
+08/11 button assets added
 
 07/11 axis planes implemented
 
