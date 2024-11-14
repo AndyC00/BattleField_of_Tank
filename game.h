@@ -44,6 +44,10 @@ public:
 	void ToggleDebugWindow();
 	static SoundSystem* pSoundsystem;
 
+	//Scene:
+	std::vector<Scene*> m_scenes;
+	int m_iCurrentScene;
+
 protected:
 	bool m_bShowDebugWindow;
 
@@ -51,10 +55,6 @@ protected:
 
 	static Game* sm_pInstance; 
 	Renderer* m_pRenderer;
-
-	//Scene:
-	std::vector<Scene*> m_scenes;
-	int m_iCurrentScene;
 
 	__int64 m_iLastTime; 
 	float m_fExecutionTime; 
@@ -71,7 +71,6 @@ protected:
 
 private:
 	InputSystem* m_pInputSystem;
-	int m_iCurrentScene;
 };
 
 #endif //   GAME_H 

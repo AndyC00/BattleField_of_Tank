@@ -4,7 +4,6 @@
 //local includes:
 #include "renderer.h"
 #include "sprite.h"
-#include "game.h"
 #include "TankGame.h"
 
 #include "imgui/imgui.h"
@@ -77,7 +76,7 @@ void LoseScene::Process(float deltaTime, InputSystem& inputSystem)
 	{
 		//Restart the Playing Scene
 		Scene* newScene = new SceneTankGame();
-
+		m_game.m_scenes[1] = newScene;
 		if (newScene->Initialise(*m_pRenderer))
 		{
 			m_game.ChangeScene(newScene);

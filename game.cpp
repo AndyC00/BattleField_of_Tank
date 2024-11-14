@@ -107,24 +107,24 @@ bool Game::Initialise()
 		return false;
 	}
 
-	TitleScene* pScene1 = 0;
+	TitleScene* pScene1 = nullptr;
 	pScene1 = new TitleScene();
 	pScene1->OnSceneChange(&m_iCurrentScene);
 	pScene1->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene1);
 
-	SceneTankGame* pScene2 = 0;
+	SceneTankGame* pScene2 = nullptr;
 	pScene2 = new SceneTankGame();
 	pScene2->OnSceneChange(&m_iCurrentScene);
 	pScene2->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene2);
 
-	Scene* pScene3 = 0;
+	Scene* pScene3 = nullptr;
 	pScene3 = new LoseScene(*this);
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
 
-	Scene* pScene4 = 0;
+	Scene* pScene4 = nullptr;
 	pScene4 = new WinScene();
 	pScene4->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene4);

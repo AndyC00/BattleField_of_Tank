@@ -4,6 +4,7 @@
 //local includes:
 #include "scene.h"
 #include "InputSystem.h"
+#include "game.h"
 
 //Forward declarations:
 class Renderer;
