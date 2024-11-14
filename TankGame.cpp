@@ -78,7 +78,17 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pRenderer = &renderer;
 
 	//initialise the background pic
-	m_pBackground = renderer.CreateSprite("Sprites\\Scene\\background.png");
+	std::vector<const char*> filenames = {
+			"Sprites\\Scene\\background1.png",
+			"Sprites\\Scene\\background2.png",
+			"Sprites\\Scene\\background3.png",
+			"Sprites\\Scene\\background4.png",
+			"Sprites\\Scene\\background5.png",
+	};
+
+	int selection = rand() % filenames.size();
+	m_pBackground = renderer.CreateSprite(filenames[selection]);
+
 	m_pBackground->SetX(1860 / 2);
 	m_pBackground->SetY(1060 / 2);
 

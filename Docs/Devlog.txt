@@ -1,3 +1,5 @@
+14/11 restart implemented, bug fixed
+
 13/11 restart game, need to add an Scene manager to delete current game and create new game
 
 12/11 quit game implemented
