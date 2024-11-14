@@ -70,11 +70,6 @@ void TitleScene::Draw(Renderer& renderer)
 	m_pictures[m_CurrentPicture]->Draw(renderer);
 }
 
-void TitleScene::OnSceneChange(int* sceneIndex)
-{
-	m_sceneIndex = sceneIndex;
-}
-
 void TitleScene::DebugDraw()
 {
 	

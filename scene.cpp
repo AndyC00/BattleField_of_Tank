@@ -21,3 +21,8 @@ bool Scene::Initialise(Renderer& renderer)
 {
 	return true;
 }
+
+void Scene::OnSceneChange(int* sceneIndex)
+{
+	m_sceneIndex = sceneIndex;
+}

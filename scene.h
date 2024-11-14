@@ -17,6 +17,8 @@ public:
 	virtual void Process(float deltaTime, InputSystem& inputSystem) = 0;
 	virtual void Draw(Renderer& renderer) = 0;
 
+	void OnSceneChange(int* sceneIndex);
+
 protected:
 
 private:
@@ -28,7 +30,10 @@ public:
 	virtual void DebugDraw() = 0;
 
 protected:
+	int* m_sceneIndex;
 
+private:
+	
 };
 
 #endif __SCENE_H_

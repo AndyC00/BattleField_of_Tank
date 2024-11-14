@@ -121,6 +121,7 @@ bool Game::Initialise()
 
 	Scene* pScene3 = nullptr;
 	pScene3 = new LoseScene(this);
+	pScene3->OnSceneChange(&m_iCurrentScene);
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
 

@@ -32,7 +32,6 @@ public:
 	SceneTankGame();
 	virtual ~SceneTankGame();
 
-	void OnSceneChange(int* sceneIndex);
 	virtual bool Initialise(Renderer& renderer);
 	virtual void Process(float deltaTime, InputSystem& inputSystem);
 	virtual void Draw(Renderer& renderer);
@@ -70,8 +69,6 @@ private:
 
 	Clouds m_clouds;
 	Aircraft m_aircraft;
-
-	int* m_sceneIndex;
 };
 
 #endif //   TANKGAME_H 

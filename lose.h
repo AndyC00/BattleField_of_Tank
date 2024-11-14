@@ -42,9 +42,8 @@ protected:
 	Renderer* m_pRenderer;
 
 private:
-
 	Game* m_game;
-	int* m_sceneIndex;
+
 };
 
 #endif // _LOSE_H_

@@ -79,7 +79,6 @@ void LoseScene::Process(float deltaTime, InputSystem& inputSystem)
 		int sceneTankGameIndex = 1; // The buffer of the TankGame Scene
 		
 		Scene* oldScene = m_game->GetSceneAt(sceneTankGameIndex);
-		delete oldScene;
 
 		SceneTankGame* newScene = new SceneTankGame();
 		newScene->OnSceneChange(m_sceneIndex);

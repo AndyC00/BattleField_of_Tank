@@ -3,6 +3,7 @@
 
 //Library includes:
 #include <vector>
+#include <memory>
 
 #include "inputsystem.h"
 #include "soundsystem.h"

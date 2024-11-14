@@ -54,7 +54,6 @@ SceneTankGame::~SceneTankGame()
 		opening->release();
 		opening = nullptr;
 	}
-	delete m_pPlayer;
 	for (auto& pAnimatedSprite : m_explosions)
 	{
 		delete pAnimatedSprite;
@@ -71,6 +70,7 @@ SceneTankGame::~SceneTankGame()
 	}
 	m_Traps.clear();
 	delete m_pBackground;
+	delete m_pPlayer;
 }
 
 bool SceneTankGame::Initialise(Renderer& renderer)
@@ -223,11 +223,6 @@ void SceneTankGame::CheckCollisions()
 			ReceiveDamage(1);
 		}
 	}
-}
-
-void SceneTankGame::OnSceneChange(int* sceneIndex)
-{
-	m_sceneIndex = sceneIndex;
 }
 
 void SceneTankGame::Draw(Renderer& renderer)
