@@ -1,4 +1,5 @@
 14/11 restart implemented, bug fixed
+	  background assets added, background will be changed randomly every time load the scene
 
 13/11 restart game, need to add an Scene manager to delete current game and create new game
 

@@ -89,8 +89,9 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	int selection = rand() % filenames.size();
 	m_pBackground = renderer.CreateSprite(filenames[selection]);
 
-	m_pBackground->SetX(1860 / 2);
-	m_pBackground->SetY(1060 / 2);
+	m_pBackground->SetX(m_pRenderer->GetWidth() / 2);
+	m_pBackground->SetY(m_pRenderer->GetHeight() / 2);
+	m_pBackground->SetScale(1.05f);
 
 	// Initialize player tank
 	m_pPlayer = new Player();

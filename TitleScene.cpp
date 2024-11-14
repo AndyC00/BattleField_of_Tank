@@ -44,6 +44,7 @@ bool TitleScene::Initialise(Renderer& renderer)
 
 		m_picture->SetX(SCREEN_WIDTH / 2);
 		m_picture->SetY(SCREEN_HEIGHT / 2);
+		m_picture->SetScale(1.05f);
 	}
 
 	return true;

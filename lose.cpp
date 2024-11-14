@@ -51,6 +51,7 @@ bool LoseScene::Initialise(Renderer& renderer)
 
 	m_pCentre->SetX(SCREEN_WIDTH / 2);
 	m_pCentre->SetY(SCREEN_HEIGHT / 2);
+	m_pCentre->SetScale(1.05f);
 
 	m_quit->SetX(SCREEN_WIDTH / 6);
 	m_quit->SetY(SCREEN_HEIGHT / 6);

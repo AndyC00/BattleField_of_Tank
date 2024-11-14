@@ -91,8 +91,9 @@ void Enemy::Process(float deltaTime)
 		{
 			m_isRotating = true;
 			m_startAngle = m_pSprite->GetAngle();
-			//rotate 45 degrees every time
-			m_targetAngle = m_startAngle + ((rand() % 2 == 0) ? -45.0f : 45.0f);
+			//rotate 20-70 degrees every time
+			float rotateDegree = 20 + rand() % (70 - 20 + 1);
+			m_targetAngle = m_startAngle + ((rand() % 2 == 0) ? rotateDegree : - rotateDegree);
 			m_rotationTimer = 0.0f;
 		}
 		else
