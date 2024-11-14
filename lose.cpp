@@ -79,6 +79,7 @@ void LoseScene::Process(float deltaTime, InputSystem& inputSystem)
 		int sceneTankGameIndex = 1; // The buffer of the TankGame Scene
 		
 		Scene* oldScene = m_game->GetSceneAt(sceneTankGameIndex);
+		oldScene = nullptr; //the oldScene will be deleted in the __debugbreak(). No idea why
 
 		SceneTankGame* newScene = new SceneTankGame();
 		newScene->OnSceneChange(m_sceneIndex);

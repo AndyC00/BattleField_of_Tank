@@ -126,7 +126,8 @@ bool Game::Initialise()
 	m_scenes.push_back(pScene3);
 
 	Scene* pScene4 = nullptr;
-	pScene4 = new WinScene();
+	pScene4 = new WinScene(this);
+	pScene4->OnSceneChange(&m_iCurrentScene);
 	pScene4->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene4);
 

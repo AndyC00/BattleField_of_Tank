@@ -3,6 +3,8 @@
 
 //local includes:
 #include "scene.h"
+#include "InputSystem.h"
+#include "game.h"
 
 //Forward declarations:
 class Renderer;
@@ -13,7 +15,7 @@ class WinScene :public Scene
 {
 	//member methods:
 public:
-	WinScene();
+	WinScene(Game* game);
 	virtual ~WinScene();
 
 	virtual bool Initialise(Renderer& renderer);
@@ -32,11 +34,15 @@ public:
 
 protected:
 	Sprite* m_pCentre;
+	Sprite* m_quit;
+	Sprite* m_restart;
 
 	float m_angle;
 	float m_rotationSpeed;
+	Renderer* m_pRenderer;
 
 private:
+	Game* m_game;
 
 };
 
