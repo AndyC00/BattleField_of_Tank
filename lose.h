@@ -15,7 +15,7 @@ class LoseScene :public Scene
 {
 	//member methods:
 public:
-	LoseScene(Game& game);
+	LoseScene(Game* game);
 	virtual ~LoseScene();
 
 	virtual bool Initialise(Renderer& renderer);
@@ -43,8 +43,8 @@ protected:
 
 private:
 
-	Game& m_game;
-
+	Game* m_game;
+	int* m_sceneIndex;
 };
 
 #endif // _LOSE_H_

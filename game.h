@@ -25,7 +25,9 @@ public:
 	bool Initialise(); 
 	bool DoGameLoop(); 
 	void Quit();
-	void ChangeScene(Scene* newScene);
+
+	Scene* GetSceneAt(int index) const;
+	void SetSceneAt(int index, Scene* scene);
 
 protected:
 	void Process(float deltaTime); 
@@ -43,10 +45,6 @@ private:
 public:
 	void ToggleDebugWindow();
 	static SoundSystem* pSoundsystem;
-
-	//Scene:
-	std::vector<Scene*> m_scenes;
-	int m_iCurrentScene;
 
 protected:
 	bool m_bShowDebugWindow;
@@ -71,6 +69,10 @@ protected:
 
 private:
 	InputSystem* m_pInputSystem;
+
+	//Scene:
+	std::vector<Scene*> m_scenes;
+	int m_iCurrentScene;
 };
 
 #endif //   GAME_H 

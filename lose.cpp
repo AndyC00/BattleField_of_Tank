@@ -13,12 +13,13 @@
 #include <cstdlib>
 
 
-LoseScene::LoseScene(Game& game) :
+LoseScene::LoseScene(Game* game) :
 	m_pCentre(0),
 	m_quit(0),
 	m_restart(0),
 	m_angle(0.0f),
 	m_rotationSpeed(0.0f),
+	m_pRenderer(nullptr),
 	m_game(game)
 {
 
@@ -75,16 +76,18 @@ void LoseScene::Process(float deltaTime, InputSystem& inputSystem)
 	if (RKeyState == BS_PRESSED)
 	{
 		//Restart the Playing Scene
-		Scene* newScene = new SceneTankGame();
-		m_game.m_scenes[1] = newScene;
-		if (newScene->Initialise(*m_pRenderer))
-		{
-			m_game.ChangeScene(newScene);
-		}
-		else
-		{
-			delete newScene;
-		}
+		int sceneTankGameIndex = 1; // The buffer of the TankGame Scene
+		
+		Scene* oldScene = m_game->GetSceneAt(sceneTankGameIndex);
+		delete oldScene;
+
+		SceneTankGame* newScene = new SceneTankGame();
+		newScene->OnSceneChange(m_sceneIndex);
+		newScene->Initialise(*m_pRenderer);
+
+		m_game->SetSceneAt(sceneTankGameIndex, newScene);
+
+		*m_sceneIndex = sceneTankGameIndex;
 	}
 
 	if (QKeyState == BS_PRESSED)

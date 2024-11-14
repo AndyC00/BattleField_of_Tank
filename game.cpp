@@ -120,7 +120,7 @@ bool Game::Initialise()
 	m_scenes.push_back(pScene2);
 
 	Scene* pScene3 = nullptr;
-	pScene3 = new LoseScene(*this);
+	pScene3 = new LoseScene(this);
 	pScene3->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene3);
 
@@ -277,11 +277,19 @@ void Game::ToggleDebugWindow()
 	m_pInputSystem->ShowMouseCursor(m_bShowDebugWindow);
 }
 
-void Game::ChangeScene(Scene* newScene)
+Scene* Game::GetSceneAt(int index) const
 {
-	if (m_scenes[m_iCurrentScene])
+	if (index >= 0 && index < m_scenes.size())
 	{
-		delete m_scenes[m_iCurrentScene];
+		return m_scenes[index];
 	}
-	m_scenes[m_iCurrentScene] = newScene;
+	return nullptr;
+}
+
+void Game::SetSceneAt(int index, Scene* scene)
+{
+	if (index >= 0 && index < m_scenes.size())
+	{
+		m_scenes[index] = scene;
+	}
 }

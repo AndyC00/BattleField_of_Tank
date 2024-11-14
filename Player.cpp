@@ -149,7 +149,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	ButtonState FKeyState = inputSystem.GetKeyState(SDL_SCANCODE_UP);
 	ButtonState BKeyState = inputSystem.GetKeyState(SDL_SCANCODE_DOWN);
 
-	//when press left arrow buttom:
+	//when press left arrow button:
 	if (LKeyState == BS_HELD)
 	{
 		if (!channelEngineLeft)
@@ -245,7 +245,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 			Game::pSoundsystem->playSound(engineSound, nullptr, false, &channelEngineForward);
 		}
 		float playerAngle = m_pSprite->GetAngle();
-		float angleInRadians = - (playerAngle + 90.0f) * M_PI / 180.0f;
+		float angleInRadians = (playerAngle + 90.0f) * M_PI / 180.0f;
 
 		m_currentSpeed += m_acceleration * deltaTime;
 		if (m_currentSpeed > m_maxSpeed - 10.0f)
@@ -254,7 +254,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		}
 
 		Vector2 direction(cos(angleInRadians), sin(angleInRadians));
-		m_velocity = direction * m_currentSpeed;
+		m_velocity = direction * -m_currentSpeed;
 	}
 	else if (BKeyState == BS_RELEASED)
 	{
