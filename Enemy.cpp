@@ -14,6 +14,7 @@ const int bulletTimerTotal = 2;
 Enemy::Enemy(Player* player)
 	: Entity()
 	, m_pPlayer(player)
+	, m_pRenderer(nullptr)
 	, m_rotationTimer(0.0f)
 	, m_rotationDuration(0.5f) //take 0.5s to rotate
 	, m_isRotating(false)
@@ -34,6 +35,11 @@ Enemy::~Enemy()
 
 bool Enemy::Initialise(Renderer& renderer)
 {
+	m_pRenderer = &renderer;
+
+	float ScreenWidth = m_pRenderer->GetWidth();
+	float ScreenHeight = m_pRenderer->GetHeight();
+
 	std::vector<const char*> filenames = {
 			"Sprites\\Enemies\\StuG III.png",
 			"Sprites\\Enemies\\Panzer III.png",
@@ -49,7 +55,7 @@ bool Enemy::Initialise(Renderer& renderer)
 		return false;
 	}
 
-	int m_x = (rand() % (renderer.GetWidth() / 2 - 50) + 50);
+	int m_x = (rand() % (renderer.GetWidth() - 50) + 100);
 	int m_y = (rand() % (renderer.GetHeight() / 2) + 50);
 
 	m_pSprite->SetScale(0.2f);
@@ -75,13 +81,13 @@ void Enemy::Process(float deltaTime)
 	{
 		m_rotationTimer += deltaTime;
 
+		m_isRotating = true;
+		m_startAngle = m_pSprite->GetAngle();
+
 		//go back if near the edge of the screen
 		if (IsNearBoundary(m_position))
 		{
-			m_isRotating = true;
-			m_startAngle = m_pSprite->GetAngle();
-
-			Vector2 center(930.0f, 530.0f); // the center of the screen (1860/2, 1060/2)
+			Vector2 center(ScreenWidth / 2, ScreenHeight / 2);
 			Vector2 direction = center - m_position;
 			float angleToCenter = atan2(direction.y, direction.x) * 180.0f / M_PI - 90.0f;
 
@@ -92,11 +98,17 @@ void Enemy::Process(float deltaTime)
 		// rotate every 1.5s
 		if (m_rotationTimer >= 1.5f)
 		{
-			m_isRotating = true;
-			m_startAngle = m_pSprite->GetAngle();
-			//rotate 20-70 degrees every time
-			float rotateDegree = 20 + rand() % (70 - 20 + 1);
-			m_targetAngle = m_startAngle + ((rand() % 2 == 0) ? rotateDegree : - rotateDegree);
+			if (IsWithinRange())
+			{
+				Vector2 direction = m_pPlayer->GetPosition() - m_position;
+				m_targetAngle = atan2(direction.y, direction.x) * 180.0f / M_PI - 90.0f;
+			}
+			else
+			{
+				//rotate randomly 20-70 degrees every time
+				float rotateDegree = 20 + rand() % (70 - 20 + 1);
+				m_targetAngle = m_startAngle + ((rand() % 2 == 0) ? rotateDegree : -rotateDegree);
+			}
 			m_rotationTimer = 0.0f;
 		}
 		else
@@ -109,6 +121,7 @@ void Enemy::Process(float deltaTime)
 		RotateOverTime(deltaTime);
 	}
 
+	//bullet process:
 	if (m_bulletTimer < 0)
 	{
 		bullet->SetPosition(m_position, m_pSprite->GetAngle());
@@ -149,13 +162,6 @@ void Enemy::RotateOverTime(float deltaTime)
 	this->Rotate(currentAngle);
 }
 
-void Enemy::RotateRandomly()
-{
-	int randomDirection = (rand() % 2 == 0) ? -45 : 45;
-
-	m_targetAngle = m_pSprite->GetAngle() + randomDirection;
-}
-
 Bullet* Enemy::GetBullet()
 {
 	return bullet;
@@ -165,8 +171,7 @@ bool Enemy::IsNearBoundary(Vector2 m_position)
 {
 	float margin = 35.0f; //the distance to trigger the function
 
-	return (m_position.x <= margin || m_position.x >= 1860.0f - margin ||
-		m_position.y <= margin || m_position.y >= 1060.0f - margin);
+	return (m_position.x <= margin || m_position.x >= ScreenWidth - margin || m_position.y <= margin || m_position.y >= ScreenHeight - margin);
 }
 
 bool Enemy::IsWithinRange()

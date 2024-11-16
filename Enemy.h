@@ -32,10 +32,13 @@ private:
 	float m_targetAngle;
 	float m_bulletTimer;
 	float m_attackRange;
+	float ScreenWidth;
+	float ScreenHeight;
 
 	bool IsNearBoundary(Vector2 m_position);
 	bool IsWithinRange();
 
 	Bullet* bullet;
 	Player* m_pPlayer;
+	Renderer* m_pRenderer;
 };
