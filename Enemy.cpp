@@ -15,14 +15,14 @@ Enemy::Enemy(Player* player)
 	: Entity()
 	, m_pPlayer(player)
 	, m_pRenderer(nullptr)
-	, m_rotationTimer(0.0f)
-	, m_rotationDuration(0.5f) //take 0.5s to rotate
+	, m_rotationTimer(0.5f)
+	, m_rotationDuration(0.5f)	//take 0.5s to rotate
 	, m_isRotating(false)
 	, m_startAngle(0.0f)
 	, m_targetAngle(0.0f)
 	, bullet(nullptr)
 	, m_bulletTimer(0)
-	, m_attackRange(150.0f)
+	, m_attackRange(550.0f)		//attack range
 {
 
 }
@@ -37,12 +37,13 @@ bool Enemy::Initialise(Renderer& renderer)
 {
 	m_pRenderer = &renderer;
 
-	float ScreenWidth = m_pRenderer->GetWidth();
-	float ScreenHeight = m_pRenderer->GetHeight();
+	ScreenWidth = m_pRenderer->GetWidth();
+	ScreenHeight = m_pRenderer->GetHeight();
 
 	std::vector<const char*> filenames = {
 			"Sprites\\Enemies\\StuG III.png",
 			"Sprites\\Enemies\\Panzer III.png",
+			"Sprites\\Enemies\\Panzer V.png",
 	};
 
 	int selection = rand() % filenames.size();
@@ -81,23 +82,23 @@ void Enemy::Process(float deltaTime)
 	{
 		m_rotationTimer += deltaTime;
 
-		m_isRotating = true;
-		m_startAngle = m_pSprite->GetAngle();
-
 		//go back if near the edge of the screen
 		if (IsNearBoundary(m_position))
 		{
+			m_startAngle = m_pSprite->GetAngle();
 			Vector2 center(ScreenWidth / 2, ScreenHeight / 2);
 			Vector2 direction = center - m_position;
 			float angleToCenter = atan2(direction.y, direction.x) * 180.0f / M_PI - 90.0f;
 
 			m_targetAngle = angleToCenter;
 			m_rotationTimer = 0.0f;
+			m_isRotating = true;
 		}
-
 		// rotate every 1.5s
-		if (m_rotationTimer >= 1.5f)
+		else if (m_rotationTimer >= 1.5f)
 		{
+			m_startAngle = m_pSprite->GetAngle();
+
 			if (IsWithinRange())
 			{
 				Vector2 direction = m_pPlayer->GetPosition() - m_position;
@@ -110,6 +111,7 @@ void Enemy::Process(float deltaTime)
 				m_targetAngle = m_startAngle + ((rand() % 2 == 0) ? rotateDegree : -rotateDegree);
 			}
 			m_rotationTimer = 0.0f;
+			m_isRotating = true;
 		}
 		else
 		{

@@ -167,7 +167,7 @@ void Aircraft::SpawnPlane()
 	direction.Normalise();
 
 	//set the speed
-	float speed = static_cast<float>(rand() % 30 + 130);
+	float speed = static_cast<float>(rand() % 30 + 180);
 	newPlane->GetVelocity() = direction * speed;
 
 	m_alliesPlanes.push_back(newPlane);
@@ -196,7 +196,7 @@ void Aircraft::SpawnAxisPlane()
 	Vector2 direction = Vector2(endX, endY) - Vector2(startX, startY);
 	direction.Normalise();
 
-	float speed = static_cast<float>(rand() % 30 + 130);
+	float speed = static_cast<float>(rand() % 30 + 180);
 	axisPlane->GetVelocity() = direction * speed;
 
 	m_axisPlanes.push_back(axisPlane);

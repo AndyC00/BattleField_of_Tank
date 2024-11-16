@@ -1,15 +1,10 @@
 ﻿  Enemy.cpp
-D:\Developing_Projects\TankGame\Enemy.cpp(40,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(41,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(67,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(67,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(92,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(104,69): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(109,24): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(157,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  TankGame.cpp
-  game.cpp
-D:\Developing_Projects\TankGame\game.cpp(284,26): warning C4018: '<': signed/unsigned mismatch
-D:\Developing_Projects\TankGame\game.cpp(293,26): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+D:\Developing_Projects\TankGame\Enemy.cpp(40,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(41,39): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(68,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(68,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(91,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(105,69): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(110,24): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\Enemy.cpp(159,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe
