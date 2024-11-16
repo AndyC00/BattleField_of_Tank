@@ -27,23 +27,19 @@ Enemy::Enemy()
 Enemy::~Enemy()
 {
 	delete bullet;
+	bullet = nullptr;
 }
 
 bool Enemy::Initialise(Renderer& renderer)
 {
-	//std::vector<const char*> filenames = {
-	//		"Sprites\\Enemies\\hummel.png",
-	//		"Sprites\\Enemies\\panther.png",
-	//		"Sprites\\Enemies\\panzer4.png",
-	//		"Sprites\\Enemies\\stug3.png",
-	//		"Sprites\\Enemies\\tiger.png",
-	//};
+	std::vector<const char*> filenames = {
+			"Sprites\\Enemies\\StuG III.png",
+			"Sprites\\Enemies\\Panzer III.png",
+	};
 
-	//int selection = rand() % filenames.size();
+	int selection = rand() % filenames.size();
 
-	//const char* pcFilename = filenames[selection];
-
-	const char* pcFilename = "Sprites\\Tanks\\tank.png";
+	const char* pcFilename = filenames[selection];
 
 	if (!Entity::Initialise(renderer, pcFilename))
 	{
@@ -55,6 +51,11 @@ bool Enemy::Initialise(Renderer& renderer)
 	int m_y = ((rand() % 2 == 0) ? (rand() % 490 + 10) : (rand() % 480 + 550));
 
 	m_pSprite->SetScale(0.2f);
+
+	m_pSprite->SetBlueTint(0.85f);
+	m_pSprite->SetGreenTint(0.85f);
+	m_pSprite->SetRedTint(0.85f);
+
 	m_position = Vector2(m_x, m_y);
 	m_velocity = Vector2(0.0f, 0.0f);
 

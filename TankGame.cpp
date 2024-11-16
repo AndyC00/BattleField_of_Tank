@@ -69,8 +69,11 @@ SceneTankGame::~SceneTankGame()
 		delete trap;
 	}
 	m_Traps.clear();
+
 	delete m_pBackground;
+	m_pBackground = nullptr;
 	delete m_pPlayer;
+	m_pPlayer = nullptr;
 }
 
 bool SceneTankGame::Initialise(Renderer& renderer)
@@ -98,15 +101,14 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pPlayer->Initialise(renderer);
 	m_pPlayer->SetPosition(static_cast<int>(renderer.GetWidth() / 2.0f), static_cast<int>(renderer.GetHeight() / 2.0f));
 
-	// Spawn a setting number of enemies:
-	for (int i = 0; i < 9; i++)
+	// Spawn a set random number of enemies:
+	for (int i = 0; i < rand()%5 + 4; i++)
 	{
 		Enemy* enemy = new Enemy();
 		enemy->Initialise(renderer);
-		enemy->m_pSprite->SetGreenTint(0.75f);
 		m_pEnemies.push_back(enemy);
 	}
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < rand()%3 + 3; i++)
 	{
 		Trap* trap = new Trap();
 		trap->Initialise(renderer);
