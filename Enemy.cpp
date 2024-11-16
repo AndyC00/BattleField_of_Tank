@@ -140,6 +140,8 @@ void Enemy::Process(float deltaTime)
 
 void Enemy::Draw(Renderer& renderer)
 {
+	if (!IsAlive()) return;
+
 	bullet->Draw(renderer);
 	Entity::Draw(renderer);
 }

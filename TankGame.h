@@ -47,6 +47,8 @@ private:
 	SceneTankGame& operator=(const SceneTankGame& SceneTankGame);
 	void UpdateExplosions(float deltaTime);
 	void CreateExplosion(float x, float y);
+	void UpdateBoom(float deltaTime);
+	void CreateBoom(float x, float y);
 	void ReceiveDamage(int num);
 	void SetButtonOn();
 	void SetButtonOff();
@@ -58,6 +60,7 @@ public:
 protected:
 	Renderer* m_pRenderer;
 	std::vector<AnimatedSprite*> m_explosions;
+	std::vector<AnimatedSprite*> m_allFire;
 	std::vector<Enemy*> m_pEnemies;
 	std::vector<Trap*> m_Traps;
 	Sprite* m_pBackground;
@@ -71,6 +74,9 @@ private:
 
 	float skillTimer;
 	float skillInterval;
+	float waitTimer;
+	float waitInterval;
+	bool isWaitTimeActive;
 
 	Player* m_pPlayer;
 

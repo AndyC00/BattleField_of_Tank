@@ -34,6 +34,9 @@ SceneTankGame::SceneTankGame()
 	opening(nullptr),
 	m_pBackground(nullptr),
 	m_pSkillButton(nullptr),
+	waitTimer(0.75f),		//the time wait for the plane
+	waitInterval(0),
+	isWaitTimeActive(false),
 	skillTimer(0.5f),
 	skillInterval(4.0f)		//how often able to use skill
 {
@@ -62,6 +65,11 @@ SceneTankGame::~SceneTankGame()
 		delete pAnimatedSprite;
 	}
 	m_explosions.clear();
+	for (auto& fire : m_allFire)
+	{
+		delete fire;
+	}
+	m_allFire.clear();
 	for (auto& enemy : m_pEnemies)
 	{
 		delete enemy;
@@ -84,6 +92,8 @@ SceneTankGame::~SceneTankGame()
 bool SceneTankGame::Initialise(Renderer& renderer)
 {
 	m_pRenderer = &renderer;
+
+	waitInterval = waitTimer;
 
 	//initialise the background pic
 	std::vector<const char*> filenames = {
@@ -112,13 +122,13 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pPlayer->SetPosition(static_cast<int>(renderer.GetWidth() / 2.0f), static_cast<int>(renderer.GetHeight() * 0.8f));
 
 	// Spawn a set random number of enemies:
-	for (int i = 0; i < rand()%5 + 4; i++)
+	for (int i = 0; i < rand() % 5 + 4; i++)
 	{
 		Enemy* enemy = new Enemy(m_pPlayer);
 		enemy->Initialise(renderer);
 		m_pEnemies.push_back(enemy);
 	}
-	for (int i = 0; i < rand()%3 + 3; i++)
+	for (int i = 0; i < rand() % 3 + 3; i++)
 	{
 		Trap* trap = new Trap();
 		trap->Initialise(renderer);
@@ -185,6 +195,7 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 
 	//processing animated sprite
 	UpdateExplosions(deltaTime);
+	UpdateBoom(deltaTime);
 
 	//judge if all enemies destroyed
 	bool allEnemiesDestroyed = true;
@@ -222,7 +233,42 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 
 		//use the skill:
 		m_skill.Activate();
+
+		isWaitTimeActive = true;
+		waitTimer = waitInterval;
 	}
+
+	if (isWaitTimeActive)
+	{
+		waitTimer -= deltaTime;
+
+		if (waitTimer <= 0.0f)
+		{
+			for (int i = 0; i < 13; i++)
+			{
+				int positionX = m_pPlayer->GetPosition().x + ((rand() % 2 == 0) ? (rand() % 400) : (-rand() % 400));
+				int positionY = m_pPlayer->GetPosition().y + ((rand() % 2 == 0) ? (rand() % 400) : (-rand() % 400));
+				CreateBoom(positionX, positionY);
+			}
+			for (auto& enemy : m_pEnemies)
+			{
+				if (!enemy->IsAlive())	continue;
+
+				Vector2 playerPosition = m_pPlayer->GetPosition();
+				Vector2 enemyPosition = enemy->GetPosition();
+
+				float distance = (playerPosition - enemyPosition).Length();
+
+				if (distance < 400.0f)
+				{
+					CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
+					enemy->SetDead();
+				}
+			}
+			isWaitTimeActive = false;
+		}
+	}
+
 	m_skill.Process(deltaTime);
 
 }
@@ -309,6 +355,11 @@ void SceneTankGame::Draw(Renderer& renderer)
 		explosion->Draw(renderer);
 	}
 
+	for (auto& fire : m_allFire)
+	{
+		fire->Draw(renderer);
+	}
+
 	m_aircraft.Draw(renderer);
 
 	m_clouds.Draw(renderer);
@@ -353,6 +404,38 @@ void SceneTankGame::CreateExplosion(float x, float y)
 	newExplosion->SetY(static_cast<int>(y));
 	newExplosion->Animate();
 	m_explosions.push_back(newExplosion);
+}
+
+void SceneTankGame::CreateBoom(float x, float y)
+{
+	AnimatedSprite* newFire = m_pRenderer->CreateAnimatedSprite("Sprites\\fireExplosion.png");
+	newFire->SetupFrames(128, 128);
+	newFire->SetFrameDuration(0.1f);
+	newFire->SetLooping(false);
+	newFire->SetX(static_cast<int>(x));
+	newFire->SetY(static_cast<int>(y));
+	newFire->Animate();
+	m_allFire.push_back(newFire);
+}
+
+void SceneTankGame::UpdateBoom(float deltaTime)
+{
+	for (auto it = m_allFire.begin(); it != m_allFire.end();)
+	{
+		AnimatedSprite* fire = *it;
+
+		fire->Process(deltaTime);
+
+		if (!fire->IsAnimating())
+		{
+			delete fire;
+			it = m_allFire.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
 }
 
 void SceneTankGame::ReceiveDamage(int num)

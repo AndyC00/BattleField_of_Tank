@@ -1,7 +1,6 @@
-﻿  EnterSkill.cpp
-D:\Developing_Projects\TankGame\EnterSkill.cpp(54,52): warning C4018: '<': signed/unsigned mismatch
-D:\Developing_Projects\TankGame\EnterSkill.cpp(80,27): warning C4018: '>=': signed/unsigned mismatch
-D:\Developing_Projects\TankGame\EnterSkill.cpp(99,12): warning C4018: '>=': signed/unsigned mismatch
-D:\Developing_Projects\TankGame\EnterSkill.cpp(121,14): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\EnterSkill.cpp(146,15): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+﻿  TankGame.cpp
+D:\Developing_Projects\TankGame\TankGame.cpp(249,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Developing_Projects\TankGame\TankGame.cpp(250,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Developing_Projects\TankGame\TankGame.cpp(251,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\TankGame.cpp(251,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe
