@@ -32,7 +32,10 @@ SceneTankGame::SceneTankGame()
 	m_pPlayer(nullptr),
 	channel(nullptr),
 	opening(nullptr),
-	m_pBackground(nullptr)
+	m_pBackground(nullptr),
+	m_pSkillButton(nullptr),
+	skillTimer(0.5f),
+	skillInterval(4.0f)		//how often able to use skill
 {
 	srand(static_cast<unsigned>(time(0)));
 }
@@ -72,6 +75,8 @@ SceneTankGame::~SceneTankGame()
 
 	delete m_pBackground;
 	m_pBackground = nullptr;
+	delete m_pSkillButton;
+	m_pSkillButton = nullptr;
 	delete m_pPlayer;
 	m_pPlayer = nullptr;
 }
@@ -95,6 +100,11 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pBackground->SetX(m_pRenderer->GetWidth() / 2);
 	m_pBackground->SetY(m_pRenderer->GetHeight() / 2);
 	m_pBackground->SetScale(1.05f);
+
+	m_pSkillButton = renderer.CreateSprite("Sprites\\Buttons\\SkillButton.png");
+	m_pSkillButton->SetX(m_pRenderer->GetWidth() / 8);
+	m_pSkillButton->SetY(m_pRenderer->GetHeight() / 7);
+	SetButtonOff();
 
 	// Initialize player tank
 	m_pPlayer = new Player();
@@ -149,6 +159,9 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	m_pBackground->SetAngle(0);
 	m_pBackground->Process(deltaTime);
 
+	m_pSkillButton->SetAngle(0);
+	m_pSkillButton->Process(deltaTime);
+
 	m_pPlayer->Process(deltaTime, inputSystem);
 
 	for (auto& enemy : m_pEnemies)
@@ -183,6 +196,27 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	if (allEnemiesDestroyed)
 	{
 		(*m_sceneIndex) += 2;
+	}
+
+	//dealing with skill:
+	ButtonState ENKeyState = inputSystem.GetKeyState(SDL_SCANCODE_RETURN);
+
+	if (skillTimer > 0.0f)
+	{
+		skillTimer -= deltaTime;
+	}
+	else
+	{
+		SetButtonOn();
+	}
+
+	if (skillTimer <= 0.0f && ENKeyState == BS_PRESSED)
+	{
+		SetButtonOff();
+		//use the skill:
+
+
+		skillTimer = skillInterval;
 	}
 }
 
@@ -271,6 +305,8 @@ void SceneTankGame::Draw(Renderer& renderer)
 	m_aircraft.Draw(renderer);
 
 	m_clouds.Draw(renderer);
+
+	m_pSkillButton->Draw(renderer);
 }
 
 void SceneTankGame::DebugDraw()
@@ -318,4 +354,18 @@ void SceneTankGame::ReceiveDamage(int num)
 	{
 		(*m_sceneIndex)++;
 	}
+}
+
+void SceneTankGame::SetButtonOn()
+{
+	m_pSkillButton->SetBlueTint(1.0f);
+	m_pSkillButton->SetGreenTint(1.0f);
+	m_pSkillButton->SetRedTint(1.0f);
+}
+
+void SceneTankGame::SetButtonOff()
+{
+	m_pSkillButton->SetBlueTint(0.6f);
+	m_pSkillButton->SetGreenTint(0.6f);
+	m_pSkillButton->SetRedTint(0.6f);
 }

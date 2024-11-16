@@ -47,6 +47,8 @@ private:
 	void UpdateExplosions(float deltaTime);
 	void CreateExplosion(float x, float y);
 	void ReceiveDamage(int num);
+	void SetButtonOn();
+	void SetButtonOff();
 
 	// Member data: 
 public:
@@ -58,12 +60,16 @@ protected:
 	std::vector<Enemy*> m_pEnemies;
 	std::vector<Trap*> m_Traps;
 	Sprite* m_pBackground;
+	Sprite* m_pSkillButton;
 
 private:
 	FMOD::Sound* hitsound1;
 	FMOD::Sound* hitsound2;
 	FMOD::Sound* opening;
 	FMOD::Channel* channel;
+
+	float skillTimer;
+	float skillInterval;
 
 	Player* m_pPlayer;
 

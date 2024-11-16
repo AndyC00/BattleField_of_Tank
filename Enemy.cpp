@@ -9,7 +9,7 @@
 #include <cmath>
 #include <iostream>
 
-const int bulletTimerTotal = 2;
+const float bulletTimerTotal = 3.5f;	//how often to shoot
 
 Enemy::Enemy(Player* player)
 	: Entity()
