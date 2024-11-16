@@ -11,8 +11,9 @@
 
 const int bulletTimerTotal = 2;
 
-Enemy::Enemy()
+Enemy::Enemy(Player* player)
 	: Entity()
+	, m_pPlayer(player)
 	, m_rotationTimer(0.0f)
 	, m_rotationDuration(0.5f) //take 0.5s to rotate
 	, m_isRotating(false)
@@ -20,6 +21,7 @@ Enemy::Enemy()
 	, m_targetAngle(0.0f)
 	, bullet(nullptr)
 	, m_bulletTimer(0)
+	, m_attackRange(150.0f)
 {
 
 }
@@ -47,8 +49,8 @@ bool Enemy::Initialise(Renderer& renderer)
 		return false;
 	}
 
-	int m_x = ((rand() % 2 == 0) ? (rand() % 890 + 10) : (rand() % 890 + 910));
-	int m_y = ((rand() % 2 == 0) ? (rand() % 490 + 10) : (rand() % 480 + 550));
+	int m_x = (rand() % (renderer.GetWidth() / 2 - 50) + 50);
+	int m_y = (rand() % (renderer.GetHeight() / 2) + 50);
 
 	m_pSprite->SetScale(0.2f);
 
@@ -165,4 +167,20 @@ bool Enemy::IsNearBoundary(Vector2 m_position)
 
 	return (m_position.x <= margin || m_position.x >= 1860.0f - margin ||
 		m_position.y <= margin || m_position.y >= 1060.0f - margin);
+}
+
+bool Enemy::IsWithinRange()
+{
+	if (m_pPlayer == nullptr)
+	{
+		std::cout << "Can't find Player!" << std::endl;
+		return false;
+	}
+	Vector2 PlayerPosition = m_pPlayer->GetPosition();
+
+	float deltaX = m_position.x - PlayerPosition.x;
+	float deltaY = m_position.y - PlayerPosition.y;
+	float distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
+
+	return distance <= m_attackRange;
 }

@@ -99,12 +99,12 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	// Initialize player tank
 	m_pPlayer = new Player();
 	m_pPlayer->Initialise(renderer);
-	m_pPlayer->SetPosition(static_cast<int>(renderer.GetWidth() / 2.0f), static_cast<int>(renderer.GetHeight() / 2.0f));
+	m_pPlayer->SetPosition(static_cast<int>(renderer.GetWidth() / 2.0f), static_cast<int>(renderer.GetHeight() * 0.8f));
 
 	// Spawn a set random number of enemies:
 	for (int i = 0; i < rand()%5 + 4; i++)
 	{
-		Enemy* enemy = new Enemy();
+		Enemy* enemy = new Enemy(m_pPlayer);
 		enemy->Initialise(renderer);
 		m_pEnemies.push_back(enemy);
 	}

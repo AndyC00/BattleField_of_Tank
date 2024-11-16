@@ -3,11 +3,12 @@
 #include <vector>
 #include <memory>
 #include "Bullet.h"
+#include "Player.h"
 
 class Enemy : public Entity
 {
 public:
-	Enemy();
+	Enemy(Player* player);
 	~Enemy();
 
 	// Initialise multiple enemies
@@ -30,8 +31,11 @@ private:
 	float m_startAngle;
 	float m_targetAngle;
 	float m_bulletTimer;
+	float m_attackRange;
 
 	bool IsNearBoundary(Vector2 m_position);
+	bool IsWithinRange();
 
 	Bullet* bullet;
+	Player* m_pPlayer;
 };
