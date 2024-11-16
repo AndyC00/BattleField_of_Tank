@@ -131,6 +131,9 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	//initialise the planes:
 	m_aircraft.Initialise(renderer);
 
+	//initialise the skill assets:
+	m_skill.Initialise(renderer);
+
 	//initialise the sound:
 	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
 	if (result != FMOD_OK || hitsound1 == nullptr) {
@@ -198,6 +201,8 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 		(*m_sceneIndex) += 2;
 	}
 
+	m_skill.Process(deltaTime);
+
 	//dealing with skill:
 	ButtonState ENKeyState = inputSystem.GetKeyState(SDL_SCANCODE_RETURN);
 
@@ -213,11 +218,13 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	if (skillTimer <= 0.0f && ENKeyState == BS_PRESSED)
 	{
 		SetButtonOff();
-		//use the skill:
-
-
 		skillTimer = skillInterval;
+
+		//use the skill:
+		m_skill.Activate();
 	}
+	m_skill.Process(deltaTime);
+
 }
 
 void SceneTankGame::CheckCollisions()
@@ -307,6 +314,8 @@ void SceneTankGame::Draw(Renderer& renderer)
 	m_clouds.Draw(renderer);
 
 	m_pSkillButton->Draw(renderer);
+
+	m_skill.Draw(renderer);
 }
 
 void SceneTankGame::DebugDraw()

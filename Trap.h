@@ -1,3 +1,6 @@
+#ifndef   Trap_H 
+#define   Trap_H 
+
 #include "Entity.h"
 #include "animatedsprite.h"
 
@@ -19,3 +22,5 @@ private:
 	AnimatedSprite* m_trap;
 	Renderer* m_pRenderer;
 };
+
+#endif //   Trap_H

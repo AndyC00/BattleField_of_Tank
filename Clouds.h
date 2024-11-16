@@ -1,3 +1,6 @@
+#ifndef   Clouds_H 
+#define   Clouds_H 
+
 #include "Entity.h"
 #include "animatedsprite.h"
 
@@ -18,3 +21,5 @@ private:
 	Renderer* m_pRenderer;
 	std::vector <Entity*> m_clouds;
 };
+
+#endif //   Clouds_H

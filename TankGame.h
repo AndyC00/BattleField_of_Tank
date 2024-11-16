@@ -12,6 +12,7 @@
 #include "Trap.h"
 #include "Clouds.h"
 #include "Aircraft.h"
+#include "EnterSkill.h"
 
 // Library includes:
 #include <vector>
@@ -75,6 +76,7 @@ private:
 
 	Clouds m_clouds;
 	Aircraft m_aircraft;
+	EnterSkill m_skill;
 };
 
 #endif //   TANKGAME_H 

@@ -1,3 +1,6 @@
+#ifndef   Aircraft_H 
+#define   Aircraft_H 
+
 #include "Entity.h"
 #include "animatedsprite.h"
 
@@ -29,3 +32,5 @@ private:
 	float spawnInterval;
 	float axisSpawnInterval;
 };
+
+#endif //   Aircraft_H 
