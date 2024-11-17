@@ -9,6 +9,8 @@
 
 08/11 button assets added
 
+11/11 - 16/11 enemy rework, assets added, skill implemented!
+
 07/11 axis planes implemented
 
 05/11 Allie planes implemented
@@ -19,10 +21,10 @@
 	  Plane assets found
 	  Trap collision implemented
 
-		plan: 1. Enemies face player once in range and move towards player if withinRange()
-			2. Enemies all spawn in the top half screen, player spawn in the bottom half screen
-			3. Enemies all using different sprites
-			4. press "enter" to use skill which calls planes to boom
+		plan: 1. Enemies face player once in range and move towards player if withinRange()							(done)
+			2. Enemies all spawn in the top half screen, player spawn in the bottom half screen						(done)
+			3. Enemies all using different sprites															(done)
+			4. press "enter" to use skill which calls planes to boom											(done)
 			5. Allies planes comes from bottom edge to top edge, Axis planes comes from top edge to bottom edge		(done)
 			6. Set a timer for player to shoot															(done)
 			7. Sound & music rework
