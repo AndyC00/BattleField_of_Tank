@@ -102,12 +102,12 @@ bool Player::Initialise(Renderer& renderer)
     PlayerBullet = new Bullet();
     PlayerBullet->Initialise(renderer);
 
-	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\largeExplosion.flac", FMOD_DEFAULT, &deadsound);
+	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\PlayerDead.mp3", FMOD_DEFAULT, &deadsound);
 	if (result != FMOD_OK || deadsound == nullptr) {
-		printf("Failed to load largeExplosion.flac: %s\n", FMOD_ErrorString(result));
+		printf("Failed to load PlayerDead.mp3: %s\n", FMOD_ErrorString(result));
 	}
 	else {
-		printf("Successfully loaded largeExplosion.flac\n");
+		printf("Successfully loaded PlayerDead.mp3\n");
 	}
 	FMOD_RESULT result2 = Game::pSoundsystem->createSound("sounds\\fire.wav", FMOD_DEFAULT, &hitsound1);
 	if (result2 != FMOD_OK || hitsound1 == nullptr) {

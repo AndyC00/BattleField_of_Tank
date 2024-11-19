@@ -153,12 +153,12 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 		printf("Successfully loaded hit.wav\n");
 	}
 
-	result = Game::pSoundsystem->createSound("sounds\\hit2.mp3", FMOD_DEFAULT, &hitsound2);
+	result = Game::pSoundsystem->createSound("sounds\\hit2.wav", FMOD_DEFAULT, &hitsound2);
 	if (result != FMOD_OK || hitsound2 == nullptr) {
-		printf("Failed to load hit2.mp3: %s\n", FMOD_ErrorString(result));
+		printf("Failed to load hit2.wav: %s\n", FMOD_ErrorString(result));
 	}
 	else {
-		printf("Successfully loaded hit2.mp3\n");
+		printf("Successfully loaded hit2.wav\n");
 	}
 	Game::pSoundsystem->createSound("sounds\\opening.wav", FMOD_LOOP_NORMAL, &opening);
 	Game::pSoundsystem->playSound(opening, nullptr, false, &channel);
