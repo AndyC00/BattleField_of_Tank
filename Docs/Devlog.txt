@@ -1,3 +1,12 @@
+19/11 All Music assets implemented
+	  Scene management update
+	  Battle Scene modified
+
+18/11 Music Assets added
+
+16/11 Skill implemented
+	  Bugs fixed
+
 14/11 restart implemented, bug fixed
 	  background assets added, background will be changed randomly every time load the scene
 
