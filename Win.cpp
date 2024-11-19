@@ -12,6 +12,10 @@
 #include <cassert>
 #include <cstdlib>
 
+using FMOD::System;
+using FMOD::Sound;
+using FMOD::Channel;
+
 WinScene::WinScene(Game* game) :
 	m_pCentre(0),
 	m_quit(0),
@@ -19,6 +23,8 @@ WinScene::WinScene(Game* game) :
 	m_angle(0.0f),
 	m_rotationSpeed(0.0f),
 	m_pRenderer(nullptr),
+	winningChannel(nullptr),
+	winningSound(nullptr),
 	m_game(game)
 {
 
@@ -32,6 +38,17 @@ WinScene::~WinScene()
 	m_quit = 0;
 	delete m_restart;
 	m_restart = 0;
+
+	if (winningSound)
+	{
+		winningSound->release();
+		winningSound = nullptr;
+	}
+	if (winningChannel)
+	{
+		winningChannel->stop();
+		winningChannel = nullptr;
+	}
 }
 
 bool WinScene::Initialise(Renderer& renderer)
@@ -57,10 +74,28 @@ bool WinScene::Initialise(Renderer& renderer)
 	m_restart->SetX(SCREEN_WIDTH / 6);
 	m_restart->SetY(SCREEN_HEIGHT / 6 + 120);
 
+	//sound:
+	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\winningSound.wav", FMOD_DEFAULT, &winningSound);
+
+	if (result != FMOD_OK || winningSound == nullptr)
+	{
+		printf("Failed to load winningSound.wav: %s\n", FMOD_ErrorString(result));
+	}
+	else
+	{
+		printf("Successfully loaded winningSound.wav\n");
+	}
+
 	return true;
 }
+
 void WinScene::Process(float deltaTime, InputSystem& inputSystem)
 {
+	if (!winningChannel)
+	{
+		Game::pSoundsystem->playSound(winningSound, nullptr, false, &winningChannel);
+	}
+
 	m_angle += m_rotationSpeed * deltaTime;
 
 	m_pCentre->SetAngle(m_angle);

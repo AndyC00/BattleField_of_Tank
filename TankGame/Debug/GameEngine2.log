@@ -1,6 +1,7 @@
-﻿  TankGame.cpp
-D:\Developing_Projects\TankGame\TankGame.cpp(296,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Developing_Projects\TankGame\TankGame.cpp(297,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Developing_Projects\TankGame\TankGame.cpp(298,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\TankGame.cpp(298,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  TitleScene.cpp
+D:\Developing_Projects\TankGame\TitleScene.cpp(83,24): warning C4018: '<': signed/unsigned mismatch
+  game.cpp
+D:\Developing_Projects\TankGame\game.cpp(284,26): warning C4018: '<': signed/unsigned mismatch
+D:\Developing_Projects\TankGame\game.cpp(293,26): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe

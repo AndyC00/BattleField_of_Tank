@@ -72,6 +72,10 @@ private:
 	FMOD::Sound* hitsound2;
 	FMOD::Sound* opening;
 	FMOD::Sound* bgSound;
+	FMOD::Sound* boomerSound;
+	FMOD::Sound* skillExplosion;
+	FMOD::Channel* skillChannel;
+	FMOD::Channel* boomerChannel;
 	FMOD::Channel* damageReceiveChannel;
 	FMOD::Channel* explosionChannel;
 	FMOD::Channel* musicChannel;

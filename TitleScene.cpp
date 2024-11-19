@@ -11,8 +11,14 @@
 //library includes:
 #include <cassert>
 
+using FMOD::System;
+using FMOD::Sound;
+using FMOD::Channel;
+
 TitleScene::TitleScene():
-	m_CurrentPicture(0)
+	m_CurrentPicture(0),
+	titleChannel(nullptr),
+	titleSound(nullptr)
 {
 
 }
@@ -24,6 +30,17 @@ TitleScene::~TitleScene()
 		delete m_picture;
 	}
 	m_pictures.clear();
+
+	if (titleSound)
+	{
+		titleSound->release();
+		titleSound = nullptr;
+	}
+	if (titleChannel)
+	{
+		titleChannel->stop();
+		titleChannel = nullptr;
+	}
 }
 
 bool TitleScene::Initialise(Renderer& renderer)
@@ -47,10 +64,18 @@ bool TitleScene::Initialise(Renderer& renderer)
 		m_picture->SetScale(1.05f);
 	}
 
+	//sound:
+	Game::pSoundsystem->createSound("sounds\\TitleMusic.wav", FMOD_LOOP_NORMAL, &titleSound);
+
 	return true;
 }
 void TitleScene::Process(float deltaTime, InputSystem& inputSystem)
 {
+	if (!titleChannel)
+	{
+		Game::pSoundsystem->playSound(titleSound, nullptr, false, &titleChannel);
+	}
+
 	m_pictures[m_CurrentPicture]->Process(deltaTime);
 
 	if (inputSystem.GetMouseButtonState(SDL_BUTTON_LEFT) == BS_PRESSED)
@@ -62,6 +87,7 @@ void TitleScene::Process(float deltaTime, InputSystem& inputSystem)
 		else
 		{
 			(*m_sceneIndex)++;
+			OnExit();
 		}
 	}
 }
@@ -69,6 +95,20 @@ void TitleScene::Process(float deltaTime, InputSystem& inputSystem)
 void TitleScene::Draw(Renderer& renderer)
 {
 	m_pictures[m_CurrentPicture]->Draw(renderer);
+}
+
+void TitleScene::OnExit()
+{
+	if (titleSound)
+	{
+		titleSound->release();
+		titleSound = nullptr;
+	}
+	if (titleChannel)
+	{
+		titleChannel->stop();
+		titleChannel = nullptr;
+	}
 }
 
 void TitleScene::DebugDraw()

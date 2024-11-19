@@ -12,6 +12,9 @@
 #include <cassert>
 #include <cstdlib>
 
+using FMOD::System;
+using FMOD::Sound;
+using FMOD::Channel;
 
 LoseScene::LoseScene(Game* game) :
 	m_pCentre(0),
@@ -20,6 +23,8 @@ LoseScene::LoseScene(Game* game) :
 	m_angle(0.0f),
 	m_rotationSpeed(0.0f),
 	m_pRenderer(nullptr),
+	loseChannel(nullptr),
+	loseSound(nullptr),
 	m_game(game)
 {
 
@@ -33,6 +38,17 @@ LoseScene::~LoseScene()
 	m_quit = 0;
 	delete m_restart;
 	m_restart = 0;
+
+	if (loseSound)
+	{
+		loseSound->release();
+		loseSound = nullptr;
+	}
+	if (loseChannel)
+	{
+		loseChannel->stop();
+		loseChannel = nullptr;
+	}
 }
 
 bool LoseScene::Initialise(Renderer& renderer)
@@ -59,10 +75,28 @@ bool LoseScene::Initialise(Renderer& renderer)
 	m_restart->SetX(SCREEN_WIDTH / 6);
 	m_restart->SetY(SCREEN_HEIGHT / 6 + 120);
 
+	//sound:
+	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\loseSound.wav", FMOD_DEFAULT, &loseSound);
+
+	if (result != FMOD_OK || loseSound == nullptr)
+	{
+		printf("Failed to load loseSound.wav: %s\n", FMOD_ErrorString(result));
+	}
+	else 
+	{
+		printf("Successfully loaded loseSound.wav\n");
+	}
+
 	return true;
 }
+
 void LoseScene::Process(float deltaTime, InputSystem& inputSystem)
 {
+	if (!loseChannel)
+	{
+		Game::pSoundsystem->playSound(loseSound, nullptr, false, &loseChannel);
+	}
+
 	m_angle += m_rotationSpeed * deltaTime;
 
 	m_pCentre->SetAngle(m_angle);

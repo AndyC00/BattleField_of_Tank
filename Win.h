@@ -6,6 +6,9 @@
 #include "InputSystem.h"
 #include "game.h"
 
+#include "fmod.hpp"
+#include "soundsystem.h"
+
 //Forward declarations:
 class Renderer;
 class Sprite;
@@ -44,6 +47,8 @@ protected:
 private:
 	Game* m_game;
 
+	FMOD::Sound* winningSound;
+	FMOD::Channel* winningChannel;
 };
 
 #endif // _WIN_H_

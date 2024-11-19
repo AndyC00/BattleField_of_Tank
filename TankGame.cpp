@@ -16,7 +16,6 @@
 // Library includes:
 #include <vector>
 #include <cmath>
-#include "fmod.hpp"
 #include "fmod_errors.h"
 #include <ctime>
 #include "inputsystem.h"
@@ -32,13 +31,18 @@ SceneTankGame::SceneTankGame(Game* game)
 
 	hitsound1(nullptr),
 	hitsound2(nullptr),
+	boomerSound(nullptr),
+	opening(nullptr),
+	bgSound(nullptr),
+	skillExplosion(nullptr),
+
 	damageReceiveChannel(nullptr),
 	explosionChannel(nullptr),
 	musicChannel(nullptr),
 	bgChannel(nullptr),
-	opening(nullptr),
-	bgSound(nullptr),
-
+	boomerChannel(nullptr),
+	skillChannel(nullptr),
+	
 	m_pBackground(nullptr),
 	m_pSkillButton(nullptr),
 
@@ -73,6 +77,26 @@ SceneTankGame::~SceneTankGame()
 		bgSound->release();
 		bgSound = nullptr;
 	}
+	if (boomerSound)
+	{
+		boomerSound->release();
+		boomerSound = nullptr;
+	}
+	if (skillExplosion)
+	{
+		skillExplosion->release();
+		skillExplosion = nullptr;
+	}
+	if (skillChannel)
+	{
+		skillChannel->stop();
+		skillChannel = nullptr;
+	}
+	if (boomerChannel)
+	{
+		boomerChannel->stop();
+		boomerChannel = nullptr;
+	}
 	if (explosionChannel)
 	{
 		explosionChannel->stop();
@@ -93,6 +117,7 @@ SceneTankGame::~SceneTankGame()
 		bgChannel->stop();
 		bgChannel = nullptr;
 	}
+
 	for (auto& pAnimatedSprite : m_explosions)
 	{
 		delete pAnimatedSprite;
@@ -177,7 +202,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	//initialise the skill assets:
 	m_skill.Initialise(renderer);
 
-	//initialise the sound:
+	//initialise the sounds:
 	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.mp3", FMOD_DEFAULT, &hitsound1);
 	if (result != FMOD_OK || hitsound1 == nullptr) {
 		printf("Failed to load hit1.mp3: %s\n", FMOD_ErrorString(result));
@@ -196,7 +221,11 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 
 	Game::pSoundsystem->createSound("sounds\\opening.wav", FMOD_LOOP_NORMAL, &opening);
 
-	Game::pSoundsystem->createSound("sounds\\battleField.flac", FMOD_DEFAULT, &bgSound);
+	Game::pSoundsystem->createSound("sounds\\battleField.flac", FMOD_LOOP_NORMAL, &bgSound);
+
+	Game::pSoundsystem->createSound("sounds\\Boomer.mp3", FMOD_DEFAULT, &boomerSound);
+
+	Game::pSoundsystem->createSound("sounds\\SkillExplosion.flac", FMOD_DEFAULT, &skillExplosion);
 
 	return true;
 }
@@ -275,6 +304,8 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 
 	if (skillTimer <= 0.0f && ENKeyState == BS_PRESSED)
 	{
+		Game::pSoundsystem->playSound(boomerSound, nullptr, false, &boomerChannel);
+
 		SetButtonOff();
 		skillTimer = skillInterval;
 
@@ -291,6 +322,8 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 
 		if (waitTimer <= 0.0f)
 		{
+			Game::pSoundsystem->playSound(skillExplosion, nullptr, false, &skillChannel);
+
 			for (int i = 0; i < 13; i++)
 			{
 				int positionX = m_pPlayer->GetPosition().x + ((rand() % 2 == 0) ? (rand() % 400) : (-rand() % 400));
@@ -513,24 +546,64 @@ void SceneTankGame::SetButtonOff()
 
 void SceneTankGame::OnExit()
 {
-	if (musicChannel)
+	if (hitsound1)
 	{
-		musicChannel->stop();
-		musicChannel = nullptr;
+		hitsound1->release();
+		hitsound1 = nullptr;
+	}
+	if (hitsound2)
+	{
+		hitsound2->release();
+		hitsound2 = nullptr;
 	}
 	if (opening)
 	{
 		opening->release();
 		opening = nullptr;
 	}
-	if (bgChannel)
-	{
-		bgChannel->stop();
-		bgChannel = nullptr;
-	}
 	if (bgSound)
 	{
 		bgSound->release();
 		bgSound = nullptr;
+	}
+	if (boomerSound)
+	{
+		boomerSound->release();
+		boomerSound = nullptr;
+	}
+	if (skillExplosion)
+	{
+		skillExplosion->release();
+		skillExplosion = nullptr;
+	}
+	if (skillChannel)
+	{
+		skillChannel->stop();
+		skillChannel = nullptr;
+	}
+	if (boomerChannel)
+	{
+		boomerChannel->stop();
+		boomerChannel = nullptr;
+	}
+	if (explosionChannel)
+	{
+		explosionChannel->stop();
+		explosionChannel = nullptr;
+	}
+	if (damageReceiveChannel)
+	{
+		damageReceiveChannel->stop();
+		damageReceiveChannel = nullptr;
+	}
+	if (musicChannel)
+	{
+		musicChannel->stop();
+		musicChannel = nullptr;
+	}
+	if (bgChannel)
+	{
+		bgChannel->stop();
+		bgChannel = nullptr;
 	}
 }
