@@ -80,7 +80,7 @@ void WinScene::Process(float deltaTime, InputSystem& inputSystem)
 		Scene* oldScene = m_game->GetSceneAt(sceneTankGameIndex);
 		oldScene = nullptr; //the oldScene will be deleted in the __debugbreak(). No idea why
 
-		SceneTankGame* newScene = new SceneTankGame();
+		SceneTankGame* newScene = new SceneTankGame(m_game);
 		newScene->OnSceneChange(m_sceneIndex);
 		newScene->Initialise(*m_pRenderer);
 

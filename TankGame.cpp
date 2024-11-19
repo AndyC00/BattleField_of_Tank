@@ -25,15 +25,23 @@ using FMOD::System;
 using FMOD::Sound;
 using FMOD::Channel;
 
-SceneTankGame::SceneTankGame()
+SceneTankGame::SceneTankGame(Game* game)
 	: m_pRenderer(nullptr),
+	m_pPlayer(nullptr),
+	m_game(game),
+
 	hitsound1(nullptr),
 	hitsound2(nullptr),
-	m_pPlayer(nullptr),
-	channel(nullptr),
+	damageReceiveChannel(nullptr),
+	explosionChannel(nullptr),
+	musicChannel(nullptr),
+	bgChannel(nullptr),
 	opening(nullptr),
+	bgSound(nullptr),
+
 	m_pBackground(nullptr),
 	m_pSkillButton(nullptr),
+
 	waitTimer(0.75f),		//the time wait for the plane
 	waitInterval(0),
 	isWaitTimeActive(false),
@@ -59,6 +67,31 @@ SceneTankGame::~SceneTankGame()
 	{
 		opening->release();
 		opening = nullptr;
+	}
+	if (bgSound)
+	{
+		bgSound->release();
+		bgSound = nullptr;
+	}
+	if (explosionChannel)
+	{
+		explosionChannel->stop();
+		explosionChannel = nullptr;
+	}
+	if (damageReceiveChannel)
+	{
+		damageReceiveChannel->stop();
+		damageReceiveChannel = nullptr;
+	}
+	if (musicChannel)
+	{
+		musicChannel->stop();
+		musicChannel = nullptr;
+	}
+	if (bgChannel)
+	{
+		bgChannel->stop();
+		bgChannel = nullptr;
 	}
 	for (auto& pAnimatedSprite : m_explosions)
 	{
@@ -145,12 +178,12 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_skill.Initialise(renderer);
 
 	//initialise the sound:
-	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.wav", FMOD_DEFAULT, &hitsound1);
+	FMOD_RESULT result = Game::pSoundsystem->createSound("sounds\\hit1.mp3", FMOD_DEFAULT, &hitsound1);
 	if (result != FMOD_OK || hitsound1 == nullptr) {
-		printf("Failed to load hit.wav: %s\n", FMOD_ErrorString(result));
+		printf("Failed to load hit1.mp3: %s\n", FMOD_ErrorString(result));
 	}
 	else {
-		printf("Successfully loaded hit.wav\n");
+		printf("Successfully loaded hit1.mp3\n");
 	}
 
 	result = Game::pSoundsystem->createSound("sounds\\hit2.wav", FMOD_DEFAULT, &hitsound2);
@@ -160,14 +193,26 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	else {
 		printf("Successfully loaded hit2.wav\n");
 	}
+
 	Game::pSoundsystem->createSound("sounds\\opening.wav", FMOD_LOOP_NORMAL, &opening);
-	Game::pSoundsystem->playSound(opening, nullptr, false, &channel);
+
+	Game::pSoundsystem->createSound("sounds\\battleField.flac", FMOD_DEFAULT, &bgSound);
 
 	return true;
 }
 
 void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 {
+	if (!musicChannel)
+	{
+		Game::pSoundsystem->playSound(opening, nullptr, false, &musicChannel);
+	}
+
+	if (!bgChannel)
+	{
+		Game::pSoundsystem->playSound(bgSound, nullptr, false, &bgChannel);
+	}
+
 	//process the background
 	m_pBackground->SetAngle(0);
 	m_pBackground->Process(deltaTime);
@@ -209,7 +254,9 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	}
 	if (allEnemiesDestroyed)
 	{
-		(*m_sceneIndex) += 2;
+		//move to the win Scene
+		int winScenePosition = m_game->GetSceneSize() - 1;
+		m_game->SwitchScene(winScenePosition);
 	}
 
 	m_skill.Process(deltaTime);
@@ -283,7 +330,7 @@ void SceneTankGame::CheckCollisions()
 	{
 		if (enemy->IsAlive() && m_pPlayer->IsCollidingWith(*enemy))
 		{
-			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &damageReceiveChannel);
 
 			CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
 
@@ -292,7 +339,7 @@ void SceneTankGame::CheckCollisions()
 
 		if (m_pPlayer->IsCollidingWithBullet(enemy->GetBullet()))
 		{
-			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &damageReceiveChannel);
 
 			CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
 
@@ -303,7 +350,7 @@ void SceneTankGame::CheckCollisions()
 		{
 			enemy->SetDead();
 
-			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+			Game::pSoundsystem->playSound(hitsound1, nullptr, false, &explosionChannel);
 
 			CreateExplosion(enemy->GetPosition().x, enemy->GetPosition().y);
 		}
@@ -316,7 +363,7 @@ void SceneTankGame::CheckCollisions()
 		{
 			trap->SetDead();
 
-			Game::pSoundsystem->playSound(hitsound2, nullptr, false, &channel);
+			Game::pSoundsystem->playSound(hitsound1, nullptr, false, &explosionChannel);
 
 			CreateExplosion(m_pPlayer->GetPosition().x, m_pPlayer->GetPosition().y);
 
@@ -444,7 +491,9 @@ void SceneTankGame::ReceiveDamage(int num)
 
 	if (m_pPlayer->GetLives() <= 0)
 	{
-		(*m_sceneIndex)++;
+		//move to lose scene
+		int loseScenePosition = m_game->GetSceneSize() - 2;
+		m_game->SwitchScene(loseScenePosition);
 	}
 }
 
@@ -460,4 +509,28 @@ void SceneTankGame::SetButtonOff()
 	m_pSkillButton->SetBlueTint(0.6f);
 	m_pSkillButton->SetGreenTint(0.6f);
 	m_pSkillButton->SetRedTint(0.6f);
+}
+
+void SceneTankGame::OnExit()
+{
+	if (musicChannel)
+	{
+		musicChannel->stop();
+		musicChannel = nullptr;
+	}
+	if (opening)
+	{
+		opening->release();
+		opening = nullptr;
+	}
+	if (bgChannel)
+	{
+		bgChannel->stop();
+		bgChannel = nullptr;
+	}
+	if (bgSound)
+	{
+		bgSound->release();
+		bgSound = nullptr;
+	}
 }

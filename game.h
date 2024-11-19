@@ -22,6 +22,7 @@ public:
 
 	static Game& GetInstance(); 
 	static void DestroyInstance();
+	void ToggleDebugWindow();
 
 	bool Initialise(); 
 	bool DoGameLoop(); 
@@ -29,10 +30,14 @@ public:
 
 	Scene* GetSceneAt(int index) const;
 	void SetSceneAt(int index, Scene* scene);
+	void SwitchScene(int newSceneIndex);
+	int GetSceneSize();
+
 
 protected:
 	void Process(float deltaTime); 
 	void Draw(Renderer& renderer);
+	void DebugDraw();
 
 	void ProcessFrameCounting(float deltaTime);
 
@@ -44,13 +49,10 @@ private:
 
 	// Member data: 
 public:
-	void ToggleDebugWindow();
 	static SoundSystem* pSoundsystem;
 
 protected:
 	bool m_bShowDebugWindow;
-
-	void DebugDraw();
 
 	static Game* sm_pInstance; 
 	Renderer* m_pRenderer;

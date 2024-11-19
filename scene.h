@@ -18,6 +18,7 @@ public:
 	virtual void Draw(Renderer& renderer) = 0;
 
 	void OnSceneChange(int* sceneIndex);
+	virtual void OnExit() {};
 
 protected:
 

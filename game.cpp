@@ -114,7 +114,7 @@ bool Game::Initialise()
 	m_scenes.push_back(pScene1);
 
 	SceneTankGame* pScene2 = nullptr;
-	pScene2 = new SceneTankGame();
+	pScene2 = new SceneTankGame(this);
 	pScene2->OnSceneChange(&m_iCurrentScene);
 	pScene2->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene2);
@@ -294,4 +294,19 @@ void Game::SetSceneAt(int index, Scene* scene)
 	{
 		m_scenes[index] = scene;
 	}
+}
+
+void Game::SwitchScene(int newSceneIndex)
+{
+	if (m_iCurrentScene != newSceneIndex)
+	{
+		m_scenes[m_iCurrentScene]->OnExit();
+
+		m_iCurrentScene = newSceneIndex;
+	}
+}
+
+int Game::GetSceneSize()
+{
+	return m_scenes.size();
 }

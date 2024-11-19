@@ -75,6 +75,11 @@ Player::~Player()
 		channelEngineBackward->stop();
 		channelEngineBackward = nullptr;
 	}
+	if (channelFire)
+	{
+		channelFire->stop();
+		channelFire = nullptr;
+	}
 	for (auto sprite : TankStates)
 	{
 		delete sprite;
@@ -240,9 +245,9 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	//when press down arrow button:
 	if (BKeyState == BS_HELD)
 	{
-		if (!channelEngineForward)
+		if (!channelEngineBackward)
 		{
-			Game::pSoundsystem->playSound(engineSound, nullptr, false, &channelEngineForward);
+			Game::pSoundsystem->playSound(engineSound, nullptr, false, &channelEngineBackward);
 		}
 		float playerAngle = m_pSprite->GetAngle();
 		float angleInRadians = (playerAngle + 90.0f) * M_PI / 180.0f;
@@ -258,10 +263,10 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	}
 	else if (BKeyState == BS_RELEASED)
 	{
-		if (channelEngineForward)
+		if (channelEngineBackward)
 		{
-			channelEngineForward->stop();
-			channelEngineForward = nullptr;
+			channelEngineBackward->stop();
+			channelEngineBackward = nullptr;
 		}
 		m_velocity = Vector2(0.0f, 0.0f);
 	}

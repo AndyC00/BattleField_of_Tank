@@ -30,13 +30,14 @@ class SceneTankGame : public Scene
 {
 	// Member methods: 
 public:
-	SceneTankGame();
+	SceneTankGame(Game* game);
 	virtual ~SceneTankGame();
 
 	virtual bool Initialise(Renderer& renderer);
 	virtual void Process(float deltaTime, InputSystem& inputSystem);
 	virtual void Draw(Renderer& renderer);
 	virtual void DebugDraw();
+	void OnExit() override;
 
 protected:
 	void CheckCollisions();
@@ -70,7 +71,11 @@ private:
 	FMOD::Sound* hitsound1;
 	FMOD::Sound* hitsound2;
 	FMOD::Sound* opening;
-	FMOD::Channel* channel;
+	FMOD::Sound* bgSound;
+	FMOD::Channel* damageReceiveChannel;
+	FMOD::Channel* explosionChannel;
+	FMOD::Channel* musicChannel;
+	FMOD::Channel* bgChannel;
 
 	float skillTimer;
 	float skillInterval;
@@ -79,6 +84,7 @@ private:
 	bool isWaitTimeActive;
 
 	Player* m_pPlayer;
+	Game* m_game;
 
 	Clouds m_clouds;
 	Aircraft m_aircraft;
