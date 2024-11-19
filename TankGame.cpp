@@ -24,10 +24,11 @@ using FMOD::System;
 using FMOD::Sound;
 using FMOD::Channel;
 
-SceneTankGame::SceneTankGame(Game* game)
+SceneTankGame::SceneTankGame(Game* game, int difficulty)
 	: m_pRenderer(nullptr),
 	m_pPlayer(nullptr),
 	m_game(game),
+	difficulty(difficulty),
 
 	hitsound1(nullptr),
 	hitsound2(nullptr),
@@ -180,13 +181,13 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pPlayer->SetPosition(static_cast<int>(renderer.GetWidth() / 2.0f), static_cast<int>(renderer.GetHeight() * 0.8f));
 
 	// Spawn a set random number of enemies:
-	for (int i = 0; i < rand() % 5 + 4; i++)
+	for (int i = 0; i < rand() % 4 + difficulty; i++)
 	{
 		Enemy* enemy = new Enemy(m_pPlayer);
 		enemy->Initialise(renderer);
 		m_pEnemies.push_back(enemy);
 	}
-	for (int i = 0; i < rand() % 3 + 3; i++)
+	for (int i = 0; i < rand() % 2 + difficulty; i++)
 	{
 		Trap* trap = new Trap();
 		trap->Initialise(renderer);
@@ -283,9 +284,17 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 	}
 	if (allEnemiesDestroyed)
 	{
-		//move to the win Scene
-		int winScenePosition = m_game->GetSceneSize() - 1;
-		m_game->SwitchScene(winScenePosition);
+		if (difficulty < 6)
+		{
+			(*m_sceneIndex)++;
+			OnExit();
+		}
+		else
+		{
+			//move to the win Scene
+			int winScenePosition = m_game->GetSceneSize() - 1;
+			m_game->SwitchScene(winScenePosition);
+		}
 	}
 
 	m_skill.Process(deltaTime);
@@ -324,7 +333,7 @@ void SceneTankGame::Process(float deltaTime, InputSystem& inputSystem)
 		{
 			Game::pSoundsystem->playSound(skillExplosion, nullptr, false, &skillChannel);
 
-			for (int i = 0; i < 13; i++)
+			for (int i = 0; i < 20; i++)
 			{
 				int positionX = m_pPlayer->GetPosition().x + ((rand() % 2 == 0) ? (rand() % 400) : (-rand() % 400));
 				int positionY = m_pPlayer->GetPosition().y + ((rand() % 2 == 0) ? (rand() % 400) : (-rand() % 400));

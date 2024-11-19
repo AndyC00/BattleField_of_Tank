@@ -113,14 +113,23 @@ void LoseScene::Process(float deltaTime, InputSystem& inputSystem)
 		//Restart the Playing Scene
 		int sceneTankGameIndex = 1; // The buffer of the TankGame Scene
 		
-		Scene* oldScene = m_game->GetSceneAt(sceneTankGameIndex);
-		oldScene = nullptr; //the oldScene will be deleted in the __debugbreak(). No idea why
+		for (int i = 0; i < 3; i++)
+		{
+			Scene* oldScene = m_game->GetSceneAt(sceneTankGameIndex + i);
+			oldScene->OnExit();
+			oldScene = nullptr;	//the oldScene will be deleted in the __debugbreak(). No idea why
+		}
 
-		SceneTankGame* newScene = new SceneTankGame(m_game);
-		newScene->OnSceneChange(m_sceneIndex);
-		newScene->Initialise(*m_pRenderer);
+		for (int i = 1; i <= 3; ++i)
+		{
+			int difficulty = i * 2; // Difficulty levels: 2, 4, 6
 
-		m_game->SetSceneAt(sceneTankGameIndex, newScene);
+			SceneTankGame* newScene = new SceneTankGame(m_game, difficulty);
+			newScene->OnSceneChange(m_sceneIndex);
+			newScene->Initialise(*m_pRenderer);
+
+			m_game->SetSceneAt(i, newScene);
+		}
 
 		*m_sceneIndex = sceneTankGameIndex;
 	}

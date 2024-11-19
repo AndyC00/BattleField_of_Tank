@@ -30,7 +30,7 @@ class SceneTankGame : public Scene
 {
 	// Member methods: 
 public:
-	SceneTankGame(Game* game);
+	SceneTankGame(Game* game, int difficulty);
 	virtual ~SceneTankGame();
 
 	virtual bool Initialise(Renderer& renderer);
@@ -86,6 +86,8 @@ private:
 	float waitTimer;
 	float waitInterval;
 	bool isWaitTimeActive;
+
+	int difficulty;
 
 	Player* m_pPlayer;
 	Game* m_game;

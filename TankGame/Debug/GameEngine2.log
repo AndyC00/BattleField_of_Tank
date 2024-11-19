@@ -1,7 +1,4 @@
-﻿  TitleScene.cpp
-D:\Developing_Projects\TankGame\TitleScene.cpp(83,24): warning C4018: '<': signed/unsigned mismatch
-  game.cpp
-D:\Developing_Projects\TankGame\game.cpp(284,26): warning C4018: '<': signed/unsigned mismatch
-D:\Developing_Projects\TankGame\game.cpp(293,26): warning C4018: '<': signed/unsigned mismatch
+﻿  Win.cpp
+  lose.cpp
   Generating Code...
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Debug\TankGame_Debug.exe

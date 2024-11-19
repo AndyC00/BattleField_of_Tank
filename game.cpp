@@ -113,23 +113,28 @@ bool Game::Initialise()
 	pScene1->Initialise(*m_pRenderer);
 	m_scenes.push_back(pScene1);
 
-	SceneTankGame* pScene2 = nullptr;
-	pScene2 = new SceneTankGame(this);
-	pScene2->OnSceneChange(&m_iCurrentScene);
-	pScene2->Initialise(*m_pRenderer);
-	m_scenes.push_back(pScene2);
+	SceneTankGame* pScene = nullptr;
+	for (int i = 1; i <= 3; i++)
+	{
+		int difficulty = i * 2;
 
-	Scene* pScene3 = nullptr;
-	pScene3 = new LoseScene(this);
-	pScene3->OnSceneChange(&m_iCurrentScene);
-	pScene3->Initialise(*m_pRenderer);
-	m_scenes.push_back(pScene3);
+		SceneTankGame* pScene = new SceneTankGame(this, difficulty);
+		pScene->OnSceneChange(&m_iCurrentScene);
+		pScene->Initialise(*m_pRenderer);
+		m_scenes.push_back(pScene);
+	}
 
-	Scene* pScene4 = nullptr;
-	pScene4 = new WinScene(this);
-	pScene4->OnSceneChange(&m_iCurrentScene);
-	pScene4->Initialise(*m_pRenderer);
-	m_scenes.push_back(pScene4);
+	Scene* pScene5 = nullptr;
+	pScene5 = new LoseScene(this);
+	pScene5->OnSceneChange(&m_iCurrentScene);
+	pScene5->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene5);
+
+	Scene* pScene6 = nullptr;
+	pScene6 = new WinScene(this);
+	pScene6->OnSceneChange(&m_iCurrentScene);
+	pScene6->Initialise(*m_pRenderer);
+	m_scenes.push_back(pScene6);
 
 	// text renderer at last:
 	// Load static text textures into the Texture Manager... 
