@@ -101,7 +101,8 @@ bool Game::Initialise()
 	m_pInputSystem->Initialise();
 
 	m_pRenderer = new Renderer();
-	if (!m_pRenderer->Initialise(true, bbWidth, bbHeight))
+	//create game in window or not:
+	if (!m_pRenderer->Initialise(false, bbWidth, bbHeight))
 	{
 		LogManager::GetInstance().Log("Renderer failed to initialise!");
 		return false;

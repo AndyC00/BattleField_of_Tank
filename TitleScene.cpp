@@ -51,6 +51,7 @@ bool TitleScene::Initialise(Renderer& renderer)
 	m_pictures.push_back(renderer.CreateSprite("Sprites\\Scene\\Story3.png"));
 	m_pictures.push_back(renderer.CreateSprite("Sprites\\Scene\\Story4.png"));
 	m_pictures.push_back(renderer.CreateSprite("Sprites\\Scene\\instruction.png"));
+	m_pictures.push_back(renderer.CreateSprite("Sprites\\Scene\\instruction2.png"));
 
 	for (auto& m_picture : m_pictures)
 	{
@@ -61,7 +62,7 @@ bool TitleScene::Initialise(Renderer& renderer)
 
 		m_picture->SetX(SCREEN_WIDTH / 2);
 		m_picture->SetY(SCREEN_HEIGHT / 2);
-		m_picture->SetScale(1.05f);
+		m_picture->SetScale(1.0f);
 	}
 
 	//sound:
