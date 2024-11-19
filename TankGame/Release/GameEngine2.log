@@ -1,11 +1,11 @@
-﻿  Enemy.cpp
-D:\Developing_Projects\TankGame\Enemy.cpp(58,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(58,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(83,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Developing_Projects\TankGame\Enemy.cpp(140,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  TankGame.cpp
+D:\Developing_Projects\TankGame\TankGame.cpp(339,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Developing_Projects\TankGame\TankGame.cpp(340,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Developing_Projects\TankGame\TankGame.cpp(341,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Developing_Projects\TankGame\TankGame.cpp(341,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Generating code
-  1 of 2762 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 2830 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    39 functions had inline decision re-evaluated but remain unchanged
+    41 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GameEngine2.vcxproj -> D:\Developing_Projects\TankGame\Release\TankGame_Released.exe

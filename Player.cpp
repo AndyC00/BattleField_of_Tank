@@ -31,7 +31,7 @@ Player::Player()
 	m_currentSpeed(0.0f),
 	shootTimer(1.7f),		//how often to fire
 	shootInterval(0),
-	m_maxSpeed(20.0f),		//Maximum speed can achieve
+	m_maxSpeed(35.0f),		//Maximum speed can achieve
 	m_acceleration(20.0f)	//accelerations to achieve maximum speed
 {
 

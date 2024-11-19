@@ -51,7 +51,7 @@ SceneTankGame::SceneTankGame(Game* game, int difficulty)
 	waitInterval(0),
 	isWaitTimeActive(false),
 	skillTimer(0.5f),
-	skillInterval(4.0f)		//how often able to use skill
+	skillInterval(5.0f)		//how often able to use skill
 {
 	srand(static_cast<unsigned>(time(0)));
 }
@@ -179,6 +179,7 @@ bool SceneTankGame::Initialise(Renderer& renderer)
 	m_pPlayer = new Player();
 	m_pPlayer->Initialise(renderer);
 	m_pPlayer->SetPosition(static_cast<int>(renderer.GetWidth() / 2.0f), static_cast<int>(renderer.GetHeight() * 0.8f));
+	m_pPlayer->SetAngle(180);
 
 	// Spawn a set random number of enemies:
 	for (int i = 0; i < rand() % 4 + difficulty; i++)
