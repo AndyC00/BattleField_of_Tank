@@ -93,8 +93,8 @@ bool Game::Initialise()
 	//load soundsystem:
 	pSoundsystem->init();
 
-	int bbWidth = 1860;
-	int bbHeight = 1050;
+	int bbWidth = 1792;
+	int bbHeight = 1024;
 
 	//Instantiate a input system pointer with new
 	m_pInputSystem = new InputSystem();
@@ -102,7 +102,7 @@ bool Game::Initialise()
 
 	m_pRenderer = new Renderer();
 	//create game in window or not:
-	if (!m_pRenderer->Initialise(false, bbWidth, bbHeight))
+	if (!m_pRenderer->Initialise(true, bbWidth, bbHeight))
 	{
 		LogManager::GetInstance().Log("Renderer failed to initialise!");
 		return false;
@@ -151,7 +151,9 @@ bool Game::Initialise()
 	bbHeight = m_pRenderer->GetHeight();
 
 	m_iLastTime = SDL_GetPerformanceCounter();
-	m_pRenderer->SetClearColour(0, 255, 255);
+
+	//set the color of the background
+	m_pRenderer->SetClearColour(0, 0, 0);
 
 	return true;
 }
@@ -198,13 +200,19 @@ void Game::Process(float deltaTime)
 	// TODO: Add game objects to process here!
 	m_scenes[m_iCurrentScene]->Process(deltaTime, *m_pInputSystem);
 
+
+	if (m_pInputSystem->GetKeyState(SDL_SCANCODE_ESCAPE) == BS_PRESSED)
+	{
+		exit(0);
+	}
+
 	//right click mouse to move to next scene:
 	//if (m_pInputSystem->GetMouseButtonState(SDL_BUTTON_RIGHT) == BS_PRESSED && m_iCurrentScene < m_scenes.size() - 1)
 	//{
 	//	m_iCurrentScene++;
 	//}
 
-	ButtonState leftArrowState = (m_pInputSystem->GetKeyState(SDL_SCANCODE_LEFT));
+	/*ButtonState leftArrowState = (m_pInputSystem->GetKeyState(SDL_SCANCODE_LEFT));
 
 	if (leftArrowState == BS_PRESSED)
 	{
@@ -224,13 +232,13 @@ void Game::Process(float deltaTime)
 	else if (result == BS_RELEASED)
 	{
 		LogManager::GetInstance().Log("Left mouse button released.");
-	}
+	}*/
 }
 
 void Game::DebugDraw()
 {
 	// assigned to be true by myself because it hasn't been return by functions
-	if (m_bShowDebugWindow = true)
+	if (m_bShowDebugWindow = false)
 	{
 		bool open = true;
 		ImGui::Begin("Debug Window", &open, ImGuiWindowFlags_MenuBar);

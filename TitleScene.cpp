@@ -46,6 +46,7 @@ TitleScene::~TitleScene()
 bool TitleScene::Initialise(Renderer& renderer)
 {
 	m_pictures.push_back(renderer.CreateSprite("Sprites\\Scene\\opening.png"));
+	m_pictures.push_back(renderer.CreateSprite("Sprites\\Scene\\FMOD.jpg"));
 	m_pictures.push_back(renderer.CreateSprite("Sprites\\Scene\\Story1.png"));
 	m_pictures.push_back(renderer.CreateSprite("Sprites\\Scene\\Story2.png"));
 	m_pictures.push_back(renderer.CreateSprite("Sprites\\Scene\\Story3.png"));
