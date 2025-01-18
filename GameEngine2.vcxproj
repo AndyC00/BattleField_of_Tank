@@ -143,6 +143,8 @@
     <ClCompile Include="Aircraft.cpp" />
     <ClCompile Include="animatedsprite.cpp" />
     <ClCompile Include="ball.cpp" />
+    <ClCompile Include="boss.cpp" />
+    <ClCompile Include="BossScene.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Clouds.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -183,6 +185,8 @@
     <ClInclude Include="Aircraft.h" />
     <ClInclude Include="animatedsprite.h" />
     <ClInclude Include="ball.h" />
+    <ClInclude Include="boss.h" />
+    <ClInclude Include="BossScene.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Clouds.h" />
     <ClInclude Include="Enemy.h" />
