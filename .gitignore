@@ -1,5 +1,5 @@
-/.vs/
-**/[Dd]ebug/
-**/[Rr]elease/
+.vs/
+[Dd]ebug/
+[Rr]elease/
 [Bb]in/
 [Oo]bj/
