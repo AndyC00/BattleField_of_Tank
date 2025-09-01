@@ -149,13 +149,21 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 
 	//reading input
 	ButtonState LKeyState = inputSystem.GetKeyState(SDL_SCANCODE_LEFT);
+	ButtonState LKeyState2 = inputSystem.GetKeyState(SDL_SCANCODE_A);
+
 	ButtonState RKeyState = inputSystem.GetKeyState(SDL_SCANCODE_RIGHT);
-	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
+	ButtonState RKeyState2 = inputSystem.GetKeyState(SDL_SCANCODE_D);
+
 	ButtonState FKeyState = inputSystem.GetKeyState(SDL_SCANCODE_UP);
+	ButtonState FKeyState2 = inputSystem.GetKeyState(SDL_SCANCODE_W);
+
 	ButtonState BKeyState = inputSystem.GetKeyState(SDL_SCANCODE_DOWN);
+	ButtonState BKeyState2 = inputSystem.GetKeyState(SDL_SCANCODE_S);
+
+	ButtonState sKeyState = inputSystem.GetKeyState(SDL_SCANCODE_SPACE);
 
 	//when press left arrow button:
-	if (LKeyState == BS_HELD)
+	if (LKeyState == BS_HELD || LKeyState2 == BS_HELD)
 	{
 		if (!channelEngineLeft)
 		{
@@ -165,7 +173,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		float newAngle = NormalizeAngle(currentAngle - rotationSpeed * deltaTime);
 		m_pSprite->SetAngle(newAngle);
 	}
-	else if ((LKeyState == BS_RELEASED))
+	else if ((LKeyState == BS_RELEASED || LKeyState2 == BS_RELEASED))
 	{
 		if (channelEngineLeft)
 		{
@@ -175,7 +183,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	}
 
 	//when press right arrow button:
-	if (RKeyState == BS_HELD)
+	if (RKeyState == BS_HELD || RKeyState2 == BS_HELD)
 	{
 		if (!channelEngineRight)
 		{
@@ -186,7 +194,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		float newAngle = NormalizeAngle(currentAngle + rotationSpeed * deltaTime);
 		m_pSprite->SetAngle(newAngle);
 	}
-	else if (RKeyState == BS_RELEASED)
+	else if (RKeyState == BS_RELEASED || RKeyState2 == BS_RELEASED)
 	{
 		if (channelEngineRight)
 		{
@@ -214,7 +222,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	}
 
 	//when press up arrow button:
-	if (FKeyState == BS_HELD)
+	if (FKeyState == BS_HELD || FKeyState2 == BS_HELD)
 	{
 		if (!channelEngineForward)
 		{
@@ -232,7 +240,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		Vector2 direction(cos(angleInRadians), sin(angleInRadians));
 		m_velocity = direction * m_currentSpeed;
 	}
-	else if (FKeyState == BS_RELEASED)
+	else if (FKeyState == BS_RELEASED || FKeyState2 == BS_RELEASED)
 	{
 		if (channelEngineForward)
 		{
@@ -243,7 +251,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 	}
 
 	//when press down arrow button:
-	if (BKeyState == BS_HELD)
+	if (BKeyState == BS_HELD || BKeyState2 == BS_HELD)
 	{
 		if (!channelEngineBackward)
 		{
@@ -261,7 +269,7 @@ void Player::Process(float deltaTime, InputSystem& inputSystem)
 		Vector2 direction(cos(angleInRadians), sin(angleInRadians));
 		m_velocity = direction * -m_currentSpeed;
 	}
-	else if (BKeyState == BS_RELEASED)
+	else if (BKeyState == BS_RELEASED || BKeyState2 == BS_RELEASED)
 	{
 		if (channelEngineBackward)
 		{

@@ -37,7 +37,7 @@ bool Clouds::Initialise(Renderer& renderer)
 		newCloud->m_pSprite = renderer.CreateSprite(cloudFilename.c_str());
 
 		//random scale
-		float scale = static_cast<float>(rand() % 50 + 50) / 100.0f;
+		float scale = static_cast<float>(rand() % 50 + 50) / 130.0f;
 		newCloud->m_pSprite->SetScale(scale);
 
 		//random position
