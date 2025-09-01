@@ -80,7 +80,7 @@ void TitleScene::Process(float deltaTime, InputSystem& inputSystem)
 
 	m_pictures[m_CurrentPicture]->Process(deltaTime);
 
-	if (inputSystem.GetMouseButtonState(SDL_BUTTON_LEFT) == BS_PRESSED)
+	if (inputSystem.GetKeyState(SDL_SCANCODE_SPACE) == BS_PRESSED)
 	{
 		if (m_CurrentPicture < m_pictures.size() - 1)
 		{

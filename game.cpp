@@ -139,10 +139,10 @@ bool Game::Initialise()
 
 	// text renderer at last:
 	// Load static text textures into the Texture Manager... 
-	m_pRenderer->CreateStaticText("left Click to Continue", 35);
+	m_pRenderer->CreateStaticText("Press \"Space\" to Continue", 35);
 
 	// Generate sprites that use the static text textures... 
-	m_pZapPow[0] = m_pRenderer->CreateSprite("left Click to Continue");
+	m_pZapPow[0] = m_pRenderer->CreateSprite("Press \"Space\" to Continue");
 	m_pZapPow[0]->SetX(300);
 	m_pZapPow[0]->SetY(80);
 	m_pZapPow[0]->SetAngle(0);
